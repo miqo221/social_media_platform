@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+.container {
+  max-width: 1440px;
+  margin: auto;
+}
+ul,
+ol {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+}
+
+.clear::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+$body-bg: linear-gradient(45deg, #00000057, #66666657);
+$logo: linear-gradient(90deg, #fffd02, #999801);
+$btn-bg: #000000a1;
+$btn-hover: #8e8e8e;
+$yellow: #fffd02;
+$antracit: #1a1a1a;
+$darkgrey: #282828;
+$white: #fff;
+
+%navIcon {
+  position: relative;
+  font-size: 20px;
+  color: $white;
+  transition: 0.3s;
+
+  &:hover {
+    color: $yellow;
+  }
+}
+
+%navActive {
+  color: $yellow;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $yellow;
+    bottom: -6px;
+    left: 50%;
+    transform: translate(-50%, 100%);
+  }
+}
+
+@mixin button(
+  $color,
+  $bg,
+  $padding,
+  $radius,
+  $font-size,
+  $weight,
+  $hover,
+  $hover-bg
+) {
+  color: $color;
+  background: $bg;
+  padding: $padding;
+  font-size: $font-size;
+  border-radius: $radius;
+  font-weight: $weight;
+
+  &:hover {
+    color: $hover;
+    background: $hover-bg;
+  }
+}
