@@ -1,0 +1,53 @@
+@import "../../styles/global";
+
+.home {
+  background: $main-bg;
+  height: 100vh;
+  width: 100vw;
+  padding: 14px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+
+    .anim-box {
+      height: calc(100vh - 28px);
+
+      img {
+        height: 100%;
+      }
+    }
+
+    .reg-box {
+        flex-grow: 1;
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        gap: 6px;
+        padding: 40px 22px;
+
+        h1 {
+          background: $logo;
+          color: transparent;
+          background-clip: text;
+          font-style: italic;
+          font-size: 40px;
+          font-weight: 800;
+          font-family: $font;
+          margin: 0;
+        }
+      }
+
+      h2 {
+        color: $white;
+        text-align: center;
+        font-style: italic;
+        font-weight: 900;
+        font-family: $font;
+        margin: 26px 0;
+      }
+    }
+  }
+}

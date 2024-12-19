@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "mat.grigoryan@gmail.com",
+      "password": "Matos1234",
+      "name": "Matos",
+      "surname": "Grigoryan"
+    },
+    {
+      "id": "2",
+      "email": "bghdo.grigoryan@gmail.com",
+      "password": "bghdo1234",
+      "name": "Bghdo",
+      "surname": "Grigoryan"
+    }
+  ]
+}
