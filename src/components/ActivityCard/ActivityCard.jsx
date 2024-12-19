@@ -3,7 +3,7 @@ import verificationIcon from "../../assets/images/icons/verificationIcon.png";
 
 import "./ActivityCard.scss";
 
-const ActivityCard = ({ userPic, userName, activityTime }) => {
+const ActivityCard = ({ userPic, userName, activityType, activityTime }) => {
   return (
     <div className="activityCard">
       <div className="activityInfo">
@@ -18,7 +18,7 @@ const ActivityCard = ({ userPic, userName, activityTime }) => {
         <div className="userInfo">
           <h6 className="userName">{userName}</h6>
           <p className="activity">
-            Followed on you <span>{activityTime}</span>
+            {activityType} <span>{activityTime}</span>
           </p>
         </div>
       </div>
