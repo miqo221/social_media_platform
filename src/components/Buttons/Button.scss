@@ -1,0 +1,159 @@
+@mixin button(
+  $width,
+  $height,
+  $color,
+  $bg,
+  $padding,
+  $radius,
+  $font-size,
+  $font-family,
+  $weight,
+  $hover,
+  $hover-bg,
+  $hover-radius
+) {
+  width: $width;
+  height: $height;
+  color: $color;
+  background: $bg;
+  padding: $padding;
+  border-radius: $radius;
+  font-size: $font-size;
+  font-family: $font-family;
+  font-weight: $weight;
+  transition: all 0.3s;
+
+  &:hover {
+    color: $hover;
+    background: $hover-bg;
+    border-radius: $hover-radius;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem;
+  .btn_sign_in {
+    border: none;
+    line-height: 43.71px;
+    @include button(
+      100px,
+      50px,
+      rgba(255, 255, 255, 1),
+      #000000a1,
+      0.5rem 1rem,
+      0.5rem,
+      23px,
+      "Avenir",
+      _,
+      #fff,
+      #000,
+      _
+    );
+  }
+  .btn_sign_in_google {
+    border: none;
+    @include button(
+      100px,
+      50px,
+      #f7ebeb,
+      #080808,
+      0.5rem 1rem,
+      0.5rem,
+      23px,
+      "Poppins",
+      _,
+      #fff,
+      #413f3f,
+      _
+    );
+  }
+  .btn_my_profile {
+    border: none;
+    @include button(
+      100px,
+      50px,
+      #f7ebeb,
+      #3b3737,
+      0.5rem 1rem,
+      1.5rem,
+      20px,
+      "Poppins",
+      _,
+      #fff,
+      #413f3f,
+      _
+    );
+  }
+  .btn_save {
+    border: none;
+    @include button(
+      100px,
+      50px,
+      #030303,
+      #f7f200,
+      0.5rem 1rem,
+      1.4rem,
+      40px,
+      "Poppins",
+      600,
+      #fff,
+      rgba(206, 192, 0, 0.993),
+      _
+    );
+  }
+  .btn_follow_back {
+    border: none;
+    @include button(
+      100px,
+      50px,
+      #030303,
+      #f7f200,
+      _,
+      1.5rem,
+      20px,
+      "Poppins",
+      600,
+      #fff,
+      rgba(206, 192, 0, 0.996),
+      _
+    );
+  }
+  .btn_remove {
+    border: none;
+    @include button(
+      100px,
+      50px,
+      #fff,
+      #3b3737,
+      _,
+      1.5rem,
+      20px,
+      "Poppins",
+      600,
+      #fff,
+      rgba(206, 192, 0, 0.996),
+      _
+    );
+  }
+  .btn_edit_profile {
+    border: none;
+    @include button(
+      100px,
+      50px,
+      #fff,
+      #3b3737,
+      _,
+      1.5rem,
+      20px,
+      "Poppins",
+      600,
+      #fff,
+      rgba(206, 192, 0, 0.996),
+      _
+    );
+  }
+}
