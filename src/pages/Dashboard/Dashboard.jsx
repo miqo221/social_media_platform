@@ -1,18 +1,23 @@
+import { useReducer, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { ACTIONS, dashboardReducer } from "../../helpers/reducer";
+
 import "./Dashboard.scss";
 
+const initialState = {
+  user: null,
+};
+
 export function Dashboard({ user }) {
-  const [loadedUser, setLoadedUser] = useState(null);
+  const [state, dispatch] = useReducer(dashboardReducer, initialState);
 
   useEffect(() => {
     if (user) {
-      setLoadedUser(user);
+      dispatch({ type: ACTIONS.SET_USER, payload: user });
     }
   }, [user]);
-  console.log(user, "user");
 
-  return loadedUser && <h2>Hello from {loadedUser?.email}</h2>;
+  return state.user && <h2>Hello from {state.user.email}</h2>;
 }
 
 Dashboard.propTypes = {

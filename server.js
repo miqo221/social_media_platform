@@ -3,6 +3,8 @@ import jwt from "jsonwebtoken";
 import axios from "axios";
 import cors from "cors";
 import dotenv from "dotenv";
+import generatePassword from "password-generator";
+import { nanoid } from "nanoid";
 
 dotenv.config();
 
@@ -13,23 +15,30 @@ app.use(express.json());
 const SECRET_KEY = process.env.SECRET_KEY || "your_secret_key";
 const JSON_SERVER_URL = process.env.JSON_SERVER_URL || "http://localhost:8001";
 
-app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+app.post("/google-login", async (req, res) => {
+  const { email, name, surname, image } = req.body;
 
   try {
-    const response = await axios.get(`${JSON_SERVER_URL}/users`);
-    const users = response.data;
+    const { data: users } = await axios.get(`${JSON_SERVER_URL}/users`);
+    let user = users.find((u) => u.email === email);
 
-    const user = users.find((u) => u.email === email && u.password === password);
+    if (!user) {
+      const newUser = {
+        id: nanoid(),
+        email,
+        name,
+        surname,
+        password: generatePassword(12),
+      };
 
-    if (user) {
-      const token = jwt.sign({ id: user.id, email: user.email, name: user.name }, SECRET_KEY, {
-        expiresIn: "1h",
-      });
-      res.json({ token });
-    } else {
-      res.status(401).json({ message: "Invalid email or password" });
+      await axios.post(`${JSON_SERVER_URL}/users`, newUser);
+      user = newUser;
     }
+
+    const { password, ...userWithoutPassword } = user;
+    const token = jwt.sign(userWithoutPassword, SECRET_KEY, { expiresIn: "1h" });
+
+    res.json({ token });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }

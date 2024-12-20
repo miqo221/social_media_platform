@@ -1,18 +1,20 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": "8_ouS3o3m7FYKXUSu8ziT",
       "email": "mat.grigoryan@gmail.com",
-      "password": "Matos1234",
-      "name": "Matos",
-      "surname": "Grigoryan"
+      "name": "Matevos Grigoryan",
+      "surname": "Grigoryan",
+      "image": "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c",
+      "password": "luqapikupuse"
     },
     {
-      "id": "2",
-      "email": "bghdo.grigoryan@gmail.com",
-      "password": "bghdo1234",
-      "name": "Bghdo",
-      "surname": "Grigoryan"
+      "id": "R4X-3l5G24lFQprmUMU2b",
+      "email": "m.grikorian@gmail.com",
+      "name": "Matevos Grigoryan",
+      "surname": "Grigoryan",
+      "image": "https://lh3.googleusercontent.com/a/ACg8ocK7v4WOG4Xj-BkSNE5NOnnCA_1kUviNvl76Bpt3uSuDa_hxlg=s96-c",
+      "password": "wizavodirasi"
     }
   ]
 }

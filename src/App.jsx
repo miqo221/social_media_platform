@@ -2,8 +2,9 @@ import { useReducer, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { Login, Dashboard, Preferences } from "./pages";
-import { appReducer, ACTIONS } from "./helpers/reducer";
 import { ROUTES } from "./routes";
+import { appReducer, ACTIONS } from "./helpers/reducer";
+
 import "./App.scss";
 
 const initialState = {
@@ -15,38 +16,27 @@ function App() {
   const [state, dispatch] = useReducer(appReducer, initialState);
   const navigate = useNavigate();
 
-  const setToken = async (token) => {
-    await new Promise(resolve => setTimeout(resolve, 0));
+  const setToken = (token) => {
     dispatch({ type: ACTIONS.SET_TOKEN, payload: token });
     localStorage.setItem("authToken", token);
   };
 
-  const isTokenValid = async (token) => {
+  const isTokenValid = (token) => {
     try {
-      const decodedToken = await new Promise((resolve, reject) => {
-        try {
-          const decoded = jwtDecode(token);
-          resolve(decoded);
-        } catch (error) {
-          reject("Invalid token");
-        }
-      });
-
+      const decodedToken = jwtDecode(token);
       return decodedToken.exp > Date.now() / 1000;
-    } catch (error) {
-      console.error("Invalid token:", error);
+    } catch {
       return false;
     }
   };
 
   useEffect(() => {
-    const validateToken = async () => {
+    const validateToken = () => {
       const storedToken = localStorage.getItem("authToken");
 
-      if (storedToken && await isTokenValid(storedToken)) {
+      if (storedToken && isTokenValid(storedToken)) {
         const decodedToken = jwtDecode(storedToken);
-        console.log(decodedToken);
-        await setToken(storedToken);
+        setToken(storedToken);
         dispatch({ type: ACTIONS.SET_USER, payload: decodedToken });
       } else {
         localStorage.removeItem("authToken");
@@ -62,7 +52,7 @@ function App() {
       const decodedToken = jwtDecode(state.token);
       dispatch({ type: ACTIONS.SET_USER, payload: decodedToken });
     }
-  }, [state.token]);
+  }, [state.token, state.user]);
 
   useEffect(() => {
     if (!state.token) {
@@ -80,8 +70,6 @@ function App() {
   if (!state.token) {
     return <Login setToken={setToken} />;
   }
-
-  console.log(state.user, "state-user");
 
   return (
     <div className="app">

@@ -9,6 +9,47 @@ $darkgrey: #282828;
 $white: #ffffff;
 $font: Nunito sans;
 
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  font-family: $font;
+}
+
+.container {
+  max-width: 1440px;
+  margin: auto;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.clear::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  background: $body-bg !important;
+}
+
 %navIcon {
   position: relative;
   font-size: 20px;
@@ -59,42 +100,46 @@ $font: Nunito sans;
   }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  scroll-behavior: smooth;
-  box-sizing: border-box;
+@mixin flex($just, $align, $gap, $direction, $wrap) {
+  display: flex;
+  justify-content: $just;
+  align-items: $align;
+  gap: $gap;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
 }
 
-.container {
-  max-width: 1440px;
-  margin: auto;
+@mixin after_before($content, $top, $right, $bottom, $left, $transform) {
+  position: absolute;
+  content: $content;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  transform: $transform;
 }
 
-ul,
-ol {
-  list-style: none;
+@mixin header($fz, $fw, $color, $fs, $align, $bg) {
+  font-size: $fz;
+  font-weight: $fw;
+  color: $color;
+  font-style: $fs;
+  background: $bg;
+  text-align: $align;
 }
 
-a {
-  text-decoration: none;
+@mixin text($fz, $color, $align, $fw) {
+  color: $color;
+  font-size: $fz;
+  font-weight: $fw;
+  text-align: $align;
 }
 
-img {
-  max-width: 100%;
-}
-
-.clear::after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-::after,
-::before {
-  box-sizing: border-box;
-}
-
-body {
-  background: $body-bg !important;
+@mixin absolute($top, $right, $bottom, $left, $transform) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  transform: $transform;
 }

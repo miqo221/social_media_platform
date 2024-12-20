@@ -32,3 +32,12 @@ export function appReducer(state, action) {
       return state;
   }
 }
+
+export function dashboardReducer(state, action) {
+  switch (action.type) {
+    case ACTIONS.SET_USER:
+      return { ...state, user: action.payload };
+    default:
+      return state;
+  }
+}
