@@ -19,8 +19,6 @@ const initialState = {
 export function Login({ setToken }) {
   const [state, dispatch] = useReducer(loginReducer, initialState);
 
-  console.log("Hello");
-
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       try {
