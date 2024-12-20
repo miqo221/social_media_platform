@@ -1,6 +1,6 @@
 import React from "react";
-import verificationIcon from "../../assets/images/icons/verificationIcon.png";
 
+import verificationIcon from "../../assets/images/icons/verificationIcon.png";
 import "./ActivityCard.scss";
 
 const ActivityCard = ({ userPic, userName, activityType, activityTime }) => {
