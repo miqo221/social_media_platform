@@ -1,5 +1,4 @@
 import { useReducer, useEffect } from "react";
-import PropTypes from "prop-types";
 import { ACTIONS, dashboardReducer } from "../../helpers/reducer";
 
 import "./Dashboard.scss";
