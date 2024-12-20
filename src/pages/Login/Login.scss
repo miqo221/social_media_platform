@@ -1,0 +1,120 @@
+@import "../../styles/global";
+
+.home {
+  background: $main-bg;
+  height: 100vh;
+  width: 100vw;
+  padding: 14px;
+
+  .container {
+    @include flex(space-between, _, _, _, _);
+
+    .anim-box {
+      height: calc(100vh - 28px);
+
+      img {
+        height: 100%;
+      }
+    }
+
+    .reg-box {
+      flex-grow: 1;
+
+      header {
+        @include flex(left, center, 6px, _, _);
+        padding: 40px 22px;
+
+        h1 {
+          @include header(40px, 800, transparent, italic, _, $logo);
+          background-clip: text;
+          margin: 0;
+        }
+      }
+
+      h2 {
+        @include header(36px, 700, $white, italic, center, _);
+        margin: 26px 0;
+      }
+
+      form {
+        @include flex(_, _, 28px, column, _);
+        padding: 35px 90px;
+        margin: 0 auto;
+        max-width: 660px;
+
+        .input-box {
+          @include flex(_, _, _, column, _);
+
+          label {
+            color: $white;
+            font-weight: 200;
+            font-size: 28px;
+          }
+
+          input {
+            padding: 20px;
+            background: transparent;
+            outline: none;
+            border: 2px solid $white;
+            border-radius: 4px;
+            color: $white;
+            font-size: 20px;
+          }
+
+          #remember_me {
+            display: none;
+          }
+
+          #remember_me + label {
+            width: 24px;
+            height: 24px;
+            border: 2px solid $white;
+            border-radius: 4px;
+            background-color: transparent;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+          }
+
+          #remember_me:checked + label::after {
+            @include after_before("", 50%, _, _, 50%, translate(-50%, -50%));
+            color: $white;
+            font-size: 14px;
+          }
+
+          .remember_me_row {
+            @include flex(space-between, center, _, _, _);
+            position: relative;
+            margin-top: 20px;
+
+            .error {
+              @include text(20px, $white, center, _);
+              @include absolute(_, _, -40px, _, _);
+            }
+
+            div {
+              @include flex(_, center, 4px, _, _);
+
+              span {
+                @include text(20px, $white, _, _);
+              }
+            }
+
+            a {
+              @include text(20px, $white, _, _);
+            }
+          }
+        }
+
+        .btn-box {
+          @include flex(_, _, 36px, column, _);
+          margin: 40px 0;
+        }
+      }
+
+      p {
+        @include text(14px, $white, center, _);
+      }
+    }
+  }
+}

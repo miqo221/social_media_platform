@@ -1,20 +1,36 @@
+$main-bg: linear-gradient(235deg, #00000057, #66666657);
+$body-bg: #1a1a1a;
+$logo: linear-gradient(-90deg, #fffd02, #999801);
+$btn-bg: #000000a1;
+$btn-hover: #8e8e8e;
+$yellow: #fffd02;
+$antracit: #1a1a1a;
+$darkgrey: #282828;
+$white: #ffffff;
+$font: Nunito sans;
+
 * {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
   box-sizing: border-box;
+  font-family: $font;
 }
+
 .container {
   max-width: 1440px;
   margin: auto;
 }
+
 ul,
 ol {
   list-style: none;
 }
+
 a {
   text-decoration: none;
 }
+
 img {
   max-width: 100%;
 }
@@ -30,14 +46,9 @@ img {
   box-sizing: border-box;
 }
 
-$body-bg: linear-gradient(45deg, #00000057, #66666657);
-$logo: linear-gradient(90deg, #fffd02, #999801);
-$btn-bg: #000000a1;
-$btn-hover: #8e8e8e;
-$yellow: #fffd02;
-$antracit: #1a1a1a;
-$darkgrey: #282828;
-$white: #fff;
+body {
+  background: $body-bg !important;
+}
 
 %navIcon {
   position: relative;
@@ -87,4 +98,48 @@ $white: #fff;
     color: $hover;
     background: $hover-bg;
   }
+}
+
+@mixin flex($just, $align, $gap, $direction, $wrap) {
+  display: flex;
+  justify-content: $just;
+  align-items: $align;
+  gap: $gap;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+}
+
+@mixin after_before($content, $top, $right, $bottom, $left, $transform) {
+  position: absolute;
+  content: $content;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  transform: $transform;
+}
+
+@mixin header($fz, $fw, $color, $fs, $align, $bg) {
+  font-size: $fz;
+  font-weight: $fw;
+  color: $color;
+  font-style: $fs;
+  background: $bg;
+  text-align: $align;
+}
+
+@mixin text($fz, $color, $align, $fw) {
+  color: $color;
+  font-size: $fz;
+  font-weight: $fw;
+  text-align: $align;
+}
+
+@mixin absolute($top, $right, $bottom, $left, $transform) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  transform: $transform;
 }
