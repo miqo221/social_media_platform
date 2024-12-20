@@ -19,6 +19,8 @@ const initialState = {
 export function Login({ setToken }) {
   const [state, dispatch] = useReducer(loginReducer, initialState);
 
+  console.log("Hello");
+
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       try {
@@ -74,7 +76,8 @@ export function Login({ setToken }) {
       dispatch({
         type: ACTIONS.SET_ERROR,
         payload:
-          error.response?.data?.message || "Invalid email or password. Please try again.",
+          error.response?.data?.message ||
+          "Invalid email or password. Please try again.",
       });
     } finally {
       dispatch({ type: ACTIONS.SET_LOADING, payload: false });
@@ -123,7 +126,7 @@ export function Login({ setToken }) {
                   <span>Remember me</span>
                 </div>
                 <Link>Forgot Password</Link>
-              {state.error && <p className="error">{state.error}</p>}
+                {state.error && <p className="error">{state.error}</p>}
               </div>
             </div>
             <div className="btn-box">
@@ -145,4 +148,3 @@ export function Login({ setToken }) {
     </main>
   );
 }
-
