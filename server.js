@@ -12,8 +12,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const SECRET_KEY = process.env.SECRET_KEY || "your_secret_key";
-const JSON_SERVER_URL = process.env.JSON_SERVER_URL || "http://localhost:8001";
+const SECRET_KEY = process.env.REACT_APP_SECRET_KEY || "your_secret_key";
+const JSON_SERVER_URL = process.env.REACT_APP_JSON_SERVER_URL || "http://localhost:8001";
 
 app.post("/google-login", async (req, res) => {
   const { email, name, surname, image } = req.body;
