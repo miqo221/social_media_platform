@@ -1,7 +1,6 @@
 import { useReducer } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import PropTypes from "prop-types";
 import { useGoogleLogin } from "@react-oauth/google";
 import { loginReducer, ACTIONS } from "../../helpers/reducer";
 import logo from "../../assets/logo/icon.png";
