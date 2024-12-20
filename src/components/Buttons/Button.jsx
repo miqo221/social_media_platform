@@ -5,7 +5,6 @@ import "./Button.scss";
 const Button = ({
   content,
   button_class,
-  button_style,
   button_function,
   button_type,
   button_disabled,
