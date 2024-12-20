@@ -18,7 +18,3 @@ export function Dashboard({ user }) {
 
   return state.user && <h2>Hello from {state.user.email}</h2>;
 }
-
-Dashboard.propTypes = {
-  user: PropTypes.object,
-};
