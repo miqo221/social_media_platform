@@ -39,6 +39,12 @@ export function Login() {
 
         console.log(userData); // getting user data from google
 
+        // const addUser = () => {
+        //   axios.post("http://localhost:8001/users", userData).then((res) => {
+        //     console.log(res.data);
+        //   });
+        // };
+
         dispatch({
           type: ACTIONS.SET_USER,
           payload: userData,
