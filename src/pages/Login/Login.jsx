@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -16,7 +16,7 @@ const initialState = {
   loading: false,
 };
 
-export function Login({ setToken }) {
+export function Login() {
   const [state, dispatch] = useReducer(loginReducer, initialState);
 
   const handleGoogleLogin = useGoogleLogin({
@@ -29,53 +29,55 @@ export function Login({ setToken }) {
           }
         );
 
-        const res = await axios.post("http://localhost:8000/google-login", {
+        const userData = {
           email: googleUserInfo.data.email,
           name: googleUserInfo.data.name,
           surname: googleUserInfo.data.family_name,
           image: googleUserInfo.data.picture,
-        });
+        };
 
-        const token = res.data.token;
-        localStorage.setItem("authToken", token);
-        setToken(token);
+        console.log(userData) // getting user data from google
+
+        dispatch({
+          type: ACTIONS.SET_USER,
+          payload: userData,
+        });
       } catch (error) {
         dispatch({
           type: ACTIONS.SET_ERROR,
-          payload: "Can not access to your Google account",
+          payload: error,
         });
-        console.error("Google Login Error:", error);
       }
     },
     onError: (error) => {
       dispatch({
         type: ACTIONS.SET_ERROR,
-        payload: "Google Login Failed:",
+        payload: error,
       });
-      console.error("Google Login Failed:", error);
     },
     scope: "profile email",
   });
+
+  useEffect(() => {
+    if (state.email) {
+      console.log(state);
+    }
+  }, [state]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: ACTIONS.SET_LOADING, payload: true });
 
     try {
-      const response = await axios.post("http://localhost:8000/login", {
-        email: state.email,
-        password: state.password,
+      const response = await axios.get("http://localhost:8001/users", {
+        params: { email: state.email}
       });
 
-      const token = response.data.token;
-      localStorage.setItem("authToken", token);
-      setToken(token);
+      const user = response.data[0];
     } catch (error) {
       dispatch({
         type: ACTIONS.SET_ERROR,
-        payload:
-          error.response?.data?.message ||
-          "Invalid email or password. Please try again.",
+        payload: error,
       });
     } finally {
       dispatch({ type: ACTIONS.SET_LOADING, payload: false });

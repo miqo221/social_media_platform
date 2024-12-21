@@ -17,6 +17,8 @@ export function loginReducer(state, action) {
       return { ...state, error: action.payload };
     case ACTIONS.SET_LOADING:
       return { ...state, loading: action.payload };
+      case ACTIONS.SET_USER:
+        return { ...state, user: action.payload };
     default:
       return state;
   }
