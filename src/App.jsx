@@ -1,6 +1,4 @@
-import { useReducer, useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import { Routes, Route } from "react-router-dom";
 import {
   Login,
   Register,
@@ -11,77 +9,11 @@ import {
   NotFound,
 } from "./pages";
 import { ROUTES } from "./routes";
-import { appReducer, ACTIONS } from "./helpers/reducer";
-import Button from "./components/Buttons/Button";
-import ActivityCard from "./components/ActivityCard/ActivityCard";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.scss";
 
-const initialState = {
-  token: null,
-  user: null,
-};
-
 function App() {
-  const [user, setUser] = useState([]);
-  const [state, dispatch] = useReducer(appReducer, initialState);
-  const navigate = useNavigate();
-
-  const setToken = (token) => {
-    dispatch({ type: ACTIONS.SET_TOKEN, payload: token });
-    localStorage.setItem("authToken", token);
-  };
-
-  const isTokenValid = (token) => {
-    try {
-      const decodedToken = jwtDecode(token);
-      return decodedToken.exp > Date.now() / 1000;
-    } catch {
-      return false;
-    }
-  };
-
-  useEffect(() => {
-    const validateToken = () => {
-      const storedToken = localStorage.getItem("authToken");
-
-      if (storedToken && isTokenValid(storedToken)) {
-        const decodedToken = jwtDecode(storedToken);
-        setToken(storedToken);
-        dispatch({ type: ACTIONS.SET_USER, payload: decodedToken });
-      } else {
-        localStorage.removeItem("authToken");
-        navigate(ROUTES.DASHBOARD);
-      }
-    };
-
-    validateToken();
-  }, [navigate]);
-
-  useEffect(() => {
-    if (state.token && !state.user) {
-      const decodedToken = jwtDecode(state.token);
-      dispatch({ type: ACTIONS.SET_USER, payload: decodedToken });
-    }
-  }, [state.token, state.user]);
-
-  useEffect(() => {
-    if (!state.token) {
-      navigate(ROUTES.DASHBOARD);
-    }
-  }, [state.token, navigate]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    dispatch({ type: ACTIONS.SET_TOKEN, payload: null });
-    dispatch({ type: ACTIONS.SET_USER, payload: null });
-    navigate(ROUTES.DASHBOARD);
-  };
-
-  if (!state.token) {
-    return <Login setToken={setToken} />;
-  }
 
   return (
     <div className="app">
@@ -91,7 +23,7 @@ function App() {
           <Route path={ROUTES.REGISTER} element={<Register />} />
           <Route
             path={ROUTES.DASHBOARD}
-            element={<Dashboard user={state.user} />}
+            element={<Dashboard />}
           />
           <Route path={ROUTES.PREFERENCES} element={<Preferences />} />
           <Route path={ROUTES.MESSAGES} element={<Messages />} />

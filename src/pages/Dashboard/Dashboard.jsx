@@ -1,20 +1,15 @@
-import { useReducer, useEffect } from "react";
-import { ACTIONS, dashboardReducer } from "../../helpers/reducer";
-
+import axios from "axios";
 import "./Dashboard.scss";
 
-const initialState = {
-  user: null,
-};
+export function Dashboard() {
+  async function getUser() {
+    await axios({
+      method: "GET",
+      baseURL: "http://localhost:8001/loggedInUsers",
+    }).then((res) => console.log(res.data));
+  }
 
-export function Dashboard({ user }) {
-  const [state, dispatch] = useReducer(dashboardReducer, initialState);
+  getUser()
 
-  useEffect(() => {
-    if (user) {
-      dispatch({ type: ACTIONS.SET_USER, payload: user });
-    }
-  }, [user]);
-
-  return state.user && <h2>Hello from {state.user.email}</h2>;
+  return <h2 style={{ color: "white" }}>Hello from</h2>;
 }
