@@ -1,5 +1,8 @@
 export const ROUTES = {
-  LOGIN: "/",
-  DASHBOARD: "/dashboard",
-  PREFERENCES: "/preferences",
+  HOME: "/",
+  DASHBOARD: "dashboard",
+  PREFERENCES: "preferences",
+  MESSAGES: "messages",
+  PROFILE: "profile",
 };
+

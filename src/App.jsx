@@ -1,14 +1,20 @@
-
 import { useReducer, useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { Login, Dashboard, Preferences } from "./pages";
+import {
+  Login,
+  Dashboard,
+  Preferences,
+  Messages,
+  Profile,
+  NotFound,
+} from "./pages";
 import { ROUTES } from "./routes";
 import { appReducer, ACTIONS } from "./helpers/reducer";
 import Button from "./components/Buttons/Button";
 import ActivityCard from "./components/ActivityCard/ActivityCard";
-
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./App.scss";
 
 const initialState = {
@@ -17,7 +23,7 @@ const initialState = {
 };
 
 function App() {
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState([]);
   const [state, dispatch] = useReducer(appReducer, initialState);
   const navigate = useNavigate();
 
@@ -78,15 +84,20 @@ function App() {
 
   return (
     <div className="app">
-
       <Routes>
-        <Route
-          path={ROUTES.DASHBOARD}
-          element={<Dashboard user={state.user} />}
-        />
-        <Route path={ROUTES.PREFERENCES} element={<Preferences />} />
+        <Route path={ROUTES.HOME}>
+          <Route index element={<Login />} />
+          <Route
+            path={ROUTES.DASHBOARD}
+            element={<Dashboard user={state.user} />}
+          />
+          <Route path={ROUTES.PREFERENCES} element={<Preferences />} />
+          <Route path={ROUTES.MESSAGES} element={<Messages />} />
+          <Route path={ROUTES.PROFILE} element={<Profile />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
-      <button onClick={handleLogout}>Logout</button>
+      {/* <button onClick={handleLogout}>Logout</button> */}
 
       {/* <div className="container">
         <Button
@@ -132,7 +143,6 @@ function App() {
           button_class="btn_edit_profile"
         />
       </div> */}
-
     </div>
   );
 }
