@@ -1,20 +1,5 @@
 {
   "users": [
-    {
-      "id": "8_ouS3o3m7FYKXUSu8ziT",
-      "email": "mat.grigoryan@gmail.com",
-      "name": "Matevos Grigoryan",
-      "surname": "Grigoryan",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c",
-      "password": "luqapikupuse"
-    },
-    {
-      "id": "R4X-3l5G24lFQprmUMU2b",
-      "email": "m.grikorian@gmail.com",
-      "name": "Matevos Grigoryan",
-      "surname": "Grigoryan",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocK7v4WOG4Xj-BkSNE5NOnnCA_1kUviNvl76Bpt3uSuDa_hxlg=s96-c",
-      "password": "wizavodirasi"
-    }
+
   ]
 }

@@ -87,7 +87,7 @@ function App() {
       </Routes>
       <button onClick={handleLogout}>Logout</button>
 
-      <div className="container">
+      {/* <div className="container">
         <Button
           button_function={() => console.log("Sign In")}
           id="signIn"
@@ -130,7 +130,7 @@ function App() {
           content="Edit profile"
           button_class="btn_edit_profile"
         />
-      </div>
+      </div> */}
 
     </div>
   );

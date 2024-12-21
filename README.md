@@ -9,7 +9,6 @@ Currently, two official plugins are available:
 
 running project:           npm run dev                                      // --> http://localhost:5173/dashboard
 running json.server:       json-server --watch db.json --port 8001          // --> http://localhost:8001/users
-running backend:           node server.js                                   // --> http://localhost:8000
 
 Packages, Frameworks, APIs or Libraries, that we use in this project:
 
