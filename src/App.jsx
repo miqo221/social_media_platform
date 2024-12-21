@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import {
   Login,
+  Register,
   Dashboard,
   Preferences,
   Messages,
@@ -87,6 +88,7 @@ function App() {
       <Routes>
         <Route path={ROUTES.HOME}>
           <Route index element={<Login />} />
+          <Route path={ROUTES.REGISTER} element={<Register />} />
           <Route
             path={ROUTES.DASHBOARD}
             element={<Dashboard user={state.user} />}
