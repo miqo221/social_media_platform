@@ -40,11 +40,12 @@ export function Login() {
 
         console.log(userData); // getting user data from google
 
-        // await axios({
-        //   baseURL: "http://localhost:8001",
-        //   method: "POST",
-        //   data: userData,
-        // }).then((res) => console.log(res.data));
+        await axios({
+          baseURL: "http://localhost:8001",
+          url: "users",
+          method: "POST",
+          data: userData,
+        }).then((res) => console.log(res.data));
 
         dispatch({
           type: ACTIONS.SET_USER,
