@@ -54,6 +54,7 @@ export function Login() {
         type: ACTIONS.SET_ERROR,
         payload: error,
       });
+      console.error(error)
     },
     scope: "profile email",
   });

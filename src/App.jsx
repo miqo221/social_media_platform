@@ -1,5 +1,5 @@
 
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { Login, Dashboard, Preferences } from "./pages";
@@ -17,6 +17,7 @@ const initialState = {
 };
 
 function App() {
+  const [user, setUser] = useState([])
   const [state, dispatch] = useReducer(appReducer, initialState);
   const navigate = useNavigate();
 
