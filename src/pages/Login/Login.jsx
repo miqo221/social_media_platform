@@ -6,6 +6,7 @@ import { loginReducer, ACTIONS } from "../../helpers/reducer";
 import logo from "../../assets/logo/icon.png";
 import google from "../../assets/png/google.png";
 import anim from "../../assets/png/home_anim.png";
+import { ToastContainer, toast } from "react-toastify";
 
 import "./Login.scss";
 
@@ -36,7 +37,7 @@ export function Login() {
           image: googleUserInfo.data.picture,
         };
 
-        console.log(userData) // getting user data from google
+        console.log(userData); // getting user data from google
 
         dispatch({
           type: ACTIONS.SET_USER,
@@ -54,7 +55,7 @@ export function Login() {
         type: ACTIONS.SET_ERROR,
         payload: error,
       });
-      console.error(error)
+      console.error(error);
     },
     scope: "profile email",
   });
@@ -71,7 +72,7 @@ export function Login() {
 
     try {
       const response = await axios.get("http://localhost:8001/users", {
-        params: { email: state.email}
+        params: { email: state.email },
       });
 
       const user = response.data[0];
@@ -85,8 +86,11 @@ export function Login() {
     }
   };
 
+  const notify = () => toast("TEST!!!");
+
   return (
     <main className="home">
+      <ToastContainer className="notification" />
       <div className="container">
         <div className="reg-box">
           <header>
@@ -131,7 +135,7 @@ export function Login() {
               </div>
             </div>
             <div className="btn-box">
-              <button type="submit" disabled={state.loading}>
+              <button type="submit" disabled={state.loading} onClick={notify}>
                 {state.loading ? "Loading..." : "Submit"}
               </button>
               <button type="button" onClick={handleGoogleLogin}>
