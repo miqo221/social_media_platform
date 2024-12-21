@@ -1,8 +1,10 @@
 import { useReducer, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import { loginReducer, ACTIONS } from "../../helpers/reducer";
+
+import axios from "axios";
+
 import logo from "../../assets/logo/icon.png";
 import google from "../../assets/png/google.png";
 import anim from "../../assets/png/home_anim.png";
@@ -36,7 +38,13 @@ export function Login() {
           image: googleUserInfo.data.picture,
         };
 
-        console.log(userData) // getting user data from google
+        console.log(userData); // getting user data from google
+
+        // await axios({
+        //   baseURL: "http://localhost:8001",
+        //   method: "POST",
+        //   data: userData,
+        // }).then((res) => console.log(res.data));
 
         dispatch({
           type: ACTIONS.SET_USER,
@@ -70,7 +78,7 @@ export function Login() {
 
     try {
       const response = await axios.get("http://localhost:8001/users", {
-        params: { email: state.email}
+        params: { email: state.email },
       });
 
       const user = response.data[0];
