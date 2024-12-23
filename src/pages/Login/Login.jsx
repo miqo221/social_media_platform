@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,6 +7,7 @@ import { loginReducer, ACTIONS } from "../../helpers/reducer";
 import { ROUTES } from "../../routes";
 import logo from "../../assets/logo/icon.png";
 import anim from "../../assets/png/home_anim.png";
+import Animation from "../../components/Animation/Animation";
 
 import "./Login.scss";
 
@@ -24,6 +25,7 @@ export function Login() {
   const [state, dispatch] = useReducer(loginReducer, initialState);
   const navigate = useNavigate();
   const savedUser = JSON.parse(localStorage.getItem("rememberMe"));
+  const [type, setType] = useState("password");
 
   //! if the user is saved on localstorage the email input field will be filled automatic
   useEffect(() => {
@@ -159,6 +161,10 @@ export function Login() {
     dispatch({ type: ACTIONS.SET_REMEMBER, payload: !state.checked });
   };
 
+  const showPassword = () => {
+    type === "password" ? setType("text") : setType("password");
+  };
+
   return (
     <main className="home">
       <ToastContainer className="notification" />
@@ -185,16 +191,24 @@ export function Login() {
             </div>
             <div className="input-box">
               <label>Password</label>
-              <input
-                type="password"
-                value={state.password}
-                onChange={(e) =>
-                  dispatch({
-                    type: ACTIONS.SET_PASSWORD,
-                    payload: e.target.value,
-                  })
-                }
-              />
+              <div className="password-input">
+                <input
+                  type={type}
+                  value={state.password}
+                  onChange={(e) =>
+                    dispatch({
+                      type: ACTIONS.SET_PASSWORD,
+                      payload: e.target.value,
+                    })
+                  }
+                />
+                <i
+                  className={`bi bi-${
+                    type === "password" ? "eye" : "eye-slash"
+                  }`}
+                  onClick={showPassword}
+                ></i>
+              </div>
               <div className="remember_me_row">
                 <div>
                   <input
@@ -224,9 +238,7 @@ export function Login() {
             <p>Copyright @ 2024 Banish</p>
           </form>
         </div>
-        <div className="anim-box">
-          <img src={anim} alt="Home animation" id="anim" />
-        </div>
+        <Animation anim={anim} />
       </div>
     </main>
   );

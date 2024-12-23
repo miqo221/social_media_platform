@@ -11,66 +11,10 @@
   .container {
     @include flex(flex-start, _, _, _, _);
 
-    .anim-box {
-      height: calc(100vh - 28px);
-      overflow: hidden;
-      border-radius: 1rem;
-
-      img {
-        height: 100%;
-        animation: img 20s 1s infinite linear;
-      }
-
-      @keyframes img {
-        0% {
-          transform: scale(1);
-        }
-        25% {
-          transform: scale(1.5) translate(80px, -80px);
-          filter: hue-rotate(-90deg);
-        }
-        50% {
-          transform: scale(2) translate(160px, -160px);
-          filter: hue-rotate(0) saturate(200%);
-        }
-        75% {
-          transform: scale(1.5) translate(100px, -100px);
-          filter: hue-rotate(0) saturate(300%);
-        }
-        100% {
-          transform: scale(1) translate(0, 0);
-          filter: hue-rotate(0) saturate(100%);
-        }
-      }
-    }
-
-    @media (max-width: 700px) {
-      @keyframes img {
-        0% {
-          transform: scale(1);
-        }
-        25% {
-          transform: scale(1.5) translate(0, -60px);
-          filter: hue-rotate(-90deg);
-        }
-        50% {
-          transform: scale(2) translate(20px, -120px);
-          filter: hue-rotate(0) saturate(200%);
-        }
-        75% {
-          transform: scale(1.5) translate(0, -60px);
-          filter: hue-rotate(0) saturate(300%);
-        }
-        100% {
-          transform: scale(1) translate(0, 0);
-          filter: hue-rotate(0) saturate(100%);
-        }
-      }
-    }
-
     .reg-box {
       flex-grow: 1;
       position: relative;
+      user-select: none;
 
       header {
         @include flex(left, center, 6px, _, _);
@@ -104,6 +48,21 @@
         .input-box {
           @include flex(_, _, _, column, _);
 
+          .password-input {
+            position: relative;
+            width: 100%;
+
+            i {
+              position: absolute;
+              font-size: 24px;
+              cursor: pointer;
+              color: $white;
+              top: 50%;
+              right: 10px;
+              transform: translateY(-50%);
+            }
+          }
+
           label {
             color: $white;
             font-weight: 200;
@@ -111,6 +70,7 @@
           }
 
           input {
+            width: 100%;
             padding: 12px;
             background: transparent;
             outline: none;
@@ -194,6 +154,7 @@
           input {
             padding: 8px !important;
           }
+
           label,
           a,
           span,
@@ -203,28 +164,6 @@
 
           .btn_sign_in {
             padding: 0.25rem;
-          }
-
-          @keyframes img {
-            0% {
-              transform: scale(1);
-            }
-            25% {
-              transform: scale(1.5) translate(0, -60px);
-              filter: hue-rotate(-90deg);
-            }
-            50% {
-              transform: scale(2) translate(0, -120px);
-              filter: hue-rotate(0) saturate(200%);
-            }
-            75% {
-              transform: scale(1.5) translate(0, -60px);
-              filter: hue-rotate(0) saturate(300%);
-            }
-            100% {
-              transform: scale(1) translate(0, 0);
-              filter: hue-rotate(0) saturate(100%);
-            }
           }
         }
       }
@@ -281,14 +220,6 @@
   @media (max-width: 1050px) {
     .container {
       position: relative;
-
-      .anim-box {
-        width: 100%;
-        img {
-          width: 100%;
-          object-fit: cover;
-        }
-      }
 
       .reg-box {
         position: absolute;
