@@ -5,4 +5,5 @@ export const ROUTES = {
   PREFERENCES: "/preferences",
   MESSAGES: "/messages",
   PROFILE: "/profile",
+  REC_PASSWORD: "/recover_password"
 };

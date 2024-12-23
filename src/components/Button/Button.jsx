@@ -1,5 +1,3 @@
-import React from "react";
-
 import "./Button.scss";
 
 const Button = ({
@@ -11,7 +9,7 @@ const Button = ({
   button_id,
 }) => {
   return (
-    <div className="buttons">
+    <>
       {/* <button className="btn_sign_in">Sign In</button>
       <button className="btn_sign_in_google">Sign In With Google</button>
       <button className="btn_my_profile">My Profile</button>
@@ -24,11 +22,10 @@ const Button = ({
         className={button_class}
         onClick={button_function}
         type={button_type}
-        disabled={button_disabled}
-      >
+        disabled={button_disabled}>
         {content}
       </button>
-    </div>
+    </>
   );
 };
 

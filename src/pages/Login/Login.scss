@@ -5,15 +5,41 @@
   height: 100vh;
   width: 100vw;
   padding: 14px;
+  position: relative;
 
   .container {
     @include flex(space-between, _, _, _, _);
 
     .anim-box {
       height: calc(100vh - 28px);
+      overflow: hidden;
+      border-radius: 1rem;
 
       img {
         height: 100%;
+        animation: img 20s 1s infinite linear;
+      }
+
+      @keyframes img {
+        0% {
+          transform: scale(1);
+        }
+        25% {
+          transform: scale(1.5) translate(80px, -80px);
+          filter: hue-rotate(-90deg);
+        }
+        50% {
+          transform: scale(2) translate(160px, -160px);
+          filter: hue-rotate(0) saturate(200%);
+        }
+        75% {
+          transform: scale(1.5) translate(100px, -100px);
+          filter: hue-rotate(0) saturate(300%);
+        }
+        100% {
+          transform: scale(1) translate(0, 0);
+          filter: hue-rotate(0) saturate(100%);
+        }
       }
     }
 
@@ -77,20 +103,17 @@
           }
 
           #remember_me:checked + label::after {
-            @include after_before("", 50%, _, _, 50%, translate(-50%, -50%));
+            @include after_before("x", 50%, _, _, 50%, translate(-50%, -50%));
             color: $white;
-            font-size: 14px;
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1
           }
 
           .remember_me_row {
             @include flex(space-between, center, _, _, _);
             position: relative;
             margin-top: 20px;
-
-            .error {
-              @include text(20px, $white, center, _);
-              @include absolute(_, _, -40px, _, _);
-            }
 
             div {
               @include flex(_, center, 4px, _, _);
@@ -102,6 +125,11 @@
 
             a {
               @include text(20px, $white, _, _);
+              transition: 0.3s;
+
+              &:hover {
+                color: $btn-hover;
+              }
             }
           }
         }

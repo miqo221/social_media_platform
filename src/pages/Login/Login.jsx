@@ -1,13 +1,12 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useGoogleLogin } from "@react-oauth/google";
-import { loginReducer, ACTIONS } from "../../helpers/reducer";
-import logo from "../../assets/logo/icon.png";
-import google from "../../assets/png/google.png";
-import anim from "../../assets/png/home_anim.png";
 import { ToastContainer, toast } from "react-toastify";
+import Button from "../../components/Button/Button";
+import { loginReducer, ACTIONS } from "../../helpers/reducer";
 import { ROUTES } from "../../routes";
+import logo from "../../assets/logo/icon.png";
+import anim from "../../assets/png/home_anim.png";
 
 import "./Login.scss";
 
@@ -17,82 +16,43 @@ const initialState = {
   success: null,
   error: null,
   loading: false,
+  checked: false,
+  IP: null,
 };
 
 export function Login() {
   const [state, dispatch] = useReducer(loginReducer, initialState);
   const navigate = useNavigate();
+  const savedUser = JSON.parse(localStorage.getItem("rememberMe"));
 
-  const handleGoogleLogin = useGoogleLogin({
-    //! Handle google login
-    onSuccess: async (response) => {
-      try {
-        const { data: googleUserInfo } = await axios.get(
-          //! Fetch the user info from google
-          "https://www.googleapis.com/oauth2/v2/userinfo",
-          {
-            headers: { Authorization: `Bearer ${response.access_token}` },
-          }
-        );
+  //! if the user is saved on localstorage the email input field will be filled automatic
+  useEffect(() => {
+    if (savedUser) {
+      dispatch({ type: ACTIONS.SET_EMAIL, payload: savedUser.email });
+      dispatch({ type: ACTIONS.SET_REMEMBER, payload: savedUser.checked });
+    }
+  }, []);
 
-        const userData = {
-          //! Construct user data object
-          email: googleUserInfo.email,
-          name: googleUserInfo.given_name,
-          surname: googleUserInfo.family_name,
-          image: googleUserInfo.picture,
-          id: googleUserInfo.id,
-        };
-
-        const { data: existingUsers } = await axios.get(
-          //! Checking if the user already exists
-          "http://localhost:8001/users"
-        );
-
-        const userExists = existingUsers.some(
-          (user) => user.email === userData.email
-        );
-
-        if (userExists) {
-          //! Throwing error for existing user
-          dispatch({
-            type: ACTIONS.SET_ERROR,
-            payload: "You already have an account",
-          });
-        } else {
-          await axios.post("http://localhost:8001/users", userData); //! Register new user and navigate to registration
-          dispatch({
-            type: ACTIONS.SET_SUCCESS,
-            payload: `Welcome ${userData.name} ${userData.surname}. Please finish the registration.`,
-          });
-          navigate(ROUTES.REGISTER, {
-            state: {
-              newUser: [userData, state.success], //! Success message for Toastify
-            },
-          });
-        }
-      } catch (error) {
-        //! Google login errors
+  useEffect(() => {
+    axios
+      .get("https://api.ipify.org?format=json")
+      .then((response) =>
         dispatch({
-          type: ACTIONS.SET_ERROR,
-          payload: "Google login failed. Please try again.",
-        });
-      }
-    },
-    onError: (error) => {
-      dispatch({
-        type: ACTIONS.SET_ERROR,
-        payload: "Google login failed. Please try again.",
+          type: ACTIONS.SET_IP,
+          payload: response.data.ip,
+        })
+      )
+      .catch((error) => {
+        console.error("Error fetching IP address:", error);
       });
-      console.error(error);
-    },
-    scope: "profile email",
-  });
+  }, []);
 
   //! Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: ACTIONS.SET_LOADING, payload: true });
+
+    localStorage.getItem("memorizedUser");
 
     try {
       //! Fetching users from db.json
@@ -103,8 +63,8 @@ export function Login() {
         (u) => u.email === state.email && u.password === state.password
       );
 
+      //! Throwing error if the email or password are incorrect
       if (!user) {
-        //! Throwing error if the email or password are incorrect
         dispatch({
           type: ACTIONS.SET_ERROR,
           payload: "Invalid username or password.",
@@ -113,17 +73,66 @@ export function Login() {
         //! Destructuring of user to not send the password to db.json
         const { password, ...signedUser } = user;
 
-        axios({  //! Setting the user in db.json as logged in user
-          method: "POST",
-          baseURL: "http://localhost:8001",
-          url: "/loggedInUsers",
-          data: {
+        //! Check if the user is already logged in or add a new logged-in user
+        const { data: loggedInUsers } = await axios.get(
+          "http://localhost:8001/loggedInUsers"
+        );
+
+        const existingUser = loggedInUsers.find(
+          (u) => u.email === signedUser.email
+        );
+
+        //! Check if the User is already loggedIn from one IP address, don't add the user in loggedInUsers array
+        if (existingUser) {
+          if (existingUser.IP !== state.IP) {
+            await axios.put(
+              `http://localhost:8001/loggedInUsers/${existingUser.id}`,
+              {
+                ...existingUser,
+                IP: state.IP,
+                success: `Welcome back ${signedUser.name}!`,
+              }
+            );
+          }
+        } else {
+          await axios.post("http://localhost:8001/loggedInUsers", {
             ...signedUser,
             success: `Welcome ${signedUser.name}!`,
             signedIn: true,
-          },
-        });
+            IP: state.IP,
+          });
+        }
 
+        //! Handle remember me functionality
+        if (state.checked && !savedUser) {
+          localStorage.setItem("rememberMe", JSON.stringify(state));
+        } else if (
+          !state.checked &&
+          savedUser &&
+          state.email === savedUser.email
+        ) {
+          localStorage.removeItem("rememberMe");
+        } else if (
+          state.checked &&
+          savedUser &&
+          savedUser.email !== state.email
+        ) {
+          localStorage.removeItem("rememberMe");
+          localStorage.setItem("rememberMe", JSON.stringify(state));
+        }
+
+        //! Looking for a saved user in localstorage,if the user is saved it doesn't save the user again, if he is not saved, it saves the user, and if the user was saved but he doesn't want want to be saved more it removes the user from localstorage
+        if (state.checked === true && !savedUser) {
+          localStorage.setItem("rememberMe", JSON.stringify(state));
+        } else if (
+          state.checked === false &&
+          savedUser &&
+          state.email === savedUser.email
+        ) {
+          localStorage.removeItem("rememberMe");
+        }
+
+        //! after login navigating to dashboard
         navigate(`/dashboard/${user.id}`);
       }
     } catch (error) {
@@ -136,6 +145,18 @@ export function Login() {
       //! Reset loading state
       dispatch({ type: ACTIONS.SET_LOADING, payload: false });
     }
+  };
+
+  const notify = () => {
+    if (state.error) toast.error(state.error);
+  };
+
+  useEffect(() => {
+    notify();
+  }, [state.error]);
+
+  const setChecked = () => {
+    dispatch({ type: ACTIONS.SET_REMEMBER, payload: !state.checked });
   };
 
   return (
@@ -176,22 +197,29 @@ export function Login() {
               />
               <div className="remember_me_row">
                 <div>
-                  <input type="checkbox" id="remember_me" />
-                  <label htmlFor="remember_me" id="label_remember"></label>
+                  <input
+                    type="checkbox"
+                    id="remember_me"
+                    checked={state.checked}
+                    onChange={setChecked}
+                  />
+                  <label htmlFor="remember_me"></label>
                   <span>Remember me</span>
                 </div>
-                <Link to={ROUTES.FORGOT_PASSWORD}>Forgot Password</Link>
-                {state.error && <p className="error">{state.error}</p>}
+                <Link to={ROUTES.REC_PASSWORD}>Forgot Password</Link>
               </div>
             </div>
             <div className="btn-box">
-              <button type="submit" disabled={state.loading}>
-                {state.loading ? "Loading..." : "Submit"}
-              </button>
-              <button type="button" onClick={handleGoogleLogin}>
-                <img src={google} alt="Google login" />
-                Sign in with Google
-              </button>
+              <Button
+                button_type="submit"
+                content={state.loading ? "Loading..." : "Sign In"}
+                button_class="btn_sign_in"
+                button_disabled={state.loading}
+                button_function={notify}
+              />
+              <Link className="btn_sign_in" to="/register">
+                Sign up
+              </Link>
             </div>
           </form>
           <p>Copyright @ 2024 Banish</p>

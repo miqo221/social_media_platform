@@ -1,12 +1,15 @@
-$main-bg: linear-gradient(235deg, #00000057, #66666657);
 $body-bg: #1a1a1a;
-$logo: linear-gradient(-90deg, #fffd02, #999801);
 $btn-bg: #000000a1;
+$black: #000;
 $btn-hover: #8e8e8e;
 $yellow: #fffd02;
+$d-yellow: #999801;
 $antracit: #1a1a1a;
 $darkgrey: #282828;
 $white: #ffffff;
+$btn-gr: linear-gradient($darkgrey, $btn-hover);
+$main-bg: linear-gradient(235deg, #00000057, #66666657);
+$logo: linear-gradient(-90deg, $yellow, $d-yellow);
 $font: Nunito sans;
 
 * {
@@ -77,25 +80,19 @@ body {
   }
 }
 
-@mixin button(
-  $color,
-  $bg,
-  $padding,
-  $radius,
-  $font-size,
-  $weight,
-  $hover,
-  $hover-bg
-) {
+@mixin button($color, $bg, $padding, $radius, $font-size, $weight, $hover-bg) {
   color: $color;
   background: $bg;
   padding: $padding;
-  font-size: $font-size;
   border-radius: $radius;
+  font-size: $font-size;
   font-weight: $weight;
+  font-family: $font;
+  text-align: center;
+  border: none;
+  transition: all 0.3s;
 
   &:hover {
-    color: $hover;
     background: $hover-bg;
   }
 }

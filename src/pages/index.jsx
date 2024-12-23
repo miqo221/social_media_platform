@@ -5,5 +5,15 @@ import { Preferences } from "./Preferences/Preferences";
 import { Messages } from "./Messages/Messages";
 import { Profile } from "./Profile/Profile";
 import { NotFound } from "./NotFound/NotFound";
+import { RecoverPassword } from "./RecoverPassword/RecoverPassword";
 
-export { Login, Register, Dashboard, Preferences, Messages, Profile, NotFound };
+export {
+  Login,
+  Register,
+  Dashboard,
+  Preferences,
+  Messages,
+  Profile,
+  NotFound,
+  RecoverPassword,
+};

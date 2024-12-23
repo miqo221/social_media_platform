@@ -5,6 +5,8 @@ export const ACTIONS = {
   SET_LOADING: "set_loading",
   SET_USER: "set_user",
   SET_SUCCESS: "set_success",
+  SET_REMEMBER: "set_remember",
+  SET_IP: "set_IP",
 };
 
 export function loginReducer(state, action) {
@@ -21,6 +23,10 @@ export function loginReducer(state, action) {
       return { ...state, loading: action.payload };
     case ACTIONS.SET_USER:
       return { ...state, user: action.payload };
+    case ACTIONS.SET_REMEMBER:
+      return { ...state, checked: action.payload };
+    case ACTIONS.SET_IP:
+      return { ...state, IP: action.payload };
     default:
       return state;
   }

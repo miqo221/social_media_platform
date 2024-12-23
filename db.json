@@ -1,37 +1,42 @@
 {
   "users": [
     {
+      "id": "118141961365986593042",
+      "email": "mat.grigoryan@gmail.com",
+      "name": "Matevos",
+      "password": "1234",
+      "surname": "Grigoryan",
+      "image": "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c"
+    },
+    {
       "id": "109366736989107049954",
       "email": "m.grikorian@gmail.com",
       "name": "Matevos",
+      "password": "1234",
       "surname": "Grigoryan",
       "image": "https://lh3.googleusercontent.com/a/ACg8ocK7v4WOG4Xj-BkSNE5NOnnCA_1kUviNvl76Bpt3uSuDa_hxlg=s96-c"
-    },
+    }
+  ],
+  "loggedInUsers": [
     {
       "id": "118141961365986593042",
       "email": "mat.grigoryan@gmail.com",
       "name": "Matevos",
       "surname": "Grigoryan",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c"
-    },
-    {
-      "id": "1181419613659865",
-      "email": "mate.grigoryan@gmail.com",
-      "name": "Matevos",
-      "surname": "Grigoryan",
-      "password": "1234",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c"
-    }
-  ],
-  "loggedInUsers": [
-    {
-      "id": "1181419613659865",
-      "email": "mate.grigoryan@gmail.com",
-      "name": "Matevos",
-      "surname": "Grigoryan",
       "image": "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c",
       "success": "Welcome Matevos!",
-      "signedIn": true
+      "signedIn": true,
+      "IP": "212.95.5.11"
+    },
+    {
+      "id": "109366736989107049954",
+      "email": "m.grikorian@gmail.com",
+      "name": "Matevos",
+      "surname": "Grigoryan",
+      "image": "https://lh3.googleusercontent.com/a/ACg8ocK7v4WOG4Xj-BkSNE5NOnnCA_1kUviNvl76Bpt3uSuDa_hxlg=s96-c",
+      "success": "Welcome Matevos!",
+      "signedIn": true,
+      "IP": "212.95.5.11"
     }
   ]
 }
