@@ -6,6 +6,7 @@ $yellow: #fffd02;
 $d-yellow: #999801;
 $antracit: #1a1a1a;
 $darkgrey: #282828;
+$black-tp: #000000b3;
 $white: #ffffff;
 $btn-gr: linear-gradient($darkgrey, $btn-hover);
 $main-bg: linear-gradient(235deg, #00000057, #66666657);
@@ -42,11 +43,6 @@ img {
   content: "";
   display: block;
   clear: both;
-}
-
-::after,
-::before {
-  box-sizing: border-box;
 }
 
 body {

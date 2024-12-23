@@ -15,7 +15,7 @@ import "./App.scss";
 
 function App() {
   return (
-    <div className="app">
+    <>
       <Routes>
         <Route path={ROUTES.HOME}>
           <Route index element={<Login />} />
@@ -28,7 +28,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-    </div>
+    </>
   );
 }
 

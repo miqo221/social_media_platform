@@ -221,8 +221,8 @@ export function Login() {
                 Sign up
               </Link>
             </div>
+            <p>Copyright @ 2024 Banish</p>
           </form>
-          <p>Copyright @ 2024 Banish</p>
         </div>
         <div className="anim-box">
           <img src={anim} alt="Home animation" id="anim" />
