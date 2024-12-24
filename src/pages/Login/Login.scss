@@ -20,8 +20,12 @@
         @include flex(left, center, 6px, _, _);
         padding: 28px 22px;
 
+        img{
+          width: 52px
+        }
+
         h1 {
-          @include header(40px, 800, transparent, italic, _, $logo);
+          @include header(36px, 800, transparent, italic, _, $logo);
           background-clip: text;
           margin: 0;
         }
@@ -96,10 +100,10 @@
           }
 
           #remember_me:checked + label::after {
-            @include after_before("x", 50%, _, _, 50%, translate(-50%, -50%));
+            @include after_before("✔", 50%, _, _, 50%, translate(-50%, -50%));
             color: $white;
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 200;
             line-height: 1;
           }
 

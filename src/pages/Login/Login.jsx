@@ -206,8 +206,7 @@ export function Login() {
                   className={`bi bi-${
                     type === "password" ? "eye" : "eye-slash"
                   }`}
-                  onClick={showPassword}
-                ></i>
+                  onClick={showPassword}></i>
               </div>
               <div className="remember_me_row">
                 <div>
@@ -231,7 +230,7 @@ export function Login() {
                 button_disabled={state.loading}
                 button_function={notify}
               />
-              <Link className="btn_sign_in" to="/register">
+              <Link className="btn_sign_in" to={ROUTES.REGISTER}>
                 Sign up
               </Link>
             </div>

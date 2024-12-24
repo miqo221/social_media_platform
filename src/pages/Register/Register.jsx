@@ -1,18 +1,18 @@
-import { useLocation } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
-import { Link,  useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { loginReducer, ACTIONS } from "../../helpers/reducer";
-import { ToastContainer, toast } from "react-toastify";
 import { ROUTES } from "../../routes";
 import google from "../../assets/png/google.png";
+import logo from "../../assets/logo/icon.png";
+import anim from "../../assets/png/home_anim.png";
+import Animation from "../../components/Animation/Animation";
+import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 
 import "./Register.scss";
 
 export const Register = () => {
-  const location = useLocation();
-  const { newUser } = location.state;
-  
   const handleGoogleLogin = useGoogleLogin({
     //! Handle google login
     onSuccess: async (response) => {
@@ -80,8 +80,21 @@ export const Register = () => {
   });
 
   return (
-    <div>
-      <h1>hello {newUser[0].name}</h1>
-    </div>
+    <main className="register">
+      <ToastContainer className="notification" />
+      <div className="container">
+        <div className="reg-box">
+          <header>
+            <Link to="/">
+              <img src={logo} alt="Bchat" id="logo" />
+              <h1>Bchat</h1>
+            </Link>
+          </header>
+          <h2>REGISTRATION</h2>
+          <RegistrationForm />
+        </div>
+        <Animation anim={anim} />
+      </div>
+    </main>
   );
 };

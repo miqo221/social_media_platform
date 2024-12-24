@@ -1,0 +1,53 @@
+@import "../../styles/global";
+
+.register {
+  background: $main-bg;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+
+  .container {
+    @include flex(flex-start, _, _, _, _);
+
+    .reg-box {
+      flex-grow: 1;
+      position: relative;
+      user-select: none;
+
+      header {
+        display: flex;
+        padding: 28px 22px;
+
+        a {
+          @include flex(left, center, 6px, _, _);
+        }
+
+        img {
+          width: 52px;
+        }
+
+        h1 {
+          @include header(36px, 800, transparent, italic, _, $logo);
+          background-clip: text;
+          margin: 0;
+        }
+      }
+
+      h2 {
+        @include header(32px, 700, $white, italic, center, _);
+        margin: 26px 0;
+      }
+
+      p {
+        @include text(14px, $white, center, _);
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translate(-50%);
+        z-index: 10000;
+      }
+    }
+  }
+}
