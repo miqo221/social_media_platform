@@ -136,3 +136,14 @@ body {
   left: $left;
   transform: $transform;
 }
+
+@mixin input($width, $p, $bg, $border, $radius, $fz) {
+  width: $width;
+  padding: $p;
+  background: $bg;
+  border: $border;
+  outline: none;
+  border-radius: $radius;
+  color: $white;
+  font-size: $fz;
+}

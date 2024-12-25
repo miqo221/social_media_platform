@@ -1,14 +1,6 @@
 {
   "users": [
     {
-      "id": "118141961365986593042",
-      "email": "mat.grigoryan@gmail.com",
-      "name": "Matevos",
-      "password": "1234",
-      "surname": "Grigoryan",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c"
-    },
-    {
       "id": "109366736989107049954",
       "email": "m.grikorian@gmail.com",
       "name": "Matevos",

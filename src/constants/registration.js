@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 export const signup = [
   {
     type: "email",
@@ -13,6 +15,11 @@ export const signup = [
     type: "text",
     name: "surname",
     placeholder: "Surname",
+  },
+  {
+    type: "text",
+    name: "birthday",
+    placeholder: "Date of birth dd.mm.yyyy",
   },
   {
     type: "text",
@@ -35,13 +42,19 @@ export const signup = [
     placeholder: "Country",
   },
   {
+    type: "file",
+    name: "image",
+    placeholder: "Choose your avatar",
+    id: "file",
+  },
+  {
     type: "text",
     name: "phone",
     placeholder: "Phone",
   },
   {
     type: "select",
-    name: "question",
+    name: "securityQuestion",
     placeholder: "Answer",
     value: [
       "What is your grandfather’s last name?",
@@ -56,7 +69,7 @@ export const signup = [
   },
   {
     type: "text",
-    name: "answer",
+    name: "securityAnswer",
     placeholder: "Answer",
   },
   {
@@ -70,3 +83,38 @@ export const signup = [
     placeholder: "Confirm the password",
   },
 ];
+
+export const user = {
+  id: "",
+  email: "",
+  name: "",
+  surname: "",
+  image: [],
+  birthday: "",
+  age: "",
+  address: "",
+  postalCode: "",
+  city: "",
+  country: "",
+  friends: [],
+  phone: "",
+  security: {
+    securityQuestion: "",
+    securityAnswer: "",
+  },
+  password: "",
+  isSigned: [
+    {
+      IP: "",
+      date: "",
+      deviceId: nanoid(),
+      isSigned: false,
+    },
+  ],
+  actions: {
+    success: null,
+    error: null,
+    loading: false,
+    checked: false,
+  },
+};
