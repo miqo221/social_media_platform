@@ -6,7 +6,6 @@ import {ToastContainer} from "react-toastify";
 import {nanoid} from "nanoid";
 import {ClipLoader} from "react-spinners";
 import {ACTIONS, loginReducer} from "../../helpers/reducer";
-import {API_URL} from "../../config/apisrc.js";
 import {ERROR_MSG} from "../../config/messages.js";
 import {user} from "../../constants/registration.js"
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
@@ -28,7 +27,7 @@ export const Register = () => {
         onSuccess: async (response) => {
             try {
                 const {data: googleUserInfo} = await axios.get(
-                    API_URL.GOOGLE_API,
+                    "https://www.googleapis.com/oauth2/v2/userinfo",
                     {headers: {Authorization: `Bearer ${response.access_token}`}}
                 );
 
@@ -42,7 +41,7 @@ export const Register = () => {
 
                 const {data: existingUsers} = await axios.get(
                     //! Checking if the user already exists
-                    API_URL.USERS_URL
+                    "http://localhost:8001/users"
                 );
 
                 const userExists = existingUsers.some(

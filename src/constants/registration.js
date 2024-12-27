@@ -98,23 +98,8 @@ export const user = {
   country: "",
   friends: [],
   phone: "",
-  security: {
-    securityQuestion: "",
-    securityAnswer: "",
-  },
+  securityQuestion: "",
+  securityAnswer: "",
   password: "",
-  isSigned: [
-    {
-      IP: "",
-      date: "",
-      deviceId: nanoid(),
-      isSigned: false,
-    },
-  ],
-  actions: {
-    success: null,
-    error: null,
-    loading: false,
-    checked: false,
-  },
+  isSigned: [],
 };
