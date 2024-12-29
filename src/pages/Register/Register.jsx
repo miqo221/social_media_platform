@@ -34,7 +34,8 @@ export const Register = () => {
 
         const userData = {
           email: googleUserInfo.email,
-          name: googleUserInfo.given_name + " " + googleUserInfo.family_name,
+          name: googleUserInfo.given_name,
+          surname: googleUserInfo.family_name,
           image: [googleUserInfo.picture],
           id: nanoid(),
         };

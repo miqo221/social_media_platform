@@ -12,6 +12,11 @@ export const signup = [
     placeholder: "Name",
   },
   {
+    type: "text",
+    name: "surname",
+    placeholder: "Surname",
+  },
+  {
     type: "select",
     name: "gender",
     value: ["Gender", "Men", "Women"],
@@ -40,12 +45,6 @@ export const signup = [
     type: "text",
     name: "country",
     placeholder: "Country",
-  },
-  {
-    type: "file",
-    name: "image",
-    placeholder: "Choose your avatar",
-    id: "file",
   },
   {
     type: "text",
@@ -86,9 +85,10 @@ export const signup = [
 ];
 
 export const user = {
-  id: "",
+  id: nanoid(),
   email: "",
   name: "",
+  surname: "",
   gender: "",
   image: [],
   birthday: "",

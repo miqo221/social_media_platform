@@ -1,12 +1,14 @@
-import { Fragment, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import { signup } from "../../constants/registration";
 import { object, string } from "yup";
 import { ERROR_MSG } from "../../config/messages";
 import { loginReducer, ACTIONS } from "../../helpers/reducer";
+import google from "../../assets/png/google.png";
 
 import "./RegistrationForm.scss";
 import { nanoid } from "nanoid";
+import Button from "../Button/Button";
 
 const RegistrationForm = ({
   handleClick,
@@ -16,24 +18,31 @@ const RegistrationForm = ({
 }) => {
   const [state, dispatch] = useReducer(loginReducer, initialState);
 
-  const initialValues = {
-    birthday: "",
-    address: "",
-    postalCode: "",
-    city: "",
-    country: "",
-    phone: "",
+  const [formValues, setFormValues] = useState({
+    ...defaultValue,
     password: "",
     password2: "",
-    gender: "",
-    securityQuestion: "",
-    securityAnswer: "",
+  });
+
+  useEffect(() => {
+    if (googleSignIn) {
+      setFormValues({
+        ...defaultValue,
+        password: "",
+        password2: "",
+      });
+    }
+  }, [googleSignIn, defaultValue]);
+
+  const initialValues = {
     ...defaultValue,
+    password: "",
+    password2: "",
   };
+
   const validationSchema = object(
     signup.reduce((acc, field) => {
       switch (field.name) {
-        case "name":
         case "securityAnswer":
           acc[field.name] = string()
             .min(2, `${field.placeholder} must be at least 2 characters`)
@@ -81,19 +90,21 @@ const RegistrationForm = ({
           break;
         case "postalCode":
           acc[field.name] = string()
-            .matches(/^\d{4,6}$/, "Postal code must be between 4 and 6 digits")
+            .matches(/^\d{4,6}$/, "Invalid ZIP code")
             .required("Postal code is a required field");
           break;
         case "country":
         case "city":
+        case "name":
+        case "surname":
           acc[field.name] = string()
             .matches(/^[\p{L}\p{M}\s\-]{2,50}$/u, `Invalid format`)
             .min(2, `Invalid format`)
             .max(50, `Invalid format`)
-            .required(`Required field`)
+            .required(`${field.placeholder} is a required field`)
             .test(
               "capitalize",
-              "Cities and countries starting with uppercase",
+              `${field.placeholder} starts with uppercase`,
               (value) => {
                 if (!value) return true;
                 const words = value.split(" ");
@@ -112,9 +123,8 @@ const RegistrationForm = ({
               /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
               "Invalid phone number"
             )
-            .required("Mobile is a required field");
+            .required("Phone number is a required field");
           break;
-        case "password2":
         case "password":
           acc[field.name] = string()
             .matches(
@@ -124,6 +134,14 @@ const RegistrationForm = ({
             .min(8, "Password must be at least 8 characters")
             .max(16, "Password cannot exceed 16 characters")
             .required("Password is a required field");
+          break;
+        case "password2":
+          acc[field.name] = string()
+            .required("Confirm password is required")
+            .test("", "Passwords must match", function (value) {
+              const { password } = this.options.context || {};
+              return value === password;
+            });
           break;
         case "gender":
         case "securityQuestion":
@@ -150,8 +168,6 @@ const RegistrationForm = ({
       age: getAge(values.birthday),
       id: googleSignIn ? values.id : nanoid(),
     };
-
-    console.log(newUser);
   };
 
   function getAge(birthdate) {
@@ -168,8 +184,9 @@ const RegistrationForm = ({
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={formValues}
       validationSchema={validationSchema}
+      enableReinitialize={true}
       onSubmit={(values, formikEvent) => createUser(values, formikEvent)}>
       {({ errors, touched }) => (
         <Form className="reg-form">
@@ -183,6 +200,8 @@ const RegistrationForm = ({
                 : fieldTouched
                 ? "input-valid inputField"
                 : "inputField";
+
+            const showSuccessIcon = fieldTouched && !fieldError;
 
             if (elm.type === "select") {
               return (
@@ -200,40 +219,34 @@ const RegistrationForm = ({
                       )
                     )}
                   </Field>
-                  <ErrorMessage
-                    name={elm.name}
-                    component="legend"
-                    className="error-message"
-                  />
+                  {(fieldError || fieldTouched) && (
+                    <legend className="error-message">
+                      {showSuccessIcon && <span>✔</span>}
+                      {fieldError && (
+                        <ErrorMessage name={elm.name} component="span" />
+                      )}
+                    </legend>
+                  )}
                 </fieldset>
               );
-            } else if (elm.type === "file") {
-              return (
-                <fieldset key={index} className={fieldClassName}>
-                  <Field type={elm.type} name={elm.name} />
-                  <label htmlFor={elm.name} id="fileLabel">
-                    <span>{elm.placeholder}</span>
-                    <i className="bi bi-camera"></i>
-                  </label>
-                </fieldset>
-              );
-            } else if (
-              (elm.name === "email" || elm.name === "name") &&
-              googleSignIn
-            ) {
+            } else if (elm.name === "email" && googleSignIn) {
               return (
                 <fieldset className={fieldClassName} key={index}>
                   <Field
                     type={elm.type}
                     name={elm.name}
                     placeholder={elm.placeholder}
-                    value={initialValues[elm.name]}
+                    autoComplete="off"
+                    readOnly
                   />
-                  <ErrorMessage
-                    name={elm.name}
-                    component="legend"
-                    className="error-message"
-                  />
+                  {(fieldError || fieldTouched) && (
+                    <legend className="error-message">
+                      {showSuccessIcon && <span>✔</span>}
+                      {fieldError && (
+                        <ErrorMessage name={elm.name} component="span" />
+                      )}
+                    </legend>
+                  )}
                 </fieldset>
               );
             } else {
@@ -243,22 +256,42 @@ const RegistrationForm = ({
                     type={elm.type}
                     name={elm.name}
                     placeholder={elm.placeholder}
+                    autoComplete="off"
                   />
-                  <ErrorMessage
-                    name={elm.name}
-                    component="legend"
-                    className="error-message"
-                  />
+                  {(fieldError || fieldTouched) && (
+                    <legend className="error-message">
+                      {showSuccessIcon && <span>✔</span>}
+                      {fieldError && (
+                        <ErrorMessage name={elm.name} component="span" />
+                      )}
+                    </legend>
+                  )}
                 </fieldset>
               );
             }
           })}
-          {handleClick && (
-            <button onClick={handleClick} type="button">
-              Sign up with Google
-            </button>
-          )}
-          <button type="submit">Submit</button>
+          <div className="button-field">
+            {" "}
+            {handleClick && (
+              <Button
+                button_class="btn_sign_in"
+                button_function={handleClick}
+                button_type="button"
+                content={
+                  <>
+                    <img src={google} alt="" />
+                    Sign up with Google
+                  </>
+                }
+              />
+            )}
+            <Button
+              button_class="btn_sign_in"
+              button_function={handleClick}
+              button_type="button"
+              content={"Sign up"}
+            />
+          </div>
         </Form>
       )}
     </Formik>

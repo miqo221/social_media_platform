@@ -21,6 +21,20 @@ $font: Nunito sans;
   font-family: $font;
 }
 
+input:-webkit-autofill {
+  background-color: transparent !important;  
+  color: #fff !important;  
+  border: none !important;  
+  outline: none !important; 
+}
+
+input:-moz-autofill {
+  background-color: transparent !important;  
+  color: #fff !important;  
+  border: none !important;  
+  outline: none !important;  
+}
+
 .container {
   max-width: 1440px;
   margin: auto;
