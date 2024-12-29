@@ -12,9 +12,9 @@ export const signup = [
     placeholder: "Name",
   },
   {
-    type: "text",
-    name: "surname",
-    placeholder: "Surname",
+    type: "select",
+    name: "gender",
+    value: ["Gender", "Men", "Women"],
   },
   {
     type: "text",
@@ -57,6 +57,7 @@ export const signup = [
     name: "securityQuestion",
     placeholder: "Answer",
     value: [
+      "Please select a security question",
       "What is your grandfather’s last name?",
       "What’s your home address?",
       "What is your mother’s phone number?",
@@ -88,7 +89,7 @@ export const user = {
   id: "",
   email: "",
   name: "",
-  surname: "",
+  gender: "",
   image: [],
   birthday: "",
   age: "",

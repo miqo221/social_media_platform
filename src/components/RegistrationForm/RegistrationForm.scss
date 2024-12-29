@@ -2,20 +2,40 @@
 
 .reg-form {
   @include flex(_, _, 20px, _, wrap);
-  width: 660px;
+  width: 650px;
   margin: auto;
 
-  input,
-  select,
-  label {
-    @include input(
-      calc(50% - 10px),
-      8px,
-      transparent,
-      2px solid $white,
-      4px,
-      14px
-    );
+  .inputField {
+    width: calc(50% - 10px);
+    padding-right: 10px;
+    position: relative;
+    border: 2px solid $white;
+    border-radius: 4px;
+
+    .error-message {
+      color: #fff;
+      font-size: 10px;
+      padding: 0 10px;
+      text-align: right;
+      line-height: 0;
+    }
+
+    input,
+    select,
+    label {
+      @include input(100%, 8px, transparent, _, _, 14px);
+      border: none;
+    }
+  }
+
+  .input-error {
+    border: 2px solid red;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .input-valid {
+    border: 2px solid green;
   }
 
   select,
@@ -35,5 +55,11 @@
     opacity: 0 !important;
     visibility: hidden !important;
     display: none;
+  }
+
+  #fileLabel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }

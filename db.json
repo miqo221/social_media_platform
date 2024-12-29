@@ -3,19 +3,23 @@
     {
       "id": "109366736989107049954",
       "email": "mat.grigoryan@gmail.com",
-      "name": "Matevos",
-      "surname": "Grigoryan",
+      "name": "Matevos Grigoryan",
       "password": "1234",
       "image": "https://lh3.googleusercontent.com/a/ACg8ocK7v4WOG4Xj-BkSNE5NOnnCA_1kUviNvl76Bpt3uSuDa_hxlg=s96-c",
       "isSigned": [
-
-      ]
+        {
+          "deviceId": "lXbc7vNtspkyjh94ma3MN",
+          "date": "2024-12-29T14:20:04.431Z",
+          "IP": "212.95.5.11",
+          "isSigned": false
+        }
+      ],
+      "date": "2024-12-29T14:20:04.449Z"
     },
     {
       "id": "109366736989107049953",
-      "email": "m.grikorian@gmail.com",
-      "name": "Matevos",
-      "surname": "Grigoryan",
+      "email": "matevos.grigoryan@gmail.com",
+      "name": "Matevos Grigoryan",
       "password": "1234",
       "image": "https://lh3.googleusercontent.com/a/ACg8ocK7v4WOG4Xj-BkSNE5NOnnCA_1kUviNvl76Bpt3uSuDa_hxlg=s96-c",
       "isSigned": []

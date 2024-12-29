@@ -1,50 +1,39 @@
 import { Fragment, useReducer } from "react";
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, ErrorMessage } from "formik";
 import { signup } from "../../constants/registration";
 import { object, string } from "yup";
 import { ERROR_MSG } from "../../config/messages";
 import { loginReducer, ACTIONS } from "../../helpers/reducer";
 
 import "./RegistrationForm.scss";
+import { nanoid } from "nanoid";
 
-const RegistrationForm = ({ handleClick, defaultValue, initialState }) => {
+const RegistrationForm = ({
+  handleClick,
+  defaultValue,
+  initialState,
+  googleSignIn,
+}) => {
   const [state, dispatch] = useReducer(loginReducer, initialState);
 
-  const {
-    email,
-    name,
-    surname,
-    birthday,
-    address,
-    postalCode,
-    city,
-    country,
-    image,
-    phone,
-    password,
-  } = defaultValue;
-
   const initialValues = {
-    email,
-    name,
-    surname,
-    birthday,
-    address,
-    postalCode,
-    city,
-    country,
-    image,
-    phone,
-    password,
-    sequrityQuestion: "",
+    birthday: "",
+    address: "",
+    postalCode: "",
+    city: "",
+    country: "",
+    phone: "",
+    password: "",
+    password2: "",
+    gender: "",
+    securityQuestion: "",
     securityAnswer: "",
+    ...defaultValue,
   };
-
   const validationSchema = object(
     signup.reduce((acc, field) => {
       switch (field.name) {
         case "name":
-        case "surname":
         case "securityAnswer":
           acc[field.name] = string()
             .min(2, `${field.placeholder} must be at least 2 characters`)
@@ -83,6 +72,7 @@ const RegistrationForm = ({ handleClick, defaultValue, initialState }) => {
 
               return age > 15 || (age === 15 && !isYearBefore);
             });
+          break;
         case "address":
           acc[field.name] = string()
             .min(5, "Address must be at least 5 characters")
@@ -92,11 +82,8 @@ const RegistrationForm = ({ handleClick, defaultValue, initialState }) => {
         case "postalCode":
           acc[field.name] = string()
             .matches(/^\d{4,6}$/, "Postal code must be between 4 and 6 digits")
-            .min(4, "Postal code must be at least 4 digits")
-            .max(6, "Postal code cannot exceed 6 digits")
             .required("Postal code is a required field");
           break;
-
         case "country":
         case "city":
           acc[field.name] = string()
@@ -127,8 +114,7 @@ const RegistrationForm = ({ handleClick, defaultValue, initialState }) => {
             )
             .required("Mobile is a required field");
           break;
-        case "securityQuestion":
-          string().required("Security question is required");
+        case "password2":
         case "password":
           acc[field.name] = string()
             .matches(
@@ -139,7 +125,11 @@ const RegistrationForm = ({ handleClick, defaultValue, initialState }) => {
             .max(16, "Password cannot exceed 16 characters")
             .required("Password is a required field");
           break;
-
+        case "gender":
+        case "securityQuestion":
+          acc[field.name] = string()
+            .required("Gender is required")
+            .notOneOf([""], "Gender is required");
         default:
           break;
       }
@@ -152,51 +142,125 @@ const RegistrationForm = ({ handleClick, defaultValue, initialState }) => {
       dispatch({ type: ACTIONS.SET_ERROR, payload: ERROR_MSG.PASS_ERROR });
       return;
     }
-    //TODO: to be continued
+
+    const newUser = {
+      ...values,
+      gender: values.gender || null,
+      birthday: values.birthday || null,
+      age: getAge(values.birthday),
+      id: googleSignIn ? values.id : nanoid(),
+    };
+
+    console.log(newUser);
   };
+
+  function getAge(birthdate) {
+    const [day, month, year] = birthdate.split(".").map(Number);
+    const dateOfBirth = new Date(year, month - 1, day);
+    const today = new Date();
+    let age = today.getFullYear() - dateOfBirth.getFullYear();
+    const hasHadBirthday =
+      today.getMonth() > dateOfBirth.getMonth() ||
+      (today.getMonth() === dateOfBirth.getMonth() &&
+        today.getDate() >= dateOfBirth.getDate());
+    return hasHadBirthday ? age : age - 1;
+  }
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values, formikEvent) => createUser(values, formikEvent)}>
-      <Form className="reg-form">
-        {signup.map((elm, index) =>
-          elm.type === "select" ? (
-            <Field as="select" required key={index + elm.name}>
-              <option hidden>Select a security question</option>
-              {elm.value.map((value, i) => (
-                <option value={value} key={i}>
-                  {value}
-                </option>
-              ))}
-            </Field>
-          ) : elm.type === "file" ? (
-            <Fragment key={index + elm.name}>
-              <Field type={elm.type} name={elm.name} id={elm.id} required />
-              <label htmlFor={elm.id}>
-                <span>{elm.placeholder}</span>
-                <span>
-                  <i className="bi bi-camera"></i>
-                </span>
-              </label>
-            </Fragment>
-          ) : (
-            <Field
-              key={index + elm.name}
-              type={elm.type}
-              name={elm.name}
-              placeholder={elm.placeholder}
-              required
-            />
-          )
-        )}
-        {handleClick && (
-          <button onClick={handleClick} type="button">
-            Sign up with Google
-          </button>
-        )}
-      </Form>
+      {({ errors, touched }) => (
+        <Form className="reg-form">
+          {signup.map((elm, index) => {
+            const fieldError = errors[elm.name];
+            const fieldTouched = touched[elm.name];
+
+            const fieldClassName =
+              fieldTouched && fieldError
+                ? "input-error inputField"
+                : fieldTouched
+                ? "input-valid inputField"
+                : "inputField";
+
+            if (elm.type === "select") {
+              return (
+                <fieldset className={fieldClassName} key={index}>
+                  <Field as="select" name={elm.name}>
+                    {elm.value.map((option, i) =>
+                      i === 0 ? (
+                        <option key={i + option} value="" hidden>
+                          {option}
+                        </option>
+                      ) : (
+                        <option key={i} value={option}>
+                          {option}
+                        </option>
+                      )
+                    )}
+                  </Field>
+                  <ErrorMessage
+                    name={elm.name}
+                    component="legend"
+                    className="error-message"
+                  />
+                </fieldset>
+              );
+            } else if (elm.type === "file") {
+              return (
+                <fieldset key={index} className={fieldClassName}>
+                  <Field type={elm.type} name={elm.name} />
+                  <label htmlFor={elm.name} id="fileLabel">
+                    <span>{elm.placeholder}</span>
+                    <i className="bi bi-camera"></i>
+                  </label>
+                </fieldset>
+              );
+            } else if (
+              (elm.name === "email" || elm.name === "name") &&
+              googleSignIn
+            ) {
+              return (
+                <fieldset className={fieldClassName} key={index}>
+                  <Field
+                    type={elm.type}
+                    name={elm.name}
+                    placeholder={elm.placeholder}
+                    value={initialValues[elm.name]}
+                  />
+                  <ErrorMessage
+                    name={elm.name}
+                    component="legend"
+                    className="error-message"
+                  />
+                </fieldset>
+              );
+            } else {
+              return (
+                <fieldset className={fieldClassName} key={index}>
+                  <Field
+                    type={elm.type}
+                    name={elm.name}
+                    placeholder={elm.placeholder}
+                  />
+                  <ErrorMessage
+                    name={elm.name}
+                    component="legend"
+                    className="error-message"
+                  />
+                </fieldset>
+              );
+            }
+          })}
+          {handleClick && (
+            <button onClick={handleClick} type="button">
+              Sign up with Google
+            </button>
+          )}
+          <button type="submit">Submit</button>
+        </Form>
+      )}
     </Formik>
   );
 };

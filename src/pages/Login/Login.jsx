@@ -52,7 +52,9 @@ export function Login() {
   //! function fetchIP for getting IP
   async function fetchIP() {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_REACT_IP_API_URL}`);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_REACT_IP_API_URL}`
+      );
       dispatch({ type: ACTIONS.SET_IP, payload: data.ip });
     } catch {
       dispatch({ type: ACTIONS.SET_ERROR, payload: ERROR_MSG.IP_ERROR_MSG });
@@ -80,6 +82,7 @@ export function Login() {
         const updatedIsSigned = activeUser.isSigned.map((entry) => ({
           ...entry,
           isSigned: false,
+          date: new Date(),
         }));
 
         const activeDevices = updatedIsSigned.filter((entry) => entry.isSigned);
@@ -91,15 +94,23 @@ export function Login() {
           await axios.delete(
             `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${activeUser.id}`
           );
-          await axios.put(`${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`, {
-            ...user,
-            isSigned: updatedIsSigned,
-          });
+          await axios.put(
+            `${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`,
+            {
+              ...user,
+              isSigned: updatedIsSigned,
+              date: new Date(),
+            }
+          );
         } else {
-          await axios.put(`${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`, {
-            ...activeUser,
-            isSigned: updatedIsSigned,
-          });
+          await axios.put(
+            `${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`,
+            {
+              ...activeUser,
+              isSigned: updatedIsSigned,
+              date: new Date(),
+            }
+          );
         }
       } catch (error) {
         console.error("Error during cleanup:", error);
@@ -110,7 +121,9 @@ export function Login() {
 
   //!verify the user checking the email and password
   async function verifyUser(email, password) {
-    const { data: users } = await axios.get(`${import.meta.env.VITE_REACT_USERS_URL}`);
+    const { data: users } = await axios.get(
+      `${import.meta.env.VITE_REACT_USERS_URL}`
+    );
     return users.find(
       (user) => user.email === email && user.password === password
     );
@@ -135,7 +148,9 @@ export function Login() {
 
     user.isSigned = isDeviceAdded
       ? user.isSigned.map((device) =>
-          device.deviceId === deviceId ? { ...device, isSigned: true } : device
+          device.deviceId === deviceId
+            ? { ...device, isSigned: true, date: new Date() }
+            : device
         )
       : [...(user.isSigned || []), deviceData];
 
@@ -160,7 +175,7 @@ export function Login() {
   }
 
   //! Set the user email in locale storage, if the user allows
-  function handleRememberMe(checked, email, user) {
+  function handleRememberMe(checked, user) {
     if (checked) {
       const { password, isSigned, ...userData } = user;
       localStorage.setItem("rememberMe", JSON.stringify(userData));
@@ -186,7 +201,7 @@ export function Login() {
       const updatedUser = await updateUserDevicesInDB(user);
 
       await saveLoggedInUser(updatedUser);
-      handleRememberMe(state.checked, state.email, updatedUser);
+      handleRememberMe(state.checked, updatedUser);
       navigate(`/dashboard/${user.id}`);
     } catch {
       dispatch({ type: ACTIONS.SET_ERROR, payload: ERROR_MSG.FAILED_LOGIN });
