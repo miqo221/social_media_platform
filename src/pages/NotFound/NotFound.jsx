@@ -6,17 +6,12 @@ import notFoundImg from "../../assets/images/png/pageNotFound.png";
 import "./NotFound.scss";
 
 export const NotFound = () => {
-  const button = () => {
-    console.log("asf");
-  };
-
   return (
     <div className="notFoundPage">
       <Link to={ROUTES.HOME}>
         <Button
           content="Go To Login Page"
           button_class="notFound_page_button"
-          button_function={button}
           button_type="submit"
           button_disabled={false}
         />
