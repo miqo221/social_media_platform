@@ -9,7 +9,7 @@
   overflow: hidden;
 
   .container {
-    @include flex(flex-start, _, _, _, _);
+    @include flex(flex-start, _, 14px, _, _);
 
     .reg-box {
       flex-grow: 1;
@@ -42,10 +42,7 @@
 
       p {
         @include text(14px, $white, center, _);
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translate(-50%);
+        @include absolute(_, _, 20px, 50%, translate(-50%));
         z-index: 10000;
       }
     }

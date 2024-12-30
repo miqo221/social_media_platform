@@ -1,14 +1,102 @@
+@import "../../styles/global";
+
 .reg-form {
-  display: flex;
-  width: 660px;
-  flex-wrap: wrap;
-  gap: 20px;
+  @include flex(_, _, 20px, _, wrap);
+  width: 650px;
   margin: auto;
 
-  input,
-  select {
-    flex-basis: calc(50% - 10px);
+  .inputField {
     width: calc(50% - 10px);
-    padding: 10px;
+    position: relative;
+    border: 2px solid $white;
+    border-radius: 4px;
+
+    .error-message {
+      position: relative;
+      @include text(10px, $white, right, _);
+      line-height: 0;
+
+      span {
+        line-height: 0;
+        padding: 0 10px;
+        display: inline-block;
+        z-index: 999999;
+      }
+    }
+
+    input,
+    select,
+    label {
+      @include input(100%, 8px, transparent, _, _, 14px);
+      border: none;
+    }
+
+    input:-webkit-autofill {
+      -webkit-box-shadow: $autofill-shadow;
+      -webkit-text-fill-color: $white;
+      z-index: 0 !important;
+    }
+
+    input:-webkit-autofill:focus {
+      -webkit-box-shadow: $autofill-shadow;
+      -webkit-text-fill-color: $white;
+      z-index: 0 !important;
+    }
+
+    i {
+      @include absolute(50%, 10px, _, _, translate(0, -50%));
+      color: $white;
+      cursor: pointer;
+    }
+  }
+
+  .button-field {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      @include iflex(center, center, 20px, calc(50% - 10px));
+      font-size: 16px;
+      padding: 4px !important;
+      cursor: pointer;
+
+      img {
+        width: 32px;
+      }
+    }
+  }
+
+  .input-error {
+    border: 2px solid red;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .input-valid {
+    border: 2px solid green;
+  }
+
+  select,
+  label {
+    cursor: pointer;
+  }
+
+  select option {
+    background: $darkgrey;
+  }
+
+  input::placeholder {
+    color: $white;
+  }
+
+  input[type="file"] {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    display: none;
+  }
+
+  #fileLabel {
+    @include flex(space-between, center, _, _, _);
   }
 }

@@ -8,6 +8,7 @@ export const ACTIONS = {
   SET_REMEMBER: "set_remember",
   SET_IP: "set_IP",
   SET_SHOW_PASS: "set_show_pass",
+  SET_GOOGLE_SIGN_IN: "set_google_sign_in",
 };
 
 export function loginReducer(state, action) {
@@ -24,6 +25,8 @@ export function loginReducer(state, action) {
       return { ...state, loading: action.payload };
     case ACTIONS.SET_USER:
       return { ...state, user: action.payload };
+    case ACTIONS.SET_GOOGLE_SIGN_IN:
+      return { ...state, googleSignIn: action.payload };
     case ACTIONS.SET_REMEMBER:
       return { ...state, checked: action.payload };
     case ACTIONS.SET_IP:

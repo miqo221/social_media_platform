@@ -20,8 +20,8 @@
         @include flex(left, center, 6px, _, _);
         padding: 28px 22px;
 
-        img{
-          width: 52px
+        img {
+          width: 52px;
         }
 
         h1 {
@@ -34,13 +34,6 @@
       h2 {
         @include header(32px, 700, $white, italic, center, _);
         margin: 26px 0;
-      }
-
-      @media (max-height: 780px) {
-        header {
-          gap: 10px;
-          padding: 10px 20px;
-        }
       }
 
       form {
@@ -57,13 +50,10 @@
             width: 100%;
 
             i {
-              position: absolute;
+              @include absolute(50%, 10px, _, _, translateY(-50%));
               font-size: 24px;
               cursor: pointer;
               color: $white;
-              top: 50%;
-              right: 10px;
-              transform: translateY(-50%);
             }
           }
 
@@ -74,14 +64,7 @@
           }
 
           input {
-            width: 100%;
-            padding: 12px;
-            background: transparent;
-            outline: none;
-            border: 2px solid $white;
-            border-radius: 4px;
-            color: $white;
-            font-size: 20px;
+            @include input(100%, 12px, transparent, 2px solid $white, 4px, 20px);
           }
 
           #remember_me {
@@ -101,9 +84,7 @@
 
           #remember_me:checked + label::after {
             @include after_before("✔", 50%, _, _, 50%, translate(-50%, -50%));
-            color: $white;
-            font-size: 16px;
-            font-weight: 200;
+            @include text(16px, $white, _, 200);
             line-height: 1;
           }
 
@@ -212,10 +193,7 @@
 
       p {
         @include text(14px, $white, center, _);
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translate(-50%);
+        @include absolute(_, _, 20px, 50%, translate(-50%));
         z-index: 10000;
       }
     }

@@ -1,42 +1,41 @@
 {
   "users": [
     {
-      "id": "118141961365986593042",
+      "id": "qCZSRvbVBaa4kZxkJLUqn",
       "email": "mat.grigoryan@gmail.com",
       "name": "Matevos",
-      "password": "1234",
       "surname": "Grigoryan",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c"
-    },
-    {
-      "id": "109366736989107049954",
-      "email": "m.grikorian@gmail.com",
-      "name": "Matevos",
-      "password": "1234",
-      "surname": "Grigoryan",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocK7v4WOG4Xj-BkSNE5NOnnCA_1kUviNvl76Bpt3uSuDa_hxlg=s96-c"
+      "gender": "Men",
+      "image": [
+        "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c"
+      ],
+      "birthday": "08.12.1993",
+      "age": 31,
+      "address": "Jivanu 54",
+      "postalCode": "0032",
+      "city": "Yerevan",
+      "country": "Österreich",
+      "friends": [],
+      "phone": "06766877568",
+      "securityQuestion": "What’s your home address?",
+      "securityAnswer": "bereb",
+      "password": "Matos-123",
+      "isSigned": [
+        {
+          "deviceId": "iY_VTNYk8CBjFcB_x6GzV",
+          "date": "2024-12-30T10:31:48.682Z",
+          "IP": "212.95.5.11",
+          "isSigned": false
+        },
+        {
+          "deviceId": "J5IQKQ4vre7upFuLEnwyM",
+          "date": "2024-12-30T10:31:48.682Z",
+          "IP": "212.95.5.11",
+          "isSigned": false
+        }
+      ],
+      "date": "2024-12-30T10:31:48.761Z"
     }
   ],
-  "loggedInUsers": [
-    {
-      "id": "118141961365986593042",
-      "email": "mat.grigoryan@gmail.com",
-      "name": "Matevos",
-      "surname": "Grigoryan",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c",
-      "success": "Welcome Matevos!",
-      "signedIn": true,
-      "IP": "212.95.5.11"
-    },
-    {
-      "id": "109366736989107049954",
-      "email": "m.grikorian@gmail.com",
-      "name": "Matevos",
-      "surname": "Grigoryan",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocK7v4WOG4Xj-BkSNE5NOnnCA_1kUviNvl76Bpt3uSuDa_hxlg=s96-c",
-      "success": "Welcome Matevos!",
-      "signedIn": true,
-      "IP": "212.95.5.11"
-    }
-  ]
+  "loggedInUsers": []
 }
