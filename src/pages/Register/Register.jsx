@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
-import { ToastContainer } from "react-toastify";
-import { nanoid } from "nanoid";
+import { toast, ToastContainer } from "react-toastify";
 import { ClipLoader } from "react-spinners";
 import { ACTIONS, loginReducer } from "../../helpers/reducer";
 import { ERROR_MSG } from "../../config/messages.js";
@@ -16,6 +15,8 @@ import anim from "../../assets/png/home_anim.png";
 import "./Register.scss";
 
 const initialState = {
+  loading: false,
+  success: false,
   error: null,
   googleSignIn: false,
   user: { ...user },
@@ -23,6 +24,10 @@ const initialState = {
 
 export const Register = () => {
   const [state, dispatch] = useReducer(loginReducer, initialState);
+
+  useEffect(() => {
+    if (state.error) toast.error(state.error);
+  }, [state.error]);
 
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (response) => {
@@ -37,7 +42,6 @@ export const Register = () => {
           name: googleUserInfo.given_name,
           surname: googleUserInfo.family_name,
           image: [googleUserInfo.picture],
-          id: nanoid(),
         };
 
         const { data: existingUsers } = await axios.get(
@@ -105,6 +109,7 @@ export const Register = () => {
             googleSignIn={state.googleSignIn}
             handleClick={handleGoogleLogin}
             initialState={initialState}
+            path={"/"}
           />
         </div>
         <Animation anim={anim} />

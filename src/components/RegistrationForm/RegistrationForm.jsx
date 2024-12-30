@@ -5,18 +5,33 @@ import { object, string } from "yup";
 import { ERROR_MSG } from "../../config/messages";
 import { loginReducer, ACTIONS } from "../../helpers/reducer";
 import google from "../../assets/png/google.png";
+import Button from "../Button/Button";
+import useToggle from "../../hooks/useToggle";
 
 import "./RegistrationForm.scss";
-import { nanoid } from "nanoid";
-import Button from "../Button/Button";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 const RegistrationForm = ({
   handleClick,
   defaultValue,
   initialState,
   googleSignIn,
+  path,
 }) => {
   const [state, dispatch] = useReducer(loginReducer, initialState);
+  const navigate = useNavigate();
+  const { toggle, changeToggle } = useToggle();
+
+  useEffect(() => {
+    if (state.error) toast.error(state.error);
+  }, [state.error]);
+
+  useEffect(() => {
+    if (state.success) toast.success("Registration was successful");
+  }, [state.success]);
 
   const [formValues, setFormValues] = useState({
     ...defaultValue,
@@ -34,12 +49,7 @@ const RegistrationForm = ({
     }
   }, [googleSignIn, defaultValue]);
 
-  const initialValues = {
-    ...defaultValue,
-    password: "",
-    password2: "",
-  };
-
+  console.log(formValues);
   const validationSchema = object(
     signup.reduce((acc, field) => {
       switch (field.name) {
@@ -55,7 +65,22 @@ const RegistrationForm = ({
               /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
               "E-mail must be a valid email address"
             )
-            .required("E-mail is a required field");
+            .required("E-mail is a required field")
+            .test("user-match", "Email already exists", async (value) => {
+              if (!value) return true;
+              try {
+                const response = await axios.get(
+                  import.meta.env.VITE_REACT_USERS_URL
+                );
+                const userExists = response.data.some(
+                  (user) => user.email === value
+                );
+                return !userExists;
+              } catch (error) {
+                console.error(error);
+                return false;
+              }
+            });
           break;
         case "birthday":
           acc[field.name] = string()
@@ -155,19 +180,30 @@ const RegistrationForm = ({
     }, {})
   );
 
-  const createUser = (values, formikEvent) => {
+  const createUser = async (values, formikEvent) => {
     if (values.password !== values.password2) {
       dispatch({ type: ACTIONS.SET_ERROR, payload: ERROR_MSG.PASS_ERROR });
       return;
     }
 
-    const newUser = {
-      ...values,
-      gender: values.gender || null,
-      birthday: values.birthday || null,
-      age: getAge(values.birthday),
-      id: googleSignIn ? values.id : nanoid(),
-    };
+    const { password2, ...newUser } = values;
+    newUser.age = getAge(values.birthday);
+
+    try {
+      dispatch({ type: ACTIONS.SET_LOADING, payload: true });
+      await axios.post(import.meta.env.VITE_REACT_USERS_URL, newUser);
+      setTimeout(() => {
+        formikEvent.resetForm();
+        navigate(path);
+      }, 3000);
+    } catch (error) {
+      dispatch({ type: ACTIONS.SET_ERROR, payload: ERROR_MSG.SERVER_ERROR });
+      dispatch({ type: ACTIONS.SET_LOADING, payload: false });
+      console.error(error);
+    } finally {
+      dispatch({ type: ACTIONS.SET_SUCCESS, payload: true });
+      dispatch({ type: ACTIONS.SET_LOADING, payload: false });
+    }
   };
 
   function getAge(birthdate) {
@@ -183,118 +219,140 @@ const RegistrationForm = ({
   }
 
   return (
-    <Formik
-      initialValues={formValues}
-      validationSchema={validationSchema}
-      enableReinitialize={true}
-      onSubmit={(values, formikEvent) => createUser(values, formikEvent)}>
-      {({ errors, touched }) => (
-        <Form className="reg-form">
-          {signup.map((elm, index) => {
-            const fieldError = errors[elm.name];
-            const fieldTouched = touched[elm.name];
+    <>
+      <ToastContainer className="notification" />
+      <Formik
+        initialValues={formValues}
+        validationSchema={validationSchema}
+        enableReinitialize={true}
+        onSubmit={(values, formikEvent) => createUser(values, formikEvent)}>
+        {({ errors, touched }) => (
+          <Form className="reg-form">
+            {signup.map((elm, index) => {
+              const fieldError = errors[elm.name];
+              const fieldTouched = touched[elm.name];
 
-            const fieldClassName =
-              fieldTouched && fieldError
-                ? "input-error inputField"
-                : fieldTouched
-                ? "input-valid inputField"
-                : "inputField";
+              const fieldClassName =
+                fieldTouched && fieldError
+                  ? "input-error inputField"
+                  : fieldTouched
+                  ? "input-valid inputField"
+                  : "inputField";
 
-            const showSuccessIcon = fieldTouched && !fieldError;
+              const showSuccessIcon = fieldTouched && !fieldError;
 
-            if (elm.type === "select") {
-              return (
-                <fieldset className={fieldClassName} key={index}>
-                  <Field as="select" name={elm.name}>
-                    {elm.value.map((option, i) =>
-                      i === 0 ? (
-                        <option key={i + option} value="" hidden>
-                          {option}
-                        </option>
-                      ) : (
-                        <option key={i} value={option}>
-                          {option}
-                        </option>
-                      )
+              if (elm.type === "select") {
+                return (
+                  <fieldset className={fieldClassName} key={index}>
+                    <Field as="select" name={elm.name}>
+                      {elm.value.map((option, i) =>
+                        i === 0 ? (
+                          <option key={i + option} value="" hidden>
+                            {option}
+                          </option>
+                        ) : (
+                          <option key={i} value={option}>
+                            {option}
+                          </option>
+                        )
+                      )}
+                    </Field>
+                    {(fieldError || fieldTouched) && (
+                      <legend className="error-message">
+                        {showSuccessIcon && <span>✔</span>}
+                        {fieldError && (
+                          <ErrorMessage name={elm.name} component="span" />
+                        )}
+                      </legend>
                     )}
-                  </Field>
-                  {(fieldError || fieldTouched) && (
-                    <legend className="error-message">
-                      {showSuccessIcon && <span>✔</span>}
-                      {fieldError && (
-                        <ErrorMessage name={elm.name} component="span" />
-                      )}
-                    </legend>
-                  )}
-                </fieldset>
-              );
-            } else if (elm.name === "email" && googleSignIn) {
-              return (
-                <fieldset className={fieldClassName} key={index}>
-                  <Field
-                    type={elm.type}
-                    name={elm.name}
-                    placeholder={elm.placeholder}
-                    autoComplete="off"
-                    readOnly
-                  />
-                  {(fieldError || fieldTouched) && (
-                    <legend className="error-message">
-                      {showSuccessIcon && <span>✔</span>}
-                      {fieldError && (
-                        <ErrorMessage name={elm.name} component="span" />
-                      )}
-                    </legend>
-                  )}
-                </fieldset>
-              );
-            } else {
-              return (
-                <fieldset className={fieldClassName} key={index}>
-                  <Field
-                    type={elm.type}
-                    name={elm.name}
-                    placeholder={elm.placeholder}
-                    autoComplete="off"
-                  />
-                  {(fieldError || fieldTouched) && (
-                    <legend className="error-message">
-                      {showSuccessIcon && <span>✔</span>}
-                      {fieldError && (
-                        <ErrorMessage name={elm.name} component="span" />
-                      )}
-                    </legend>
-                  )}
-                </fieldset>
-              );
-            }
-          })}
-          <div className="button-field">
-            {" "}
-            {handleClick && (
+                  </fieldset>
+                );
+              } else if (elm.name === "email" && googleSignIn) {
+                return (
+                  <fieldset className={fieldClassName} key={index}>
+                    <Field
+                      type={elm.type}
+                      name={elm.name}
+                      placeholder={elm.placeholder}
+                      autoComplete="off"
+                      readOnly
+                    />
+                    {(fieldError || fieldTouched) && (
+                      <legend className="error-message">
+                        {showSuccessIcon && <span>✔</span>}
+                        {fieldError && (
+                          <ErrorMessage name={elm.name} component="span" />
+                        )}
+                      </legend>
+                    )}
+                  </fieldset>
+                );
+              } else {
+                return (
+                  <fieldset className={fieldClassName} key={index}>
+                    <Field
+                      type={
+                        elm.name !== "password"
+                          ? elm.type
+                          : toggle
+                          ? "password"
+                          : "text"
+                      }
+                      name={elm.name}
+                      placeholder={elm.placeholder}
+                    />
+                    {(fieldError || fieldTouched) && (
+                      <legend className="error-message">
+                        {showSuccessIcon && <span>✔</span>}
+                        {fieldError && (
+                          <ErrorMessage name={elm.name} component="span" />
+                        )}
+                      </legend>
+                    )}
+                    {elm.name === "password" && (
+                      <i
+                        className={`bi bi-${toggle ? "eye" : "eye-slash"}`}
+                        onClick={changeToggle}></i>
+                    )}
+                  </fieldset>
+                );
+              }
+            })}
+            <div className="button-field">
+              {" "}
+              {handleClick && (
+                <Button
+                  button_class="btn_sign_in"
+                  button_function={handleClick}
+                  button_type="button"
+                  content={
+                    state.loading ? (
+                      <ClipLoader size={15} color="white" />
+                    ) : (
+                      <>
+                        <img src={google} alt="" />
+                        Sign up with Google
+                      </>
+                    )
+                  }
+                />
+              )}
               <Button
                 button_class="btn_sign_in"
-                button_function={handleClick}
-                button_type="button"
+                button_type="submit"
                 content={
-                  <>
-                    <img src={google} alt="" />
-                    Sign up with Google
-                  </>
+                  state.loading ? (
+                    <ClipLoader size={15} color="white" />
+                  ) : (
+                    "Sign In"
+                  )
                 }
               />
-            )}
-            <Button
-              button_class="btn_sign_in"
-              button_function={handleClick}
-              button_type="button"
-              content={"Sign up"}
-            />
-          </div>
-        </Form>
-      )}
-    </Formik>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </>
   );
 };
 

@@ -13,9 +13,7 @@
 
     .error-message {
       position: relative;
-      color: #fff;
-      font-size: 10px;
-      text-align: center;
+      @include text(10px, $white, right, _);
       line-height: 0;
 
       span {
@@ -34,30 +32,35 @@
     }
 
     input:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 50px #272727 inset;
-      -webkit-text-fill-color: white;
-      z-index: 0!important;
+      -webkit-box-shadow: $autofill-shadow;
+      -webkit-text-fill-color: $white;
+      z-index: 0 !important;
     }
 
     input:-webkit-autofill:focus {
-      -webkit-box-shadow: 0 0 0 50px #272727 inset;
-      -webkit-text-fill-color: white;
-      z-index: 0!important;
+      -webkit-box-shadow: $autofill-shadow;
+      -webkit-text-fill-color: $white;
+      z-index: 0 !important;
+    }
+
+    i {
+      @include absolute(50%, 10px, _, _, translate(0, -50%));
+      color: $white;
+      cursor: pointer;
     }
   }
+
   .button-field {
     width: 100%;
     display: flex;
     justify-content: space-between;
+
     button {
-      width: calc(50% - 10px);
+      @include iflex(center, center, 20px, calc(50% - 10px));
       font-size: 16px;
       padding: 4px !important;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
       cursor: pointer;
+
       img {
         width: 32px;
       }
@@ -94,8 +97,6 @@
   }
 
   #fileLabel {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex(space-between, center, _, _, _);
   }
 }

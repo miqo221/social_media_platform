@@ -11,6 +11,7 @@ import Animation from "../../components/Animation/Animation";
 import logo from "../../assets/logo/icon.png";
 import anim from "../../assets/png/home_anim.png";
 import { nanoid } from "nanoid";
+import useToggle from "../../hooks/useToggle.jsx";
 import "./Login.scss";
 
 const initialState = {
@@ -28,7 +29,7 @@ export function Login() {
   const [state, dispatch] = useReducer(loginReducer, initialState);
   const navigate = useNavigate();
   const savedUser = JSON.parse(localStorage.getItem("rememberMe"));
-  const [type, setType] = useState("password");
+  const { toggle, changeToggle } = useToggle();
 
   //! When the user has checked remember me, navigate to his page
   useEffect(() => {
@@ -212,9 +213,6 @@ export function Login() {
   }
 
   //! Hide and show password
-  function showPassword() {
-    setType((prevType) => (prevType === "password" ? "text" : "password"));
-  }
 
   //! toggle Remember
   function toggleRememberMe() {
@@ -246,7 +244,7 @@ export function Login() {
               <label>Password</label>
               <div className="password-input">
                 <input
-                  type={type}
+                  type={toggle ? "password" : "text"}
                   value={state.password}
                   onChange={(e) =>
                     dispatch({
@@ -257,9 +255,9 @@ export function Login() {
                 />
                 <i
                   className={`bi bi-${
-                    type === "password" ? "eye" : "eye-slash"
+                    toggle ? "eye" : "eye-slash"
                   }`}
-                  onClick={showPassword}></i>
+                  onClick={changeToggle}></i>
               </div>
               <div className="remember_me_row">
                 <div>

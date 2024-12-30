@@ -11,6 +11,7 @@ $white: #ffffff;
 $btn-gr: linear-gradient($darkgrey, $btn-hover);
 $main-bg: linear-gradient(235deg, #00000057, #66666657);
 $logo: linear-gradient(-90deg, $yellow, $d-yellow);
+$autofill-shadow:  0 0 0 50px #272727 inset;
 $font: Nunito sans;
 
 * {
@@ -114,6 +115,14 @@ body {
   gap: $gap;
   flex-direction: $direction;
   flex-wrap: $wrap;
+}
+
+@mixin iflex($just, $align, $gap, $width) {
+  display: inline-flex;
+  justify-content: $just;
+  align-items: $align;
+  gap: $gap;
+  width: $width;
 }
 
 @mixin after_before($content, $top, $right, $bottom, $left, $transform) {
