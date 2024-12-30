@@ -1,41 +1,4 @@
 {
-  "users": [
-    {
-      "id": "qCZSRvbVBaa4kZxkJLUqn",
-      "email": "mat.grigoryan@gmail.com",
-      "name": "Matevos",
-      "surname": "Grigoryan",
-      "gender": "Men",
-      "image": [
-        "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c"
-      ],
-      "birthday": "08.12.1993",
-      "age": 31,
-      "address": "Jivanu 54",
-      "postalCode": "0032",
-      "city": "Yerevan",
-      "country": "Österreich",
-      "friends": [],
-      "phone": "06766877568",
-      "securityQuestion": "What’s your home address?",
-      "securityAnswer": "bereb",
-      "password": "Matos-123",
-      "isSigned": [
-        {
-          "deviceId": "iY_VTNYk8CBjFcB_x6GzV",
-          "date": "2024-12-30T10:31:48.682Z",
-          "IP": "212.95.5.11",
-          "isSigned": false
-        },
-        {
-          "deviceId": "J5IQKQ4vre7upFuLEnwyM",
-          "date": "2024-12-30T10:31:48.682Z",
-          "IP": "212.95.5.11",
-          "isSigned": false
-        }
-      ],
-      "date": "2024-12-30T10:31:48.761Z"
-    }
-  ],
+  "users": [],
   "loggedInUsers": []
 }

@@ -33,7 +33,7 @@ export const Register = () => {
     onSuccess: async (response) => {
       try {
         const { data: googleUserInfo } = await axios.get(
-          "https://www.googleapis.com/oauth2/v2/userinfo",
+          import.meta.env.VITE_REACT_GOOGLE_API,
           { headers: { Authorization: `Bearer ${response.access_token}` } }
         );
 
@@ -46,7 +46,7 @@ export const Register = () => {
 
         const { data: existingUsers } = await axios.get(
           //! Checking if the user already exists
-          "http://localhost:8001/users"
+          import.meta.env.VITE_REACT_USERS_URL
         );
 
         const userExists = existingUsers.some(
@@ -86,9 +86,9 @@ export const Register = () => {
         type: ACTIONS.SET_ERROR,
         payload: ERROR_MSG.FAILED_LOGIN,
       });
-      console.error(error);
+      console.error("Google Login Error:",error);
     },
-    scope: "profile email",
+    scope: "openid profile email",
   });
 
   return (

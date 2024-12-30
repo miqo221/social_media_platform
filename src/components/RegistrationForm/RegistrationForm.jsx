@@ -1,18 +1,18 @@
 import { useEffect, useReducer, useState } from "react";
-import { Field, Form, Formik, ErrorMessage } from "formik";
-import { signup } from "../../constants/registration";
-import { object, string } from "yup";
-import { ERROR_MSG } from "../../config/messages";
-import { loginReducer, ACTIONS } from "../../helpers/reducer";
-import google from "../../assets/png/google.png";
-import Button from "../Button/Button";
-import useToggle from "../../hooks/useToggle";
-
-import "./RegistrationForm.scss";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Field, Form, Formik, ErrorMessage } from "formik";
+import { object, string } from "yup";
 import { toast, ToastContainer } from "react-toastify";
 import { ClipLoader } from "react-spinners";
+import useToggle from "../../hooks/useToggle";
+import { loginReducer, ACTIONS } from "../../helpers/reducer";
+import { ERROR_MSG } from "../../config/messages";
+import { signup } from "../../constants/registration";
+import google from "../../assets/png/google.png";
+import Button from "../Button/Button";
+
+import "./RegistrationForm.scss";
 
 const RegistrationForm = ({
   handleClick,
@@ -49,7 +49,6 @@ const RegistrationForm = ({
     }
   }, [googleSignIn, defaultValue]);
 
-  console.log(formValues);
   const validationSchema = object(
     signup.reduce((acc, field) => {
       switch (field.name) {
@@ -153,8 +152,8 @@ const RegistrationForm = ({
         case "password":
           acc[field.name] = string()
             .matches(
-              /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,16}$/,
-              "Invalid Password, Use A,a,1,-,_"
+              /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+              "Minimum 8 characters, at least 1 letter & 1 number"
             )
             .min(8, "Password must be at least 8 characters")
             .max(16, "Password cannot exceed 16 characters")
