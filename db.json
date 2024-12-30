@@ -1,40 +1,32 @@
 {
   "users": [
     {
-      "id": "qCZSRvbVBaa4kZxkJLUqn",
-      "email": "mat.grigoryan@gmail.com",
-      "name": "Matevos",
-      "surname": "Grigoryan",
+      "id": "ijl_6MDgWqzRBJFMGeo0r",
+      "email": "davit.petrosyan223@gmail.com",
+      "name": "Drive Dreamrs",
+      "surname": "Bass",
       "gender": "Men",
-      "image": [
-        "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c"
-      ],
-      "birthday": "08.12.1993",
-      "age": 31,
-      "address": "Jivanu 54",
-      "postalCode": "0032",
+      "image": [],
+      "birthday": "10.09.2002",
+      "age": 22,
+      "address": "Zeytun",
+      "postalCode": "0002",
       "city": "Yerevan",
-      "country": "Österreich",
+      "country": "Armenia",
       "friends": [],
-      "phone": "06766877568",
-      "securityQuestion": "What’s your home address?",
-      "securityAnswer": "bereb",
-      "password": "Matos-123",
+      "phone": "+37498774456",
+      "securityQuestion": "What book do you recommend to your friends?",
+      "securityAnswer": "Table",
+      "password": "A.a-123_",
       "isSigned": [
         {
-          "deviceId": "iY_VTNYk8CBjFcB_x6GzV",
-          "date": "2024-12-30T10:31:48.682Z",
-          "IP": "212.95.5.11",
-          "isSigned": false
-        },
-        {
-          "deviceId": "J5IQKQ4vre7upFuLEnwyM",
-          "date": "2024-12-30T10:31:48.682Z",
-          "IP": "212.95.5.11",
+          "deviceId": "qAKt0n69L3zn_Hd40PQSc",
+          "date": "2024-12-30T11:27:00.306Z",
+          "IP": "87.241.159.126",
           "isSigned": false
         }
       ],
-      "date": "2024-12-30T10:31:48.761Z"
+      "date": "2024-12-30T11:27:00.505Z"
     }
   ],
   "loggedInUsers": []

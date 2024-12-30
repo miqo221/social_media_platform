@@ -24,6 +24,7 @@ const RegistrationForm = ({
   const [state, dispatch] = useReducer(loginReducer, initialState);
   const navigate = useNavigate();
   const { toggle, changeToggle } = useToggle();
+  const { toggle: toggle2, changeToggle: changeToggle2 } = useToggle();
 
   useEffect(() => {
     if (state.error) toast.error(state.error);
@@ -49,7 +50,6 @@ const RegistrationForm = ({
     }
   }, [googleSignIn, defaultValue]);
 
-  console.log(formValues);
   const validationSchema = object(
     signup.reduce((acc, field) => {
       switch (field.name) {
@@ -225,7 +225,8 @@ const RegistrationForm = ({
         initialValues={formValues}
         validationSchema={validationSchema}
         enableReinitialize={true}
-        onSubmit={(values, formikEvent) => createUser(values, formikEvent)}>
+        onSubmit={(values, formikEvent) => createUser(values, formikEvent)}
+      >
         {({ errors, touched }) => (
           <Form className="reg-form">
             {signup.map((elm, index) => {
@@ -292,11 +293,17 @@ const RegistrationForm = ({
                   <fieldset className={fieldClassName} key={index}>
                     <Field
                       type={
-                        elm.name !== "password"
+                        elm.name !== "password" && elm.name !== "password2"
                           ? elm.type
-                          : toggle
-                          ? "password"
-                          : "text"
+                          : elm.name === "password"
+                          ? toggle
+                            ? "password"
+                            : "text"
+                          : elm.name === "password2"
+                          ? toggle2
+                            ? "password"
+                            : "text"
+                          : elm.type
                       }
                       name={elm.name}
                       placeholder={elm.placeholder}
@@ -312,7 +319,14 @@ const RegistrationForm = ({
                     {elm.name === "password" && (
                       <i
                         className={`bi bi-${toggle ? "eye" : "eye-slash"}`}
-                        onClick={changeToggle}></i>
+                        onClick={changeToggle}
+                      ></i>
+                    )}
+                    {elm.name === "password2" && (
+                      <i
+                        className={`bi bi-${toggle2 ? "eye" : "eye-slash"}`}
+                        onClick={changeToggle2}
+                      ></i>
                     )}
                   </fieldset>
                 );
