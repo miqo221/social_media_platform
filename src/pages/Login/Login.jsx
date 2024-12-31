@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
@@ -66,59 +66,62 @@ export function Login() {
   useEffect(() => {
     async function cleanupLoggedInUsers() {
       const device = JSON.parse(localStorage.getItem("device"));
-      if (!device) return;
-
+      if (!device) {
+        return;
+      }
+  
+      const { deviceId } = device;
+  
       try {
-        const { deviceId } = device;
         const { data: loggedInUsers } = await axios.get(
           `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}`
         );
-
+  
         const activeUser = loggedInUsers.find((user) =>
-          user.isSigned?.some((entry) => entry.deviceId === deviceId)
+          user.isSigned?.some((entry) => entry.deviceId === deviceId && entry.isSigned)
         );
-
+  
         if (!activeUser) return;
-
-        const updatedIsSigned = activeUser.isSigned.map((entry) => ({
-          ...entry,
-          isSigned: false,
-          date: new Date(),
-        }));
-
+  
+        const updatedIsSigned = activeUser.isSigned.map((entry) =>
+          entry.deviceId === deviceId
+            ? { ...entry, isSigned: false, date: new Date(), IP: entry.IP }
+            : entry
+        );
+  
         const activeDevices = updatedIsSigned.filter((entry) => entry.isSigned);
         const { data: user } = await axios.get(
           `${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`
         );
-
+  
         if (activeDevices.length === 0) {
-          await axios.delete(
-            `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${activeUser.id}`
-          );
-          await axios.put(
-            `${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`,
-            {
+          await Promise.all([
+            axios.delete(`${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${activeUser.id}`),
+            axios.put(`${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`, {
               ...user,
               isSigned: updatedIsSigned,
-              date: new Date(),
-            }
-          );
+            }),
+          ]);
         } else {
-          await axios.put(
-            `${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`,
-            {
+          await Promise.all([
+            axios.put(`${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`, {
+              ...user,
+              isSigned: updatedIsSigned,
+            }),
+            axios.put(`${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${activeUser.id}`, {
               ...activeUser,
               isSigned: updatedIsSigned,
-              date: new Date(),
-            }
-          );
+            }),
+          ]);
         }
       } catch (error) {
-        console.error("Error during cleanup:", error);
+        console.error("Error during cleanup:", error.response?.data || error);
       }
     }
+  
     cleanupLoggedInUsers();
   }, []);
+  
 
   //!verify the user checking the email and password
   async function verifyUser(email, password) {
@@ -192,7 +195,6 @@ export function Login() {
 
     try {
       const user = await verifyUser(state.email, state.password);
-      console.log(user, "my user");
 
       if (!user) {
         dispatch({ type: ACTIONS.SET_ERROR, payload: ERROR_MSG.L_P_ERROR });
@@ -254,9 +256,7 @@ export function Login() {
                   }
                 />
                 <i
-                  className={`bi bi-${
-                    toggle ? "eye" : "eye-slash"
-                  }`}
+                  className={`bi bi-${toggle ? "eye" : "eye-slash"}`}
                   onClick={changeToggle}></i>
               </div>
               <div className="remember_me_row">

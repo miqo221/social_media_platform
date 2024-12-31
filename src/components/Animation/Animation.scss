@@ -10,6 +10,7 @@
 .animtaion {
   height: 100%;
   animation: img 80s 1s infinite linear;
+  object-fit: cover;
 }
 
 @keyframes img {
