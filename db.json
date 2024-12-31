@@ -1,4 +1,113 @@
 {
-  "users": [],
-  "loggedInUsers": []
+  "users": [
+    {
+      "id": "rXymXnyJF6ON5ZLez0JYr",
+      "email": "m.grikorian@gmail.com",
+      "name": "Matevos",
+      "surname": "Grigoryan",
+      "gender": "Men",
+      "image": [
+        "https://lh3.googleusercontent.com/a/ACg8ocK7v4WOG4Xj-BkSNE5NOnnCA_1kUviNvl76Bpt3uSuDa_hxlg=s96-c"
+      ],
+      "birthday": "08.12.1993",
+      "age": 31,
+      "address": "Jivanu 54",
+      "postalCode": "0032",
+      "city": "Yerevan",
+      "country": "Österreich",
+      "following": [],
+      "followers": [],
+      "skills": [],
+      "status": "",
+      "communities": [],
+      "posts": [],
+      "phone": "06766877568",
+      "securityQuestion": "What’s your home address?",
+      "securityAnswer": "Jivanu54",
+      "password": "Matos123",
+      "isSigned": [
+        {
+          "deviceId": "T8wTQizqdfIkihUm0ltVG",
+          "date": "2024-12-31T11:21:01.638Z",
+          "IP": "212.95.5.11",
+          "isSigned": false
+        },
+        {
+          "deviceId": "4zTaWHi9-ObgOTmrl_KG4",
+          "date": "2024-12-31T11:20:59.918Z",
+          "IP": "212.95.5.11",
+          "isSigned": false
+        }
+      ]
+    },
+    {
+      "id": "OS_FDhrQOSmXA5mDDxHut",
+      "email": "mat.grigoryan@gmail.com",
+      "name": "Matevos",
+      "surname": "Grigoryan",
+      "gender": "Men",
+      "image": [
+        "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c"
+      ],
+      "birthday": "08.12.1993",
+      "age": 31,
+      "address": "Starhembergstraße 15, 4020 Linz",
+      "postalCode": "4020",
+      "city": "Linz",
+      "country": "Österreich",
+      "following": [],
+      "followers": [],
+      "skills": [],
+      "status": "",
+      "communities": [],
+      "posts": [],
+      "phone": "06766877568",
+      "securityQuestion": "What color do you like the most?",
+      "securityAnswer": "black",
+      "password": "Matos123",
+      "isSigned": [
+        {
+          "deviceId": "T8wTQizqdfIkihUm0ltVG",
+          "date": "2024-12-31T11:31:48.491Z",
+          "IP": "212.95.5.11",
+          "isSigned": true
+        }
+      ]
+    }
+  ],
+  "loggedInUsers": [
+    {
+      "id": "OS_FDhrQOSmXA5mDDxHut",
+      "email": "mat.grigoryan@gmail.com",
+      "name": "Matevos",
+      "surname": "Grigoryan",
+      "gender": "Men",
+      "image": [
+        "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c"
+      ],
+      "birthday": "08.12.1993",
+      "age": 31,
+      "address": "Starhembergstraße 15, 4020 Linz",
+      "postalCode": "4020",
+      "city": "Linz",
+      "country": "Österreich",
+      "following": [],
+      "followers": [],
+      "skills": [],
+      "status": "",
+      "communities": [],
+      "posts": [],
+      "phone": "06766877568",
+      "securityQuestion": "What color do you like the most?",
+      "securityAnswer": "black",
+      "isSigned": [
+        {
+          "deviceId": "T8wTQizqdfIkihUm0ltVG",
+          "date": "2024-12-31T11:31:48.491Z",
+          "IP": "212.95.5.11",
+          "isSigned": true
+        }
+      ]
+    }
+  ]
 }

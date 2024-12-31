@@ -75,6 +75,10 @@ body {
   }
 }
 
+::-webkit-scrollbar {
+  width: 0;
+}
+
 %navActive {
   color: $yellow;
 

@@ -343,7 +343,7 @@ const RegistrationForm = ({
                   state.loading ? (
                     <ClipLoader size={15} color="white" />
                   ) : (
-                    "Sign In"
+                    "Confirm"
                   )
                 }
               />

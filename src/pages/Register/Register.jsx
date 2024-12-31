@@ -86,7 +86,7 @@ export const Register = () => {
         type: ACTIONS.SET_ERROR,
         payload: ERROR_MSG.FAILED_LOGIN,
       });
-      console.error("Google Login Error:",error);
+      console.error("Google Login Error:", error);
     },
     scope: "openid profile email",
   });
@@ -99,7 +99,7 @@ export const Register = () => {
         <div className="reg-box">
           <header>
             <Link to="/">
-              <img src={logo} alt="Bchat" id="logo" />
+              <img src={logo} alt="Bchat" className="logo" />
               <h1>Bchat</h1>
             </Link>
           </header>
