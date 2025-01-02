@@ -14,5 +14,9 @@ export function Dashboard() {
 
   getUser();
 
-  return <h2 style={{ color: "white" }}>Hello from</h2>;
+  return (
+    <div>
+      <h2 style={{ color: "white" }}>Hello from</h2>
+    </div>
+  );
 }

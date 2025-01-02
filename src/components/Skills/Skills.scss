@@ -1,0 +1,32 @@
+@import "../../styles/global";
+
+.section-skills {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .skills-1 {
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    p {
+      font-family: Avenir;
+      font-weight: 900;
+      font-size: 32px;
+      line-height: 40px;
+      color: $white;
+      margin-bottom: 20px;
+    }
+  }
+  .skills-2 {
+    color: wheat;
+    border: 2px solid wheat;
+    border-radius: 20px;
+    width: 80%;
+    input {
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
