@@ -30,3 +30,12 @@
     }
   }
 }
+
+.skill-div {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  i {
+    cursor: pointer;
+  }
+}

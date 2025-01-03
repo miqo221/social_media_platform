@@ -6,8 +6,8 @@ export function Profile() {
   return (
     <div>
       <p>Profile</p>
-      <Skills skill={[]} />
-      {/* <Modal modal_p={"Sure to delete this skill ?"} /> */}
+      <Skills initialSkill={["human"]} />
+      <Modal modal_p={"Sure to delete this skill ?"} />
     </div>
   );
 }
