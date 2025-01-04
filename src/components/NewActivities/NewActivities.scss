@@ -1,0 +1,80 @@
+@import "../../styles/global";
+
+article {
+  padding: 2rem 2.5rem;
+  background: $darkgrey;
+  border-radius: 1rem;
+
+  .n-a-t {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .img-box {
+      background: $dashboard-bg;
+      padding: 4px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        border-radius: 2px;
+        width: 52px;
+        background: $darkgrey;
+      }
+    }
+
+    .n-a-tt {
+      display: flex;
+      flex-direction: column;
+
+      p {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: $btn-hover;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 20px;
+
+        h3 {
+          color: $white;
+          font-weight: 400;
+        }
+
+        span {
+          color: $yellow;
+        }
+      }
+    }
+  }
+  .post {
+    color: $white-tp;
+    margin: 0.75rem 0;
+  }
+
+  .btn-row {
+    border-bottom: 1px solid $white-tp;
+    margin-bottom: 1rem;
+
+    ul {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: $white;
+        font-size: 1.25rem;
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Button.scss";
 
 const Button = ({
@@ -7,6 +8,7 @@ const Button = ({
   button_type,
   button_disabled,
   button_id,
+  path,
 }) => {
   return (
     <>
@@ -17,14 +19,20 @@ const Button = ({
       <button className="btn_follow_back">Follow Back</button>
       <button className="btn_remove">Remove</button>
       <button className="btn_edit_profile">Edit profile</button> */}
-      <button
-        id={button_id}
-        className={button_class}
-        onClick={button_function}
-        type={button_type}
-        disabled={button_disabled}>
-        {content}
-      </button>
+      {path ? (
+        <Link id={button_id} className={button_class} to={path}>
+          {content}
+        </Link>
+      ) : (
+        <button
+          id={button_id}
+          className={button_class}
+          onClick={button_function}
+          type={button_type}
+          disabled={button_disabled}>
+          {content}
+        </button>
+      )}
     </>
   );
 };

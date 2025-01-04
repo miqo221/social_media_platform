@@ -121,7 +121,6 @@ const RegistrationForm = ({
         case "country":
         case "city":
         case "name":
-        case "surname":
           acc[field.name] = string()
             .matches(/^[\p{L}\p{M}\s\-]{2,50}$/u, `Invalid format`)
             .min(2, `Invalid format`)
@@ -156,9 +155,19 @@ const RegistrationForm = ({
               /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
               "Minimum 8 characters, at least 1 letter & 1 number"
             )
-            .min(8, "Password must be at least 8 characters")
-            .max(16, "Password cannot exceed 16 characters")
-            .required("Password is a required field");
+            .min(8, `${field.placeholder} must be at least 8 characters`)
+            .max(16, `${field.placeholder} cannot exceed 16 characters`)
+            .required(`${field.placeholder} is a required field`);
+          break;
+        case "username":
+          acc[field.name] = string()
+            .matches(
+              /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+              "Minimum 6 characters, at least 1 letter & 1 number"
+            )
+            .min(6, `${field.placeholder} must be at least 6 characters`)
+            .max(20, `${field.placeholder} cannot exceed 20 characters`)
+            .required(`${field.placeholder} is a required field`);
           break;
         case "password2":
           acc[field.name] = string()
@@ -188,6 +197,7 @@ const RegistrationForm = ({
 
     const { password2, ...newUser } = values;
     newUser.age = getAge(values.birthday);
+    newUser.username = `@${values.username}`;
 
     try {
       dispatch({ type: ACTIONS.SET_LOADING, payload: true });
@@ -225,8 +235,7 @@ const RegistrationForm = ({
         initialValues={formValues}
         validationSchema={validationSchema}
         enableReinitialize={true}
-        onSubmit={(values, formikEvent) => createUser(values, formikEvent)}
-      >
+        onSubmit={(values, formikEvent) => createUser(values, formikEvent)}>
         {({ errors, touched }) => (
           <Form className="reg-form">
             {signup.map((elm, index) => {
@@ -319,14 +328,12 @@ const RegistrationForm = ({
                     {elm.name === "password" && (
                       <i
                         className={`bi bi-${toggle ? "eye" : "eye-slash"}`}
-                        onClick={changeToggle}
-                      ></i>
+                        onClick={changeToggle}></i>
                     )}
                     {elm.name === "password2" && (
                       <i
                         className={`bi bi-${toggle2 ? "eye" : "eye-slash"}`}
-                        onClick={changeToggle2}
-                      ></i>
+                        onClick={changeToggle2}></i>
                     )}
                   </fieldset>
                 );

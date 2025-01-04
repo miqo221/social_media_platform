@@ -1,0 +1,72 @@
+@import "../../styles/global";
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 3.5rem 2rem 2rem;
+  align-items: center;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.5rem;
+
+    img {
+      width: 70px;
+    }
+
+    input {
+      background: $darkgrey;
+      border: none;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      outline: none;
+      color: $white-tp;
+      font-size: 1rem;
+    }
+  }
+
+  ul {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+    a {
+      color: $white;
+      transition: 0.3s;
+
+      &:hover {
+        color: Yellow;
+      }
+    }
+
+    .active {
+      color: $yellow;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translate(-50%);
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: $yellow;
+      }
+    }
+  }
+
+  button {
+    background: none;
+    border: none;
+
+    img {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+  }
+}

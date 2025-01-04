@@ -2,24 +2,24 @@ import { nanoid } from "nanoid";
 
 export const signup = [
   {
-    type: "email",
-    name: "email",
-    placeholder: "E-mail",
-  },
-  {
     type: "text",
     name: "name",
     placeholder: "Name",
   },
   {
-    type: "text",
-    name: "surname",
-    placeholder: "Surname",
-  },
-  {
     type: "select",
     name: "gender",
     value: ["Gender", "Men", "Women"],
+  },
+  {
+    type: "text",
+    name: "username",
+    placeholder: "Username",
+  },
+  {
+    type: "email",
+    name: "email",
+    placeholder: "E-mail",
   },
   {
     type: "text",

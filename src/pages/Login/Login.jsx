@@ -69,59 +69,76 @@ export function Login() {
       if (!device) {
         return;
       }
-  
+
       const { deviceId } = device;
-  
+
       try {
         const { data: loggedInUsers } = await axios.get(
           `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}`
         );
-  
+
         const activeUser = loggedInUsers.find((user) =>
-          user.isSigned?.some((entry) => entry.deviceId === deviceId && entry.isSigned)
+          user.isSigned?.some(
+            (entry) => entry.deviceId === deviceId && entry.isSigned
+          )
         );
-  
+
         if (!activeUser) return;
-  
+
         const updatedIsSigned = activeUser.isSigned.map((entry) =>
           entry.deviceId === deviceId
             ? { ...entry, isSigned: false, date: new Date(), IP: entry.IP }
             : entry
         );
-  
+
         const activeDevices = updatedIsSigned.filter((entry) => entry.isSigned);
         const { data: user } = await axios.get(
           `${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`
         );
-  
+
         if (activeDevices.length === 0) {
           await Promise.all([
-            axios.delete(`${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${activeUser.id}`),
-            axios.put(`${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`, {
-              ...user,
-              isSigned: updatedIsSigned,
-            }),
+            axios.delete(
+              `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${
+                activeUser.id
+              }`
+            ),
+            axios.put(
+              `${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`,
+              {
+                ...user,
+                isSigned: updatedIsSigned,
+                posts: activeUser.posts,
+              }
+            ),
           ]);
         } else {
           await Promise.all([
-            axios.put(`${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`, {
-              ...user,
-              isSigned: updatedIsSigned,
-            }),
-            axios.put(`${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${activeUser.id}`, {
-              ...activeUser,
-              isSigned: updatedIsSigned,
-            }),
+            axios.put(
+              `${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`,
+              {
+                ...user,
+                isSigned: updatedIsSigned,
+              }
+            ),
+            axios.put(
+              `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${
+                activeUser.id
+              }`,
+              {
+                ...activeUser,
+                isSigned: updatedIsSigned,
+              }
+            ),
           ]);
         }
       } catch (error) {
         console.error("Error during cleanup:", error.response?.data || error);
       }
     }
-  
+
     cleanupLoggedInUsers();
   }, []);
-  
 
   //!verify the user checking the email and password
   async function verifyUser(email, password) {

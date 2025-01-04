@@ -11,7 +11,10 @@
 }
 
 .btn_my_profile {
-  @include button($white, $btn-gr, 0.5rem 1rem, 1.5rem, 20px, _, _);
+  @include button($white-tp, $btn-gr,.75rem, 1rem, 1rem, 200, _);
+  width: 100%;
+  display: inline-block;
+  text-align: center;
 }
 
 .btn_save {

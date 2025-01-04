@@ -1,142 +1,69 @@
 {
   "users": [
     {
-<<<<<<< HEAD
-      "id": "ijl_6MDgWqzRBJFMGeo0r",
-      "email": "davit.petrosyan223@gmail.com",
-      "name": "Drive Dreamrs",
-      "surname": "Bass",
+      "id": "2PzR55BXmoHcADroGH3St",
+      "email": "mat.grigoryan@gmail.com",
+      "name": "Matevos Grigoryan",
+      "surname": "",
       "gender": "Men",
       "image": [],
-      "birthday": "10.09.2002",
-      "age": 22,
-      "address": "Zeytun",
-      "postalCode": "0002",
-      "city": "Yerevan",
-      "country": "Armenia",
-      "friends": [],
-      "phone": "+37498774456",
-      "securityQuestion": "What book do you recommend to your friends?",
-      "securityAnswer": "Table",
-      "password": "A.a-123_",
-      "isSigned": [
-        {
-          "deviceId": "qAKt0n69L3zn_Hd40PQSc",
-          "date": "2024-12-30T11:27:00.306Z",
-          "IP": "87.241.159.126",
-          "isSigned": false
-        }
-      ],
-      "date": "2024-12-30T11:27:00.505Z"
-=======
-      "id": "rXymXnyJF6ON5ZLez0JYr",
-      "email": "m.grikorian@gmail.com",
-      "name": "Matevos",
-      "surname": "Grigoryan",
-      "gender": "Men",
-      "image": [
-        "https://lh3.googleusercontent.com/a/ACg8ocK7v4WOG4Xj-BkSNE5NOnnCA_1kUviNvl76Bpt3uSuDa_hxlg=s96-c"
-      ],
       "birthday": "08.12.1993",
       "age": 31,
-      "address": "Jivanu 54",
-      "postalCode": "0032",
-      "city": "Yerevan",
+      "address": "Starhembergstraße 15",
+      "postalCode": "4020",
+      "city": "Linz",
       "country": "Österreich",
       "following": [],
       "followers": [],
       "skills": [],
       "status": "",
       "communities": [],
-      "posts": [],
+      "posts": [
+        {
+          "post": "new Post from another browser",
+          "date": "2025-01-04T19:40:39.043Z",
+          "author": "Matevos Grigoryan",
+          "author_nickname": "@Matos93",
+          "comments": [],
+          "likes": []
+        },
+        {
+          "post": "new post",
+          "date": "2025-01-04T19:32:35.772Z",
+          "author": "Matevos Grigoryan",
+          "author_nickname": "@Matos93",
+          "comments": [],
+          "likes": []
+        },
+        {
+          "post": "Today is a nice day 🤗",
+          "date": "2025-01-04T19:29:02.872Z",
+          "author": "Matevos Grigoryan",
+          "author_nickname": "@Matos93",
+          "comments": [],
+          "likes": []
+        }
+      ],
       "phone": "06766877568",
       "securityQuestion": "What’s your home address?",
-      "securityAnswer": "Jivanu54",
+      "securityAnswer": "Street",
       "password": "Matos123",
       "isSigned": [
         {
-          "deviceId": "T8wTQizqdfIkihUm0ltVG",
-          "date": "2024-12-31T11:21:01.638Z",
+          "deviceId": "B3kt_-OWDZ4juLQ6it4ro",
+          "date": "2025-01-04T19:42:00.287Z",
           "IP": "212.95.5.11",
           "isSigned": false
         },
         {
           "deviceId": "4zTaWHi9-ObgOTmrl_KG4",
-          "date": "2024-12-31T11:20:59.918Z",
+          "date": "2025-01-04T19:41:54.090Z",
           "IP": "212.95.5.11",
           "isSigned": false
         }
-      ]
-    },
-    {
-      "id": "OS_FDhrQOSmXA5mDDxHut",
-      "email": "mat.grigoryan@gmail.com",
-      "name": "Matevos",
-      "surname": "Grigoryan",
-      "gender": "Men",
-      "image": [
-        "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c"
       ],
-      "birthday": "08.12.1993",
-      "age": 31,
-      "address": "Starhembergstraße 15, 4020 Linz",
-      "postalCode": "4020",
-      "city": "Linz",
-      "country": "Österreich",
-      "following": [],
-      "followers": [],
-      "skills": [],
-      "status": "",
-      "communities": [],
-      "posts": [],
-      "phone": "06766877568",
-      "securityQuestion": "What color do you like the most?",
-      "securityAnswer": "black",
-      "password": "Matos123",
-      "isSigned": [
-        {
-          "deviceId": "T8wTQizqdfIkihUm0ltVG",
-          "date": "2024-12-31T11:31:48.491Z",
-          "IP": "212.95.5.11",
-          "isSigned": true
-        }
-      ]
->>>>>>> register
+      "username": "@Matos93"
     }
   ],
-  "loggedInUsers": [
-    {
-      "id": "OS_FDhrQOSmXA5mDDxHut",
-      "email": "mat.grigoryan@gmail.com",
-      "name": "Matevos",
-      "surname": "Grigoryan",
-      "gender": "Men",
-      "image": [
-        "https://lh3.googleusercontent.com/a/ACg8ocK0yORsaRgLO8cL2u2FMYAw9AUUpiXfzAo_3wCxmpdmPHBUaA=s96-c"
-      ],
-      "birthday": "08.12.1993",
-      "age": 31,
-      "address": "Starhembergstraße 15, 4020 Linz",
-      "postalCode": "4020",
-      "city": "Linz",
-      "country": "Österreich",
-      "following": [],
-      "followers": [],
-      "skills": [],
-      "status": "",
-      "communities": [],
-      "posts": [],
-      "phone": "06766877568",
-      "securityQuestion": "What color do you like the most?",
-      "securityAnswer": "black",
-      "isSigned": [
-        {
-          "deviceId": "T8wTQizqdfIkihUm0ltVG",
-          "date": "2024-12-31T11:31:48.491Z",
-          "IP": "212.95.5.11",
-          "isSigned": true
-        }
-      ]
-    }
-  ]
+  "loggedInUsers": []
 }
