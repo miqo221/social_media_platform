@@ -1,7 +1,8 @@
-import bg from "../../assets/png/circle.png";
-import "./UserAvatar.scss";
 import Button from "../Button/Button";
+import bg from "../../assets/png/circle.png";
 import user from "../../assets/png/user.png";
+
+import "./UserAvatar.scss";
 
 const UserAvatar = ({
   following,
@@ -14,7 +15,7 @@ const UserAvatar = ({
 }) => {
   return (
     <div className="thumbnail">
-      <img src={bg} alt="background image" className="bg-img" />
+      <img src={bg} alt="background image" className="bgImg" />
       <div className="userInfo">
         <div className="followerRow">
           <div className="userAvatar">
@@ -33,13 +34,13 @@ const UserAvatar = ({
           <h2>{name}</h2>
           <p>{email}</p>
         </div>
-        <div className="status-row">
+        <div className="statusRow">
           <p className="status">{status}</p>
         </div>
         {path && (
           <div className="button">
             <Button
-              button_class="btn_my_profile"
+              button_class="btnMyProfile"
               content="My Profile"
               path={path}
             />

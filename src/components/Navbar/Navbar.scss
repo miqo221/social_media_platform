@@ -1,36 +1,23 @@
 @import "../../styles/global";
 
 nav {
-  display: flex;
-  justify-content: space-between;
+  @include flex(space-between, center, _, _, _);
   padding: 2rem 3.5rem 2rem 2rem;
-  align-items: center;
 
   div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2.5rem;
+    @include flex(space-between, center, 2.5rem, _, _);
 
     img {
       width: 70px;
     }
 
     input {
-      background: $darkgrey;
-      border: none;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      outline: none;
-      color: $white-tp;
-      font-size: 1rem;
+      @include input(_, 0.5rem, $darkgrey, none, 0.5rem, 1rem, $white-tp);
     }
   }
 
   ul {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
+    @include flex(_, center, 2rem, _, _);
 
     a {
       color: $white;
@@ -46,13 +33,9 @@ nav {
       position: relative;
 
       &::after {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        left: 50%;
-        transform: translate(-50%);
-        width: 4px;
-        height: 4px;
+        @include after_before("", _, _, -0.25rem, 50%, translate(-50%));
+        width: 0.25rem;
+        height: 0.25rem;
         border-radius: 50%;
         background: $yellow;
       }
@@ -67,6 +50,8 @@ nav {
       width: 30px;
       height: 30px;
       cursor: pointer;
+      object-fit: cover;
+      border-radius: 4px;
     }
   }
 }

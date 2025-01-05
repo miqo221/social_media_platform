@@ -167,7 +167,22 @@ const RegistrationForm = ({
             )
             .min(6, `${field.placeholder} must be at least 6 characters`)
             .max(20, `${field.placeholder} cannot exceed 20 characters`)
-            .required(`${field.placeholder} is a required field`);
+            .required(`${field.placeholder} is a required field`)
+            .test("user-match", "Email already exists", async (value) => {
+              if (!value) return true;
+              try {
+                const response = await axios.get(
+                  import.meta.env.VITE_REACT_USERS_URL
+                );
+                const userExists = response.data.some(
+                  (user) => user.username === `@${value.toLowerCase()}`
+                );
+                return !userExists;
+              } catch (error) {
+                console.error(error);
+                return false;
+              }
+            });
           break;
         case "password2":
           acc[field.name] = string()
@@ -197,7 +212,7 @@ const RegistrationForm = ({
 
     const { password2, ...newUser } = values;
     newUser.age = getAge(values.birthday);
-    newUser.username = `@${values.username}`;
+    newUser.username = `@${values.username.toLowerCase()}`;
 
     try {
       dispatch({ type: ACTIONS.SET_LOADING, payload: true });
@@ -237,16 +252,16 @@ const RegistrationForm = ({
         enableReinitialize={true}
         onSubmit={(values, formikEvent) => createUser(values, formikEvent)}>
         {({ errors, touched }) => (
-          <Form className="reg-form">
+          <Form className="regForm">
             {signup.map((elm, index) => {
               const fieldError = errors[elm.name];
               const fieldTouched = touched[elm.name];
 
               const fieldClassName =
                 fieldTouched && fieldError
-                  ? "input-error inputField"
+                  ? "inputError inputField"
                   : fieldTouched
-                  ? "input-valid inputField"
+                  ? "inputValid inputField"
                   : "inputField";
 
               const showSuccessIcon = fieldTouched && !fieldError;
@@ -268,7 +283,7 @@ const RegistrationForm = ({
                       )}
                     </Field>
                     {(fieldError || fieldTouched) && (
-                      <legend className="error-message">
+                      <legend className="errorMessage">
                         {showSuccessIcon && <span>✔</span>}
                         {fieldError && (
                           <ErrorMessage name={elm.name} component="span" />
@@ -288,7 +303,7 @@ const RegistrationForm = ({
                       readOnly
                     />
                     {(fieldError || fieldTouched) && (
-                      <legend className="error-message">
+                      <legend className="errorMessage">
                         {showSuccessIcon && <span>✔</span>}
                         {fieldError && (
                           <ErrorMessage name={elm.name} component="span" />
@@ -318,7 +333,7 @@ const RegistrationForm = ({
                       placeholder={elm.placeholder}
                     />
                     {(fieldError || fieldTouched) && (
-                      <legend className="error-message">
+                      <legend className="errorMessage">
                         {showSuccessIcon && <span>✔</span>}
                         {fieldError && (
                           <ErrorMessage name={elm.name} component="span" />
@@ -339,11 +354,11 @@ const RegistrationForm = ({
                 );
               }
             })}
-            <div className="button-field">
+            <div className="buttonField">
               {" "}
               {handleClick && (
                 <Button
-                  button_class="btn_sign_in"
+                  button_class="btnSignIn"
                   button_function={handleClick}
                   button_type="button"
                   content={
@@ -359,7 +374,7 @@ const RegistrationForm = ({
                 />
               )}
               <Button
-                button_class="btn_sign_in"
+                button_class="btnSignIn"
                 button_type="submit"
                 content={
                   state.loading ? (

@@ -1,17 +1,36 @@
-import axios from "axios";
-import "./Dashboard.scss";
-import { useParams } from "react-router-dom";
-import UserAvatar from "../../components/UserAvatar/UserAvatar";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import UserAvatar from "../../components/UserAvatar/UserAvatar";
 import ActivityShare from "../../components/ActivityShare/ActivityShare";
-import { timeAgo } from "../../constants/functions";
 import Navbar from "../../components/Navbar/Navbar";
 import NewActivities from "../../components/NewActivities/NewActivities";
+import { timeAgo } from "../../constants/functions";
+
+import "./Dashboard.scss";
+import OnlineFollowers from "../../components/OnlineFollowers/OnlineFollowers";
 
 export function Dashboard() {
   const [user, setUser] = useState(null);
+  const [loggedUsers, setLoggedUsers] = useState([])
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${id}`
+  //       );
+  //       setUser(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchUser();
+  // }, [id]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -32,6 +51,7 @@ export function Dashboard() {
   const newActivity = async (e) => {
     e.preventDefault();
     const url = `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${id}`;
+    // const myFollowings = 
 
     const activityText = e.target[0].value.trim();
     if (!activityText) {
@@ -72,8 +92,8 @@ export function Dashboard() {
             id={user.id}
           />
           <div className="container">
-            <div className="dashboard-body">
-              <div className="left-side">
+            <div className="dashboardBody">
+              <div className="leftSide">
                 <UserAvatar
                   followers={user.followers.length}
                   following={user.following.length}
@@ -81,12 +101,13 @@ export function Dashboard() {
                   alt={user.name}
                   name={user.name}
                   email={user.username}
-                  status={user.status || "Hi"}
+                  status={user.status || `Hi, I'm ${user.name}`}
                   path={"/profile"}
                 />
               </div>
               <div className="middle">
-                <div className="activity-share">
+                <OnlineFollowers user={user}/>
+                <div className="activityShare">
                   <ActivityShare
                     src={user?.image[0]}
                     alt={user.name}
@@ -103,7 +124,7 @@ export function Dashboard() {
                   />
                 ))}
               </div>
-              <div className="right-side"></div>
+              <div className="rightSide"></div>
             </div>
           </div>
         </>

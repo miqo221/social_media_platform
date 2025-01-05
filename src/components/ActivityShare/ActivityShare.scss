@@ -1,10 +1,7 @@
 @import "../../styles/global";
 
-.activity-share {
-  display: flex;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.activityShare {
+  @include flex(space-between, center, _, _, _);
   width: 100%;
   height: 100px;
   background: $darkgrey;
@@ -12,50 +9,44 @@
   padding: 0 2.5rem;
 }
 
-.activity-form {
-  gap: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.activityForm {
+  @include flex(space-between, center, 1.25rem, _, _);
   width: 100%;
 
-  .img-box {
+  .imgBox {
+    @include flex(center, center, _, _, _);
     background: $dashboard-bg;
-    padding: 4px;
-    border-radius: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
 
     img {
       border-radius: 2px;
       width: 40px;
       height: 40px;
       background: $darkgrey;
+      object-fit: cover;
     }
   }
 
-  .input-box {
+  .inputBox {
     position: relative;
     width: 100%;
 
     input {
-      padding: 12px 30px;
-      width: 100%;
+      @include input(
+        100%,
+        0.75rem 1.875rem,
+        $dashboard-bg,
+        none,
+        1rem,
+        1rem,
+        $white-tp
+      );
       flex-grow: 1;
-      background: $dashboard-bg;
-      border: none;
-      outline: none;
-      border-radius: 1rem;
-      color: $white-tp;
-      font-size: 1rem;
     }
 
     button {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
+      @include absolute(50%, 1.25rem, _, _, translateY(-50%));
       background: none;
       border: none;
       cursor: pointer;

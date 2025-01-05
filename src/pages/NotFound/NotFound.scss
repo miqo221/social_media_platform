@@ -1,28 +1,21 @@
 @import "../../styles/global.scss";
 
 .notFoundPage {
+  @include flex(center, center, 2.5rem, column, _);
   user-select: "none";
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  row-gap: 40px;
   background-color: $body_bg;
-  .notFound_page_button {
+
+  .notFoundPageButton {
     @include button($white, $black, 10px 80px, 10px, 32px, 350, #000000a1);
   }
+
   .notFoundBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 40px;
+    @include flex(center, center, 2.5rem, _, _);
+
     h1 {
-      font-family: Avenir;
-      font-size: 100px;
-      font-weight: 900;
-      color: $white;
-      text-align: end;
+      @include header(100px, 900, $white, _, end, _);
+      font-family: $font;
       max-width: 400px;
       width: 100%;
     }

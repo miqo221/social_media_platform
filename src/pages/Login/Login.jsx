@@ -12,6 +12,7 @@ import logo from "../../assets/logo/icon.png";
 import anim from "../../assets/png/home_anim.png";
 import { nanoid } from "nanoid";
 import useToggle from "../../hooks/useToggle.jsx";
+
 import "./Login.scss";
 
 const initialState = {
@@ -242,14 +243,14 @@ export function Login() {
     <main className="home">
       <ToastContainer className="notification" />
       <div className="container">
-        <div className="reg-box">
+        <div className="regBox">
           <header>
             <img src={logo} alt="Bchat" id="logo" />
             <h1>Bchat</h1>
           </header>
           <h2>WELCOME BACK</h2>
           <form onSubmit={handleSubmit}>
-            <div className="input-box">
+            <div className="inputBox">
               <label>Email</label>
               <input
                 type="email"
@@ -259,9 +260,9 @@ export function Login() {
                 }
               />
             </div>
-            <div className="input-box">
+            <div className="inputBox">
               <label>Password</label>
-              <div className="password-input">
+              <div className="passwordInput">
                 <input
                   type={toggle ? "password" : "text"}
                   value={state.password}
@@ -276,21 +277,21 @@ export function Login() {
                   className={`bi bi-${toggle ? "eye" : "eye-slash"}`}
                   onClick={changeToggle}></i>
               </div>
-              <div className="remember_me_row">
+              <div className="rememberMeRow">
                 <div>
                   <input
                     type="checkbox"
-                    id="remember_me"
+                    id="rememberMe"
                     checked={state.checked}
                     onChange={toggleRememberMe}
                   />
-                  <label htmlFor="remember_me"></label>
+                  <label htmlFor="rememberMe"></label>
                   <span>Remember me</span>
                 </div>
                 <Link to={ROUTES.REC_PASSWORD}>Forgot Password</Link>
               </div>
             </div>
-            <div className="btn-box">
+            <div className="btnBox">
               <Button
                 button_type="submit"
                 content={
@@ -300,10 +301,10 @@ export function Login() {
                     "Sign In"
                   )
                 }
-                button_class="btn_sign_in"
+                button_class="btnSignIn"
                 button_disabled={state.loading}
               />
-              <Link className="btn_sign_in" to={ROUTES.REGISTER}>
+              <Link className="btnSignIn" to={ROUTES.REGISTER}>
                 Sign up
               </Link>
             </div>

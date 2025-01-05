@@ -11,47 +11,47 @@
   .container {
     @include flex(flex-start, _, _, _, _);
 
-    .reg-box {
+    .regBox {
       flex-grow: 1;
       position: relative;
       user-select: none;
 
       header {
         @include flex(left, center, 6px, _, _);
-        padding: 28px 22px;
+        padding: 2.5rem 22px;
 
         img {
           width: 52px;
         }
 
         h1 {
-          @include header(36px, 800, transparent, italic, _, $logo);
+          @include header(2.25rem, 800, transparent, italic, _, $logo);
           background-clip: text;
           margin: 0;
         }
       }
 
       h2 {
-        @include header(32px, 700, $white, italic, center, _);
+        @include header(2rem, 700, $white, italic, center, _);
         margin: 26px 0;
       }
 
       form {
-        @include flex(_, _, 20px, column, _);
-        padding: 20px 90px;
+        @include flex(_, _, 1.25rem, column, _);
+        padding: 1.25rem 90px;
         margin: 0 auto;
         max-width: 660px;
 
-        .input-box {
+        .inputBox {
           @include flex(_, _, _, column, _);
 
-          .password-input {
+          .passwordInput {
             position: relative;
             width: 100%;
 
             i {
               @include absolute(50%, 10px, _, _, translateY(-50%));
-              font-size: 24px;
+              font-size: 1.5rem;
               cursor: pointer;
               color: $white;
             }
@@ -60,20 +60,28 @@
           label {
             color: $white;
             font-weight: 200;
-            font-size: 24px;
+            font-size: 1.5rem;
           }
 
           input {
-            @include input(100%, 12px, transparent, 2px solid $white, 4px, 20px);
+            @include input(
+              100%,
+              12px,
+              transparent,
+              2px solid $white,
+              4px,
+              1.25rem,
+              $white
+            );
           }
 
-          #remember_me {
+          #rememberMe {
             display: none;
           }
 
-          #remember_me + label {
-            width: 24px;
-            height: 24px;
+          #rememberMe + label {
+            width: 1.5rem;
+            height: 1.5rem;
             border: 2px solid $white;
             border-radius: 4px;
             background-color: transparent;
@@ -82,27 +90,27 @@
             position: relative;
           }
 
-          #remember_me:checked + label::after {
+          #rememberMe:checked + label::after {
             @include after_before("✔", 50%, _, _, 50%, translate(-50%, -50%));
-            @include text(16px, $white, _, 200);
+            @include text(1rem, $white, _, 200);
             line-height: 1;
           }
 
-          .remember_me_row {
+          .rememberMeRow {
             @include flex(space-between, center, _, _, _);
             position: relative;
-            margin-top: 20px;
+            margin-top: 1.25rem;
 
             div {
-              @include flex(_, center, 4px, _, _);
+              @include flex(_, center, 0.25rem, _, _);
 
               span {
-                @include text(20px, $white, _, _);
+                @include text(1.25rem, $white, _, _);
               }
             }
 
             a {
-              @include text(20px, $white, _, _);
+              @include text(1.25rem, $white, _, _);
               transition: 0.3s;
 
               &:hover {
@@ -113,41 +121,41 @@
 
           @media (max-width: 650px) {
             input {
-              padding: 8px;
+              padding: 0.5rem;
             }
 
             label,
             span,
             a {
-              font-size: 18px !important;
+              font-size: 1.5rem !important;
             }
           }
         }
 
-        .btn-box {
-          @include flex(_, _, 36px, column, _);
-          margin: 40px 0;
+        .btnBox {
+          @include flex(_, _, 2.25rem, column, _);
+          margin: 2.5rem 0;
         }
       }
 
       @media (max-height: 780px) {
         form {
           gap: 10px;
-          padding: 10px 20px;
+          padding: 10px 1.25rem;
           max-width: 500px;
 
           input {
-            padding: 8px !important;
+            padding: 0.5rem !important;
           }
 
           label,
           a,
           span,
           button {
-            font-size: 16px !important;
+            font-size: 1rem !important;
           }
 
-          .btn_sign_in {
+          .btnSignIn {
             padding: 0.25rem;
           }
         }
@@ -155,31 +163,31 @@
 
       @media (max-height: 700px) {
         h2 {
-          margin: 20px 0;
-          font-size: 28px;
+          margin: 1.25rem 0;
+          font-size: 2.5rem;
         }
 
         form {
           gap: 10px;
-          padding: 0 20px !important;
+          padding: 0 1.25rem !important;
           max-width: 500px;
 
           input {
-            padding: 8px !important;
+            padding: 0.5rem !important;
           }
 
           label,
           a,
           span,
           button {
-            font-size: 16px !important;
+            font-size: 1rem !important;
           }
 
-          .btn_sign_in {
+          .btnSignIn {
             padding: 0.25rem;
           }
 
-          .btn-box {
+          .btnBox {
             margin: 10px 0;
           }
         }
@@ -187,13 +195,13 @@
 
       @media (max-width: 1200px) {
         form {
-          padding: 20px 20px;
+          padding: 1.25rem 1.25rem;
         }
       }
 
       p {
         @include text(14px, $white, center, _);
-        @include absolute(_, _, 20px, 50%, translate(-50%));
+        @include absolute(_, _, 1.25rem, 50%, translate(-50%));
         z-index: 10000;
       }
     }
@@ -203,7 +211,7 @@
     .container {
       position: relative;
 
-      .reg-box {
+      .regBox {
         position: absolute;
         z-index: 999;
         width: 100%;

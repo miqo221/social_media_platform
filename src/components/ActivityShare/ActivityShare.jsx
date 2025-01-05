@@ -1,13 +1,14 @@
-import "./ActivityShare.scss";
 import user from "../../assets/png/user.png";
+
+import "./ActivityShare.scss";
 
 const ActivityShare = ({ src, alt, submit, placeholder }) => {
   return (
-    <form onSubmit={submit} className="activity-form">
-      <div className="img-box">
+    <form onSubmit={submit} className="activityForm">
+      <div className="imgBox">
         <img src={src ? src : user} alt={alt} />
       </div>
-      <div className="input-box">
+      <div className="inputBox">
         <input type="text" placeholder={placeholder} />
         <button type="submit">
           <i className="bi bi-send"></i>

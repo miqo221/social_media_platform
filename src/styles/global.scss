@@ -7,7 +7,7 @@ $d-yellow: #999801;
 $antracit: #1a1a1a;
 $darkgrey: #282828;
 $black-tp: #000000b3;
-$dashboard-bg: rgb(26, 26, 26);
+$dashboard-bg: #1a1a1a;
 $white: #ffffff;
 $white-tp: #ffffff80;
 $btn-gr: linear-gradient(#282828, #464646);
@@ -171,13 +171,13 @@ body {
   transform: $transform;
 }
 
-@mixin input($width, $p, $bg, $border, $radius, $fz) {
+@mixin input($width, $p, $bg, $border, $radius, $fz, $color) {
   width: $width;
   padding: $p;
   background: $bg;
   border: $border;
   outline: none;
   border-radius: $radius;
-  color: $white;
+  color: $color;
   font-size: $fz;
 }

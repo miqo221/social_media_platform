@@ -6,17 +6,13 @@ article {
   border-radius: 1rem;
 
   .n-a-t {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    @include flex(_, center, 0.75rem, _, _);
 
     .img-box {
+      @include flex(center, center, _, _, _);
       background: $dashboard-bg;
-      padding: 4px;
-      border-radius: 4px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 0.25rem;
+      border-radius: 0.25rem;
 
       img {
         border-radius: 2px;
@@ -26,21 +22,16 @@ article {
     }
 
     .n-a-tt {
-      display: flex;
-      flex-direction: column;
+      @include flex(_, _, _, column, _);
 
       p {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+        @include flex(_, center, 0.5rem, _, _);
         color: $btn-hover;
       }
 
       div {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        font-size: 20px;
+        @include flex(_, center, 1rem, _, _);
+        font-size: 1.25rem;
 
         h3 {
           color: $white;
@@ -63,9 +54,7 @@ article {
     margin-bottom: 1rem;
 
     ul {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      @include flex(_, center, 1rem, _, _);
       margin-bottom: 1rem;
 
       button {

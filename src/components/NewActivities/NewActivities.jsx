@@ -1,7 +1,8 @@
-import "./NewActivities.scss";
 import userImage from "../../assets/png/user.png";
 import check from "../../assets/png/check.png";
 import ActivityShare from "../ActivityShare/ActivityShare";
+
+import "./NewActivities.scss";
 
 const NewActivities = ({ post, user, timeAgo, image }) => {
   return (

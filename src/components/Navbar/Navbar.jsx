@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo/icon.png";
 import user from "../../assets/png/user.png";
+
 import "./Navbar.scss";
 
 const Navbar = ({ src, alt, id }) => {
@@ -8,7 +9,7 @@ const Navbar = ({ src, alt, id }) => {
     <nav>
       <div>
         <img src={logo} alt="Bchat" />
-        <input type="text" placeholder="Search"/>
+        <input type="text" placeholder="Search" />
       </div>
       <ul>
         <li>

@@ -3,11 +3,11 @@
 .dashboard {
   background: $dashboard-bg;
 
-  .dashboard-body {
+  .dashboardBody {
     display: flex;
-    gap: 20px;
+    gap: 1.25rem;
 
-    .left-side {
+    .leftSide {
       width: calc(25% - (40px / 3));
     }
 
@@ -18,7 +18,7 @@
       width: calc(50% - (40px / 3));
     }
 
-    .right-side {
+    .rightSide {
       width: calc(25% - (40px / 3));
     }
   }

@@ -4,7 +4,6 @@
       "id": "2PzR55BXmoHcADroGH3St",
       "email": "mat.grigoryan@gmail.com",
       "name": "Matevos Grigoryan",
-      "surname": "",
       "gender": "Men",
       "image": [],
       "birthday": "08.12.1993",
@@ -13,17 +12,55 @@
       "postalCode": "4020",
       "city": "Linz",
       "country": "Österreich",
-      "following": [],
-      "followers": [],
+      "following": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos95",
+          "id": "iyAbT0o0Kx-6Pex_eWbbO"
+        },
+        {
+          "name": "Bghdo",
+          "username": "@bghdo24",
+          "id": "xAeFKZMhXBOQi0C8o8mAI"
+        }
+      ],
+      "followers": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos95",
+          "id": "iyAbT0o0Kx-6Pex_eWbbO"
+        },
+        {
+          "name": "Bghdo",
+          "username": "@bghdo24",
+          "id": "xAeFKZMhXBOQi0C8o8mAI"
+        }
+      ],
       "skills": [],
       "status": "",
       "communities": [],
       "posts": [
         {
+          "post": "hi",
+          "date": "2025-01-05T13:49:55.764Z",
+          "author": "Matevos Grigoryan",
+          "author_nickname": "@matos93",
+          "comments": [],
+          "likes": []
+        },
+        {
+          "post": "new post",
+          "date": "2025-01-05T13:48:05.079Z",
+          "author": "Matevos Grigoryan",
+          "author_nickname": "@matos93",
+          "comments": [],
+          "likes": []
+        },
+        {
           "post": "new Post from another browser",
           "date": "2025-01-04T19:40:39.043Z",
           "author": "Matevos Grigoryan",
-          "author_nickname": "@Matos93",
+          "author_nickname": "@matos93",
           "comments": [],
           "likes": []
         },
@@ -31,7 +68,7 @@
           "post": "new post",
           "date": "2025-01-04T19:32:35.772Z",
           "author": "Matevos Grigoryan",
-          "author_nickname": "@Matos93",
+          "author_nickname": "@matos93",
           "comments": [],
           "likes": []
         },
@@ -39,7 +76,7 @@
           "post": "Today is a nice day 🤗",
           "date": "2025-01-04T19:29:02.872Z",
           "author": "Matevos Grigoryan",
-          "author_nickname": "@Matos93",
+          "author_nickname": "@matos93",
           "comments": [],
           "likes": []
         }
@@ -51,7 +88,7 @@
       "isSigned": [
         {
           "deviceId": "B3kt_-OWDZ4juLQ6it4ro",
-          "date": "2025-01-04T19:42:00.287Z",
+          "date": "2025-01-05T14:04:25.204Z",
           "IP": "212.95.5.11",
           "isSigned": false
         },
@@ -62,7 +99,124 @@
           "isSigned": false
         }
       ],
-      "username": "@Matos93"
+      "username": "@matos93"
+    },
+    {
+      "id": "iyAbT0o0Kx-6Pex_eWbbO",
+      "email": "m.grikorian@gmail.com",
+      "name": "Matevos Grigoryan",
+      "gender": "Men",
+      "image": [],
+      "birthday": "08.12.1993",
+      "age": 31,
+      "address": "Starhembergstraße 15, 4020 Linz",
+      "postalCode": "4020",
+      "city": "Linz",
+      "country": "Österreich",
+      "following": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos93",
+          "id": "2PzR55BXmoHcADroGH3St"
+        },
+        {
+          "name": "Bghdo",
+          "username": "@bghdo24",
+          "id": "xAeFKZMhXBOQi0C8o8mAI"
+        }
+      ],
+      "followers": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos93",
+          "id": "2PzR55BXmoHcADroGH3St"
+        },
+        {
+          "name": "Bghdo",
+          "username": "@bghdo24",
+          "id": "xAeFKZMhXBOQi0C8o8mAI"
+        }
+      ],
+      "skills": [],
+      "status": "",
+      "communities": [],
+      "posts": [],
+      "phone": "06766877568",
+      "securityQuestion": "What color do you like the most?",
+      "securityAnswer": "black",
+      "password": "Matos123",
+      "isSigned": [
+        {
+          "deviceId": "4zTaWHi9-ObgOTmrl_KG4",
+          "date": "2025-01-05T14:04:06.352Z",
+          "IP": "212.95.5.11",
+          "isSigned": false
+        }
+      ],
+      "username": "@matos95"
+    },
+    {
+      "id": "xAeFKZMhXBOQi0C8o8mAI",
+      "email": "bghdo@gmail.com",
+      "name": "Bghdo",
+      "surname": "",
+      "gender": "Men",
+      "image": [
+        "https://imgs.search.brave.com/uTVf4fkptE0zEjCE6PVBCm-IFi5ks8zIyAf-riLL7GI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pY2hl/Zi5iYmNpLmNvLnVr/L25ld3MvNDgwL2Nw/c3Byb2RwYi8xMzJF/Ri9wcm9kdWN0aW9u/L18xMzMyNTc1ODdf/bmVhbmRlcnRoYWwz/ZF9tb2RlbC5qcGcu/d2VicA"
+      ],
+      "birthday": "10.10.2000",
+      "age": 24,
+      "address": "street1",
+      "postalCode": "0030",
+      "city": "Yerevan",
+      "country": "Armenia",
+      "following": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos93",
+          "id": "2PzR55BXmoHcADroGH3St"
+        },
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos95",
+          "id": "iyAbT0o0Kx-6Pex_eWbbO"
+        }
+      ],
+      "followers": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos93",
+          "id": "2PzR55BXmoHcADroGH3St"
+        },
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos95",
+          "id": "iyAbT0o0Kx-6Pex_eWbbO"
+        }
+      ],
+      "skills": [],
+      "status": "",
+      "communities": [],
+      "posts": [],
+      "phone": "+37477777777",
+      "securityQuestion": "What is your grandfather’s last name?",
+      "securityAnswer": "Kikos",
+      "password": "bghdo1234",
+      "isSigned": [
+        {
+          "deviceId": "4zTaWHi9-ObgOTmrl_KG4",
+          "date": "2025-01-05T13:49:48.650Z",
+          "IP": "212.95.5.11",
+          "isSigned": false
+        },
+        {
+          "deviceId": "An09Gh8Nh5JoXjlpcyo30",
+          "date": "2025-01-05T14:04:14.720Z",
+          "IP": "212.95.5.11",
+          "isSigned": false
+        }
+      ],
+      "username": "@bghdo24"
     }
   ],
   "loggedInUsers": []
