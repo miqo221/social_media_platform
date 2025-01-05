@@ -1,0 +1,32 @@
+@import "../../styles/global.scss";
+
+.communities-section {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid $white;
+  .communities-section-title {
+    border: 2px solid $white;
+    background-color: red;
+    width: 100%;
+  }
+  .communities-section-content {
+    border: 2px solid $white;
+    background-color: green;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+  }
+  .every-singl-community {
+    border: 2px solid $white;
+    background-color: blue;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.asd {
+  width: 40px;
+  height: 40px;
+  background-color: salmon;
+  background-image: url("../../../src//assets/png/home_anim.png");
+}
