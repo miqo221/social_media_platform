@@ -34,5 +34,5 @@
   @include button($white, $black, _, 1.5rem, 20px, 600, $d-yellow);
 }
 .btn_skills {
-  @include button($black, $yellow, 1rem, 1.5rem, 20px, 600, $d-yellow);
+  @include button($black, $yellow, 0.8rem 2rem, 1rem, 18px, 600, $d-yellow);
 }

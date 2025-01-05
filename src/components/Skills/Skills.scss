@@ -20,8 +20,6 @@
     }
   }
   .skills-2 {
-    color: wheat;
-    border: 2px solid wheat;
     border-radius: 20px;
     width: 80%;
     input {
@@ -31,11 +29,40 @@
   }
 }
 
+.skills-2-input {
+  padding: 15px 30px;
+  border-radius: 10px;
+  margin: auto;
+  background-color: $darkgrey;
+}
+
+.skills-2-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
 .skill-div {
   display: flex;
+  justify-content: center;
   flex-direction: row;
   gap: 10px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 24px;
+  background-color: $darkgrey;
+  color: $white;
+  flex-grow: 1;
   i {
     cursor: pointer;
   }
+}
+.every-single-skill-div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 10px;
 }

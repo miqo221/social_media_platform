@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+
+import Button from "../Button/Button";
+
 import "./Skills.scss";
 
 const Skills = ({ initialSkill }) => {
@@ -36,20 +39,20 @@ const Skills = ({ initialSkill }) => {
       </div>
       <div className="skills-2">
         <form
+        className="skills-2-form"
           onSubmit={(e) => {
             addNewSkill(e);
           }}
         >
           <input type="text" className="skills-2-input" placeholder="+" />
-          <button type="submit">Add</button>
+          <Button content={"Add"} button_class={"btn_skills"} />
         </form>
       </div>
-      <div style={{ color: "white" }}>
+      <div className="every-single-skill-div">
         {skills.map((item, index) => {
           return (
             <div key={index} className="skill-div">
               <p className="skill-p">{item}</p>
-              <i className="bi bi-pen"></i>
               <i
                 className="bi bi-x"
                 onClick={() => {
