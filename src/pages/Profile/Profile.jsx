@@ -1,10 +1,10 @@
-import Communities from "../../components/Communities/Communities";
+import Skills from "../../components/Skills/Skills";
 import "./Profile.scss";
 
 export function Profile() {
   return (
     <div>
-      <Communities />
+      <Skills initialSkill={["human"]}/>
     </div>
   );
 }
