@@ -27,6 +27,7 @@ export const Register = () => {
 
   useEffect(() => {
     if (state.error) toast.error(state.error);
+    dispatch({ type: ACTIONS.SET_ERROR, payload: null });
   }, [state.error]);
 
   const handleGoogleLogin = useGoogleLogin({
@@ -39,13 +40,11 @@ export const Register = () => {
 
         const userData = {
           email: googleUserInfo.email,
-          name: googleUserInfo.given_name,
-          surname: googleUserInfo.family_name,
+          name: googleUserInfo.given_name + " " + googleUserInfo.family_name,
           image: [googleUserInfo.picture],
         };
 
         const { data: existingUsers } = await axios.get(
-          //! Checking if the user already exists
           import.meta.env.VITE_REACT_USERS_URL
         );
 
@@ -96,7 +95,7 @@ export const Register = () => {
       {state.loading && <ClipLoader color="#34D399" />}
       <ToastContainer className="notification" />
       <div className="container">
-        <div className="reg-box">
+        <div className="regBox">
           <header>
             <Link to="/">
               <img src={logo} alt="Bchat" className="logo" />

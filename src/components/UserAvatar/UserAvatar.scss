@@ -1,0 +1,91 @@
+@import "../../styles/global";
+
+.thumbnail {
+  width: 100%;
+  position: relative;
+  height: 420px;
+  border-radius: 1rem;
+  background: $dashboard-gradient;
+
+  .bgImg {
+    width: 100%;
+    transform: scale(1.3);
+  }
+
+  .userInfo {
+    @include absolute(_, _, 0, 0, _);
+    width: 100%;
+    z-index: 2;
+    background: $darkgrey;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem 2rem;
+  }
+
+  .followerRow {
+    position: relative;
+    @include flex(space-between, center, _, _, _);
+
+    .nameRow {
+      width: 100%;
+    }
+
+    .userAvatar {
+      @include absolute(-73px, _, _, 50%, translateX(-50%));
+      @include flex(center, center, _, _, _);
+      width: 130px;
+      height: 130px;
+      padding: 0.5rem;
+      background: $antracit;
+      border-radius: 0.5rem;
+
+      img {
+        border-radius: 0.25rem;
+        width: 100%;
+        height: 100%;
+        background: $darkgrey;
+        object-fit: cover;
+      }
+    }
+
+    .follow {
+      text-align: center;
+    }
+  }
+
+  .userInfoRow {
+    padding: 1.5rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .statusRow {
+    margin-bottom: 1.5rem;
+    width: 100%;
+    text-align: center;
+
+    .status {
+      @include text(1rem, $white, _, 200);
+      line-height: 1.25;
+      padding: 0.25rem;
+    }
+  }
+
+  .button {
+    padding: 0 2rem;
+  }
+
+  p {
+    color: $white-tp;
+    line-height: 1;
+  }
+
+  span {
+    @include text(1rem, $white, _, 600);
+    line-height: 0;
+  }
+
+  h2 {
+    @include text(1rem, $white, _, 600);
+    margin-bottom: 0.75rem;
+  }
+}

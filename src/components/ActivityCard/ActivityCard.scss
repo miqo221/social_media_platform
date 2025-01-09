@@ -1,54 +1,48 @@
 @import "../../styles/global.scss";
 
 .activityCard {
-  max-width: 319px;
+  @include flex(_, _, 0.5rem, column, _);
+  max-width: 320px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 7px;
-  border-radius: 10px;
-  padding: 22px 22px 12px 22px;
-  background-color: #1a1a1ab8;
-  font-family: Avenir;
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  background-color: $dashboard-bg;
+  font-family: $font;
+
   .activityInfo {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    column-gap: 18px;
+    @include flex(flex-start, center, 1rem, _, _);
+
     .imgDiv {
-      max-width: 35px;
+      max-width: 2.25rem;
       width: 100%;
-      max-height: 35px;
+      max-height: 2.25rem;
       position: relative;
+
       .profilePic {
-        border-radius: 10px;
-        height: 35px;
-        width: 35px;
+        border-radius: 0.75rem;
+        height: 2.25rem;
+        width: 2.25rem;
       }
+
       .verified {
-        position: absolute;
-        top: -35%;
-        right: -15px;
+        @include absolute(-35%, -15px, _, _, _);
         z-index: 999;
       }
     }
     .userInfo {
-      display: flex;
-      flex-direction: column;
-      row-gap: 3px;
+      @include flex(_, _, 0.25rem, column, _);
+
       .userName {
-        font-family: inherit;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 16px;
-        color: $white;
+        @include text(1rem, $white, _, 400);
+        font-family: $font;
+        line-height: 1rem;
       }
+
       .activity {
-        font-family: inherit;
-        font-weight: 300;
-        font-size: 13px;
-        line-height: 13px;
-        color: #ffffff80;
+        @include text(0.75rem, $white-tp, _, 300);
+        font-family: $font;
+        line-height: 0.75rem;
+
         span {
           color: $yellow;
         }
@@ -56,17 +50,14 @@
     }
   }
   .buttonsDiv {
-    background-color: #1a1a1a;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    column-gap: 19px;
-    max-width: 278px;
+    @include flex(center, center, 1.25rem, row, _);
+    background-color: $dashboard-bg;
+    max-width: 276px;
     width: 100%;
-    max-height: 19px;
-    border-radius: 15px;
-    padding: 5px 7px 5px 13px;
+    max-height: 1.25rem;
+    border-radius: 1rem;
+    padding: 0.25rem 0.5rem 0.25rem 0.75rem;
+
     button {
       border: none;
       background-color: transparent;

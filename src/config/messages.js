@@ -8,4 +8,10 @@ export const ERROR_MSG = {
   REGISTERED: "You already have an account.",
   SERVER_ERROR: "An error occurred while connecting to the server.",
   PASS_ERROR: "Passwords do not match!",
+  EMAIL_ERROR: "The email doesn't exist",
+  VERIFICATION_ERROR: "Incorrect verification code. Please try again.",
 };
+
+export const SUCCESS_MSG = {
+  REGISTRATION: "Registration was successful"
+}

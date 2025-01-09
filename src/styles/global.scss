@@ -7,11 +7,18 @@ $d-yellow: #999801;
 $antracit: #1a1a1a;
 $darkgrey: #282828;
 $black-tp: #000000b3;
+$dashboard-bg: #1a1a1a;
 $white: #ffffff;
-$btn-gr: linear-gradient($darkgrey, $btn-hover);
+$white-tp: #ffffff80;
+$btn-gr: linear-gradient(#282828, #464646);
 $main-bg: linear-gradient(235deg, #00000057, #66666657);
+$dashboard-gradient: linear-gradient(
+  45deg,
+  rgba(102, 102, 102, 0.34) 40%,
+  rgb(26, 26, 26) 60%
+);
 $logo: linear-gradient(-90deg, $yellow, $d-yellow);
-$autofill-shadow:  0 0 0 50px #272727 inset;
+$autofill-shadow: 0 0 0 50px #272727 inset;
 $font: Nunito sans;
 
 * {
@@ -23,17 +30,17 @@ $font: Nunito sans;
 }
 
 input:-webkit-autofill {
-  background-color: transparent !important;  
-  color: #fff !important;  
-  border: none !important;  
-  outline: none !important; 
+  background-color: transparent !important;
+  color: #fff !important;
+  border: none !important;
+  outline: none !important;
 }
 
 input:-moz-autofill {
-  background-color: transparent !important;  
-  color: #fff !important;  
-  border: none !important;  
-  outline: none !important;  
+  background-color: transparent !important;
+  color: #fff !important;
+  border: none !important;
+  outline: none !important;
 }
 
 .container {
@@ -164,13 +171,13 @@ body {
   transform: $transform;
 }
 
-@mixin input($width, $p, $bg, $border, $radius, $fz) {
+@mixin input($width, $p, $bg, $border, $radius, $fz, $color) {
   width: $width;
   padding: $p;
   background: $bg;
   border: $border;
   outline: none;
   border-radius: $radius;
-  color: $white;
+  color: $color;
   font-size: $fz;
 }

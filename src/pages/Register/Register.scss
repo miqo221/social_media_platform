@@ -11,7 +11,7 @@
   .container {
     @include flex(flex-start, _, _, _, _);
 
-    .reg-box {
+    .regBox {
       flex-grow: 1;
       position: relative;
       user-select: none;
@@ -52,7 +52,7 @@
             font-size: 18px;
           }
         }
-        .btn-field {
+        .btnField {
           display: flex;
           gap: 20px;
 
@@ -81,7 +81,7 @@
     .container {
       position: relative;
 
-      .reg-box {
+      .regBox {
         position: absolute;
         z-index: 999;
         width: 100%;
@@ -93,7 +93,7 @@
 }
 
 @media (max-height: 800px) and (min-width: 1050px) {
-  .reg-box {
+  .regBox {
     width: 50%;
     overflow: scroll;
     height: calc(100vh - 28px);
@@ -103,7 +103,7 @@
     }
   }
 
-  .anim-box {
+  .animBox {
     height: calc(100vh - 28px);
     width: 50%;
     

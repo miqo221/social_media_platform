@@ -11,7 +11,7 @@ export const NotFound = () => {
       <Link to={ROUTES.HOME}>
         <Button
           content="Go To Login Page"
-          button_class="notFound_page_button"
+          button_class="notFoundPageButton"
           button_type="submit"
           button_disabled={false}
         />

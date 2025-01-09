@@ -1,8 +1,8 @@
 @import "../../styles/global";
 
-.reg-form {
-  @include flex(_, _, 20px, _, wrap);
-  padding: 20px;
+.regForm {
+  @include flex(_, _, 1.25rem, _, wrap);
+  padding: 1.25rem;
   max-width: 650px;
   margin: auto;
   z-index: 999;
@@ -11,11 +11,11 @@
     width: calc(50% - 10px);
     position: relative;
     border: 2px solid $white;
-    border-radius: 4px;
+    border-radius: 0.25rem;
 
-    .error-message {
-      position: relative;
+    .errorMessage {
       @include text(10px, $white, right, _);
+      position: relative;
       line-height: 0;
 
       span {
@@ -29,8 +29,7 @@
     input,
     select,
     label {
-      @include input(100%, 8px, transparent, _, _, 14px);
-      border: none;
+      @include input(100%, 8px, transparent, none, 2px, _, $white);
     }
 
     input:-webkit-autofill {
@@ -52,16 +51,14 @@
     }
   }
 
-  .button-field {
+  .buttonField {
+    @include flex(space-between, _, 1.25rem, _, _);
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
 
     button {
-      @include iflex(center, center, 20px, calc(50% - 10px));
-      font-size: 16px;
-      padding: 4px !important;
+      @include iflex(center, center, 1.25rem, calc(50% - 10px));
+      font-size: 1rem;
+      padding: 0.25rem !important;
       cursor: pointer;
 
       img {
@@ -70,13 +67,13 @@
     }
   }
 
-  .input-error {
+  .inputError {
     border: 2px solid red;
     padding-top: 0;
     margin-top: 0;
   }
 
-  .input-valid {
+  .inputValid {
     border: 2px solid green;
   }
 
@@ -105,12 +102,12 @@
 }
 
 @media (max-width: 1100px) {
-  .reg-form {
+  .regForm {
     max-width: 500px;
 
-    .button-field {
+    .buttonField {
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 1.25rem;
 
       button {
         width: 100%;
@@ -120,7 +117,7 @@
 }
 
 @media (max-width: 500px) {
-  .reg-form {
+  .regForm {
     width: 100%;
 
     .inputField {
@@ -128,4 +125,3 @@
     }
   }
 }
-

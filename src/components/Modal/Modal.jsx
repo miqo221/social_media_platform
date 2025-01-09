@@ -1,21 +1,14 @@
 import "./Modal.scss";
 
-const Modal = ({ modal_p }) => {
+const Modal = ({component}) => {
   return (
-    <modal className="modalContainer">
-      <div className="modal-header-p">
-        <p>{modal_p}</p>
+    <div className="modal">
+      <div className="modalWindow">
+        {component}
       </div>
-      <div className="modal-icons">
-        <button>
-          <i class="bi bi-check2"></i>
-        </button>
-        <button>
-          <i class="bi bi-x"></i>
-        </button>
-      </div>
-    </modal>
+    </div>
   );
 };
 
 export default Modal;
+

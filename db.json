@@ -1,4 +1,309 @@
 {
-  "users": [],
-  "loggedInUsers": []
+  "users": [
+    {
+      "id": "xAeFKZMhXBOQi0C8o8mAI",
+      "email": "bghdo@gmail.com",
+      "name": "Bghdo",
+      "surname": "",
+      "gender": "Men",
+      "image": [
+        "https://imgs.search.brave.com/uTVf4fkptE0zEjCE6PVBCm-IFi5ks8zIyAf-riLL7GI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pY2hl/Zi5iYmNpLmNvLnVr/L25ld3MvNDgwL2Nw/c3Byb2RwYi8xMzJF/Ri9wcm9kdWN0aW9u/L18xMzMyNTc1ODdf/bmVhbmRlcnRoYWwz/ZF9tb2RlbC5qcGcu/d2VicA"
+      ],
+      "birthday": "10.10.2000",
+      "age": 24,
+      "address": "street1",
+      "postalCode": "0030",
+      "city": "Yerevan",
+      "country": "Armenia",
+      "following": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos93",
+          "id": "REiksyKE1vdNPGMMRT6_G"
+        },
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos95",
+          "id": "1Ve9PwieupaxHmS9nj3Di"
+        }
+      ],
+      "followers": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos93",
+          "id": "REiksyKE1vdNPGMMRT6_G"
+        },
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos95",
+          "id": "1Ve9PwieupaxHmS9nj3Di"
+        }
+      ],
+      "skills": [],
+      "status": "",
+      "communities": [],
+      "posts": [
+        {
+          "post": "New Post from Bghdo",
+          "date": "2025-01-09T14:26:51.231Z",
+          "author": "Bghdo",
+          "author_nickname": "@bghdo24",
+          "comments": [],
+          "likes": []
+        },
+        {
+          "post": "New Post",
+          "date": "2025-01-09T14:26:20.813Z",
+          "author": "Matevos",
+          "author_nickname": "@matos93",
+          "comments": [],
+          "likes": []
+        }
+      ],
+      "phone": "+37477777777",
+      "securityQuestion": "What is your grandfather’s last name?",
+      "securityAnswer": "Kikos",
+      "password": "bghdo1234",
+      "isSigned": [
+        {
+          "deviceId": "4zTaWHi9-ObgOTmrl_KG4",
+          "date": "2025-01-05T21:17:20.602Z",
+          "IP": "212.95.5.11",
+          "isSigned": false
+        },
+        {
+          "deviceId": "An09Gh8Nh5JoXjlpcyo30",
+          "date": "2025-01-05T18:25:51.016Z",
+          "IP": "212.95.5.11",
+          "isSigned": false
+        },
+        {
+          "deviceId": "xPLZQtYmE2CQDJBdbIVdz",
+          "date": "2025-01-09T14:27:05.583Z",
+          "IP": "213.142.96.127",
+          "isSigned": false
+        }
+      ],
+      "username": "@bghdo24"
+    },
+    {
+      "id": "1Ve9PwieupaxHmS9nj3Di",
+      "email": "m.grikorian@gmail.com",
+      "name": "Matevos",
+      "surname": "",
+      "gender": "Men",
+      "image": [],
+      "birthday": "08.12.1993",
+      "age": 31,
+      "address": "Starhembergstraße 15, 4020 Linz",
+      "postalCode": "4020",
+      "city": "Linz",
+      "country": "Österreich",
+      "following": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos93",
+          "id": "REiksyKE1vdNPGMMRT6_G"
+        },
+        {
+          "name": "Bghdo",
+          "username": "@bghdo24",
+          "id": "xAeFKZMhXBOQi0C8o8mAI"
+        }
+      ],
+      "followers": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos93",
+          "id": "REiksyKE1vdNPGMMRT6_G"
+        },
+        {
+          "name": "Bghdo",
+          "username": "@bghdo24",
+          "id": "xAeFKZMhXBOQi0C8o8mAI"
+        }
+      ],
+      "skills": [],
+      "status": "",
+      "communities": [],
+      "posts": [
+        {
+          "post": "New Post from Bghdo",
+          "date": "2025-01-09T14:26:51.231Z",
+          "author": "Bghdo",
+          "author_nickname": "@bghdo24",
+          "comments": [],
+          "likes": []
+        },
+        {
+          "post": "New Post",
+          "date": "2025-01-09T14:26:20.813Z",
+          "author": "Matevos",
+          "author_nickname": "@matos93",
+          "comments": [],
+          "likes": []
+        }
+      ],
+      "phone": "06766877568",
+      "securityQuestion": "What color do you like the most?",
+      "securityAnswer": "black",
+      "password": "Matos123",
+      "isSigned": [
+        {
+          "deviceId": "xPLZQtYmE2CQDJBdbIVdz",
+          "date": "2025-01-09T14:29:37.524Z",
+          "IP": "213.142.96.127",
+          "isSigned": true
+        }
+      ],
+      "username": "@matos95"
+    },
+    {
+      "id": "REiksyKE1vdNPGMMRT6_G",
+      "email": "mat.grigoryan@gmail.com",
+      "name": "Matevos",
+      "surname": "",
+      "gender": "Men",
+      "image": [
+        "https://profile-images.xing.com/images/b6d5cff2c52ddb69174b6a5be02efa51-1/matevos-grigoryan.1024x1024.jpg"
+      ],
+      "birthday": "08.12.1993",
+      "age": 31,
+      "address": "Starhembergstraße 15, 4020 Linz",
+      "postalCode": "4020",
+      "city": "Linz",
+      "country": "Österreich",
+      "following": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos95",
+          "id": "1Ve9PwieupaxHmS9nj3Di"
+        },
+        {
+          "name": "Bghdo",
+          "username": "@bghdo24",
+          "id": "xAeFKZMhXBOQi0C8o8mAI"
+        }
+      ],
+      "followers": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos95",
+          "id": "1Ve9PwieupaxHmS9nj3Di"
+        },
+        {
+          "name": "Bghdo",
+          "username": "@bghdo24",
+          "id": "xAeFKZMhXBOQi0C8o8mAI"
+        }
+      ],
+      "skills": [],
+      "status": "",
+      "communities": [],
+      "posts": [
+        {
+          "post": "New Post from Bghdo",
+          "date": "2025-01-09T14:26:51.231Z",
+          "author": "Bghdo",
+          "author_nickname": "@bghdo24",
+          "comments": [],
+          "likes": []
+        },
+        {
+          "post": "New Post",
+          "date": "2025-01-09T14:26:20.813Z",
+          "author": "Matevos",
+          "author_nickname": "@matos93",
+          "comments": [],
+          "likes": []
+        }
+      ],
+      "phone": "06766877568",
+      "securityQuestion": "What color do you like the most?",
+      "securityAnswer": "black",
+      "password": "Matos123",
+      "isSigned": [
+        {
+          "deviceId": "xPLZQtYmE2CQDJBdbIVdz",
+          "date": "2025-01-09T14:26:24.186Z",
+          "IP": "213.142.96.127",
+          "isSigned": false
+        }
+      ],
+      "username": "@matos93"
+    }
+  ],
+  "loggedInUsers": [
+    {
+      "id": "1Ve9PwieupaxHmS9nj3Di",
+      "email": "m.grikorian@gmail.com",
+      "name": "Matevos",
+      "surname": "",
+      "gender": "Men",
+      "image": [],
+      "birthday": "08.12.1993",
+      "age": 31,
+      "address": "Starhembergstraße 15, 4020 Linz",
+      "postalCode": "4020",
+      "city": "Linz",
+      "country": "Österreich",
+      "following": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos93",
+          "id": "REiksyKE1vdNPGMMRT6_G"
+        },
+        {
+          "name": "Bghdo",
+          "username": "@bghdo24",
+          "id": "xAeFKZMhXBOQi0C8o8mAI"
+        }
+      ],
+      "followers": [
+        {
+          "name": "Matevos Grigoryan",
+          "username": "@matos93",
+          "id": "REiksyKE1vdNPGMMRT6_G"
+        },
+        {
+          "name": "Bghdo",
+          "username": "@bghdo24",
+          "id": "xAeFKZMhXBOQi0C8o8mAI"
+        }
+      ],
+      "skills": [],
+      "status": "",
+      "communities": [],
+      "posts": [
+        {
+          "post": "New Post from Bghdo",
+          "date": "2025-01-09T14:26:51.231Z",
+          "author": "Bghdo",
+          "author_nickname": "@bghdo24",
+          "comments": [],
+          "likes": []
+        },
+        {
+          "post": "New Post",
+          "date": "2025-01-09T14:26:20.813Z",
+          "author": "Matevos",
+          "author_nickname": "@matos93",
+          "comments": [],
+          "likes": []
+        }
+      ],
+      "phone": "06766877568",
+      "securityQuestion": "What color do you like the most?",
+      "securityAnswer": "black",
+      "isSigned": [
+        {
+          "deviceId": "xPLZQtYmE2CQDJBdbIVdz",
+          "date": "2025-01-09T14:29:37.524Z",
+          "IP": "213.142.96.127",
+          "isSigned": true
+        }
+      ],
+      "username": "@matos95"
+    }
+  ]
 }

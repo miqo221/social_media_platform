@@ -5,12 +5,15 @@ import { Field, Form, Formik, ErrorMessage } from "formik";
 import { object, string } from "yup";
 import { toast, ToastContainer } from "react-toastify";
 import { ClipLoader } from "react-spinners";
+import emailjs from "@emailjs/browser";
 import useToggle from "../../hooks/useToggle";
 import { loginReducer, ACTIONS } from "../../helpers/reducer";
-import { ERROR_MSG } from "../../config/messages";
+import { ERROR_MSG, SUCCESS_MSG } from "../../config/messages";
 import { signup } from "../../constants/registration";
 import google from "../../assets/png/google.png";
 import Button from "../Button/Button";
+import Modal from "../Modal/Modal";
+import EmailVerification from "../EmailVerification/EmailVerification";
 
 import "./RegistrationForm.scss";
 
@@ -22,16 +25,23 @@ const RegistrationForm = ({
   path,
 }) => {
   const [state, dispatch] = useReducer(loginReducer, initialState);
+  const [verified, setVerified] = useState(false);
   const navigate = useNavigate();
+  const [verificationCode, setVerificationCode] = useState(
+    Math.round(Math.random() * 899999 + 100000)
+  );
   const { toggle, changeToggle } = useToggle();
   const { toggle: toggle2, changeToggle: changeToggle2 } = useToggle();
+  const { toggle: toggleModal, changeToggle: changeToggleModal } = useToggle();
 
   useEffect(() => {
     if (state.error) toast.error(state.error);
+    dispatch({ type: ACTIONS.SET_ERROR, payload: null });
   }, [state.error]);
 
   useEffect(() => {
-    if (state.success) toast.success("Registration was successful");
+    if (state.success) toast.success(state.success);
+    dispatch({ type: ACTIONS.SET_SUCCESS, payload: null });
   }, [state.success]);
 
   const [formValues, setFormValues] = useState({
@@ -47,6 +57,7 @@ const RegistrationForm = ({
         password: "",
         password2: "",
       });
+      setVerified(true);
     }
   }, [googleSignIn, defaultValue]);
 
@@ -121,7 +132,6 @@ const RegistrationForm = ({
         case "country":
         case "city":
         case "name":
-        case "surname":
           acc[field.name] = string()
             .matches(/^[\p{L}\p{M}\s\-]{2,50}$/u, `Invalid format`)
             .min(2, `Invalid format`)
@@ -156,9 +166,34 @@ const RegistrationForm = ({
               /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
               "Minimum 8 characters, at least 1 letter & 1 number"
             )
-            .min(8, "Password must be at least 8 characters")
-            .max(16, "Password cannot exceed 16 characters")
-            .required("Password is a required field");
+            .min(8, `${field.placeholder} must be at least 8 characters`)
+            .max(16, `${field.placeholder} cannot exceed 16 characters`)
+            .required(`${field.placeholder} is a required field`);
+          break;
+        case "username":
+          acc[field.name] = string()
+            .matches(
+              /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+              "Minimum 6 characters, at least 1 letter & 1 number"
+            )
+            .min(6, `${field.placeholder} must be at least 6 characters`)
+            .max(20, `${field.placeholder} cannot exceed 20 characters`)
+            .required(`${field.placeholder} is a required field`)
+            .test("user-match", "Email already exists", async (value) => {
+              if (!value) return true;
+              try {
+                const response = await axios.get(
+                  import.meta.env.VITE_REACT_USERS_URL
+                );
+                const userExists = response.data.some(
+                  (user) => user.username === `@${value.toLowerCase()}`
+                );
+                return !userExists;
+              } catch (error) {
+                console.error(error);
+                return false;
+              }
+            });
           break;
         case "password2":
           acc[field.name] = string()
@@ -188,23 +223,71 @@ const RegistrationForm = ({
 
     const { password2, ...newUser } = values;
     newUser.age = getAge(values.birthday);
+    newUser.username = `@${values.username.toLowerCase()}`;
 
-    try {
-      dispatch({ type: ACTIONS.SET_LOADING, payload: true });
-      await axios.post(import.meta.env.VITE_REACT_USERS_URL, newUser);
-      setTimeout(() => {
-        formikEvent.resetForm();
-        navigate(path);
-      }, 3000);
-    } catch (error) {
-      dispatch({ type: ACTIONS.SET_ERROR, payload: ERROR_MSG.SERVER_ERROR });
-      dispatch({ type: ACTIONS.SET_LOADING, payload: false });
-      console.error(error);
-    } finally {
-      dispatch({ type: ACTIONS.SET_SUCCESS, payload: true });
-      dispatch({ type: ACTIONS.SET_LOADING, payload: false });
+    dispatch({ type: ACTIONS.SET_USER, payload: newUser });
+
+    const emailVerification = {
+      to_name: values.name,
+      to_email: values.email,
+      code: verificationCode,
+    };
+
+    googleSignIn
+      ? setVerified(true)
+      : (sendVerificationEmail(emailVerification), changeToggleModal());
+
+    if (verified) {
+      try {
+        dispatch({ type: ACTIONS.SET_LOADING, payload: true });
+        await axios.post(import.meta.env.VITE_REACT_USERS_URL, newUser);
+        setTimeout(() => {
+          formikEvent.resetForm();
+          navigate(path);
+        }, 3000);
+      } catch (error) {
+        dispatch({
+          type: ACTIONS.SET_ERROR,
+          payload: ERROR_MSG.SERVER_ERROR,
+        });
+        console.error(error);
+      } finally {
+        dispatch({ type: ACTIONS.SET_LOADING, payload: false });
+        dispatch({ type: ACTIONS.SET_SUCCESS, payload: SUCCESS_MSG.REGISTRATION });
+      }
     }
   };
+
+  function verifyEmail() {
+    setVerified(true);
+  }
+
+  function cancel() {
+    changeToggleModal();
+    setVerificationCode(Math.round(Math.random() * 899999 + 100000));
+  }
+
+  function sendVerificationEmail(obj) {
+    emailjs
+      .send(
+        import.meta.env.VITE_REACT_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_REACT_EMAILJS_TEMPLATE_ID,
+        obj,
+        {
+          publicKey: import.meta.env.VITE_REACT_EMAILJS_PUBLIC_KEY,
+        }
+      )
+      .then((response) => {
+        console.log("SUCCESS!", response.status, response.text);
+      })
+      .catch((err) => {
+        dispatch({ type: ACTIONS.SET_ERROR, payload: ERROR_MSG.EMAIL_ERROR });
+        dispatch({ type: ACTIONS.SET_LOADING, payload: false });
+      })
+      .finally(() => {
+        dispatch({ type: ACTIONS.SET_LOADING, payload: false });
+      });
+  }
 
   function getAge(birthdate) {
     const [day, month, year] = birthdate.split(".").map(Number);
@@ -220,24 +303,40 @@ const RegistrationForm = ({
 
   return (
     <>
+      {!toggleModal && (
+        <Modal
+          component={
+            <EmailVerification
+              verificationCode={verificationCode}
+              changeToggleModal={changeToggleModal}
+              verifyEmail={verifyEmail}
+              cancel={cancel}
+              createUser={createUser}
+              initialState={state}
+              navigate={navigate}
+              path={path}
+              toast={toast}
+            />
+          }
+        />
+      )}
       <ToastContainer className="notification" />
       <Formik
         initialValues={formValues}
         validationSchema={validationSchema}
         enableReinitialize={true}
-        onSubmit={(values, formikEvent) => createUser(values, formikEvent)}
-      >
+        onSubmit={(values, formikEvent) => createUser(values, formikEvent)}>
         {({ errors, touched }) => (
-          <Form className="reg-form">
+          <Form className="regForm">
             {signup.map((elm, index) => {
               const fieldError = errors[elm.name];
               const fieldTouched = touched[elm.name];
 
               const fieldClassName =
                 fieldTouched && fieldError
-                  ? "input-error inputField"
+                  ? "inputError inputField"
                   : fieldTouched
-                  ? "input-valid inputField"
+                  ? "inputValid inputField"
                   : "inputField";
 
               const showSuccessIcon = fieldTouched && !fieldError;
@@ -259,7 +358,7 @@ const RegistrationForm = ({
                       )}
                     </Field>
                     {(fieldError || fieldTouched) && (
-                      <legend className="error-message">
+                      <legend className="errorMessage">
                         {showSuccessIcon && <span>✔</span>}
                         {fieldError && (
                           <ErrorMessage name={elm.name} component="span" />
@@ -279,7 +378,7 @@ const RegistrationForm = ({
                       readOnly
                     />
                     {(fieldError || fieldTouched) && (
-                      <legend className="error-message">
+                      <legend className="errorMessage">
                         {showSuccessIcon && <span>✔</span>}
                         {fieldError && (
                           <ErrorMessage name={elm.name} component="span" />
@@ -309,7 +408,7 @@ const RegistrationForm = ({
                       placeholder={elm.placeholder}
                     />
                     {(fieldError || fieldTouched) && (
-                      <legend className="error-message">
+                      <legend className="errorMessage">
                         {showSuccessIcon && <span>✔</span>}
                         {fieldError && (
                           <ErrorMessage name={elm.name} component="span" />
@@ -319,24 +418,22 @@ const RegistrationForm = ({
                     {elm.name === "password" && (
                       <i
                         className={`bi bi-${toggle ? "eye" : "eye-slash"}`}
-                        onClick={changeToggle}
-                      ></i>
+                        onClick={changeToggle}></i>
                     )}
                     {elm.name === "password2" && (
                       <i
                         className={`bi bi-${toggle2 ? "eye" : "eye-slash"}`}
-                        onClick={changeToggle2}
-                      ></i>
+                        onClick={changeToggle2}></i>
                     )}
                   </fieldset>
                 );
               }
             })}
-            <div className="button-field">
+            <div className="buttonField">
               {" "}
               {handleClick && (
                 <Button
-                  button_class="btn_sign_in"
+                  button_class="btnSignIn"
                   button_function={handleClick}
                   button_type="button"
                   content={
@@ -352,7 +449,7 @@ const RegistrationForm = ({
                 />
               )}
               <Button
-                button_class="btn_sign_in"
+                button_class="btnSignIn"
                 button_type="submit"
                 content={
                   state.loading ? (

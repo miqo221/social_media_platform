@@ -1,36 +1,39 @@
 @import "../../styles/global.scss";
 
-.btn_sign_in {
+.btnSignIn {
   line-height: 43.71px;
   @include button($white, $btn-bg, 0.5rem 1rem, 0.5rem, 23px, _, $btn-hover);
 }
 
-.btn_sign_up {
+.btnSignUp {
   line-height: 43.71px;
   @include button($white, $black, 0.5rem 1rem, 0.5rem, 23px, _, $btn-hover);
 }
 
-.btn_my_profile {
-  @include button($white, $btn-gr, 0.5rem 1rem, 1.5rem, 20px, _, _);
+.btnMyProfile {
+  @include button($white-tp, $btn-gr,.75rem, 1rem, 1rem, 200, _);
+  width: 100%;
+  display: inline-block;
+  text-align: center;
 }
 
-.btn_save {
+.btnSave {
   @include button($black, $yellow, 0.5rem 1rem, 1.4rem, 40px, 600, $d-yellow);
 }
 
-.btn_follow_back {
+.btnFollowBack {
   @include button($black, $yellow, _, 1.5rem, 20px, 600, $d-yellow);
 }
 
-.btn-follow {
+.btnFollow {
   @include button($black, $white, _, 1.5rem, 20px, 600, $btn-hover);
 }
 
-.btn_remove {
+.btnRemove {
   border: none;
   @include button($white, $body-bg, _, 1.5rem, 20px, 600, $darkgrey);
 }
-.btn_edit_profile {
+.btnEditProfile {
   @include button($white, $black, _, 1.5rem, 20px, 600, $d-yellow);
 }
 .btn_skills {

@@ -1,13 +1,12 @@
 @import "../../styles/global";
-@import "../../styles/global";
 
-.anim-box {
+.animBox {
   height: calc(100vh - 28px);
   overflow: hidden;
   border-radius: 1rem;
 }
 
-.animtaion {
+.animation {
   height: 100%;
   animation: img 80s 1s infinite linear;
   object-fit: cover;
@@ -84,10 +83,10 @@
 }
 
 @media (max-width: 1050px) {
-  .anim-box {
+  .animBox {
     width: 100%;
 
-    .animtaion {
+    .animation {
       width: 100%;
       object-fit: cover;
     }

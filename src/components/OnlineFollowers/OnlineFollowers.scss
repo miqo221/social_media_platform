@@ -1,0 +1,25 @@
+@import "../../styles/global";
+
+.onlineFollowers {
+  .imgBox {
+    border: 1px solid $yellow;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    width: 62px;
+    height: 62px;
+
+    img {
+      border-radius: 0.25rem;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  span {
+    color: $white;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+  }
+}

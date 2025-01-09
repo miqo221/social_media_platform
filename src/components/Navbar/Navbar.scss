@@ -1,0 +1,57 @@
+@import "../../styles/global";
+
+nav {
+  @include flex(space-between, center, _, _, _);
+  padding: 2rem 3.5rem 2rem 2rem;
+
+  div {
+    @include flex(space-between, center, 2.5rem, _, _);
+
+    img {
+      width: 70px;
+    }
+
+    input {
+      @include input(_, 0.5rem, $darkgrey, none, 0.5rem, 1rem, $white-tp);
+    }
+  }
+
+  ul {
+    @include flex(_, center, 2rem, _, _);
+
+    a {
+      color: $white;
+      transition: 0.3s;
+
+      &:hover {
+        color: Yellow;
+      }
+    }
+
+    .active {
+      color: $yellow;
+      position: relative;
+
+      &::after {
+        @include after_before("", _, _, -0.25rem, 50%, translate(-50%));
+        width: 0.25rem;
+        height: 0.25rem;
+        border-radius: 50%;
+        background: $yellow;
+      }
+    }
+  }
+
+  button {
+    background: none;
+    border: none;
+
+    img {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
+}

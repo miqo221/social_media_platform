@@ -12,6 +12,7 @@ import logo from "../../assets/logo/icon.png";
 import anim from "../../assets/png/home_anim.png";
 import { nanoid } from "nanoid";
 import useToggle from "../../hooks/useToggle.jsx";
+
 import "./Login.scss";
 
 const initialState = {
@@ -48,6 +49,7 @@ export function Login() {
   //! Toastify errors
   useEffect(() => {
     if (state.error) toast.error(state.error);
+    dispatch({ type: ACTIONS.SET_ERROR, payload: null });
   }, [state.error]);
 
   //! function fetchIP for getting IP
@@ -69,59 +71,76 @@ export function Login() {
       if (!device) {
         return;
       }
-  
+
       const { deviceId } = device;
-  
+
       try {
         const { data: loggedInUsers } = await axios.get(
           `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}`
         );
-  
+
         const activeUser = loggedInUsers.find((user) =>
-          user.isSigned?.some((entry) => entry.deviceId === deviceId && entry.isSigned)
+          user.isSigned?.some(
+            (entry) => entry.deviceId === deviceId && entry.isSigned
+          )
         );
-  
+
         if (!activeUser) return;
-  
+
         const updatedIsSigned = activeUser.isSigned.map((entry) =>
           entry.deviceId === deviceId
             ? { ...entry, isSigned: false, date: new Date(), IP: entry.IP }
             : entry
         );
-  
+
         const activeDevices = updatedIsSigned.filter((entry) => entry.isSigned);
         const { data: user } = await axios.get(
           `${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`
         );
-  
+
         if (activeDevices.length === 0) {
           await Promise.all([
-            axios.delete(`${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${activeUser.id}`),
-            axios.put(`${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`, {
-              ...user,
-              isSigned: updatedIsSigned,
-            }),
+            axios.delete(
+              `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${
+                activeUser.id
+              }`
+            ),
+            axios.put(
+              `${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`,
+              {
+                ...user,
+                isSigned: updatedIsSigned,
+                posts: activeUser.posts,
+              }
+            ),
           ]);
         } else {
           await Promise.all([
-            axios.put(`${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`, {
-              ...user,
-              isSigned: updatedIsSigned,
-            }),
-            axios.put(`${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${activeUser.id}`, {
-              ...activeUser,
-              isSigned: updatedIsSigned,
-            }),
+            axios.put(
+              `${import.meta.env.VITE_REACT_USERS_URL}/${activeUser.id}`,
+              {
+                ...user,
+                isSigned: updatedIsSigned,
+              }
+            ),
+            axios.put(
+              `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${
+                activeUser.id
+              }`,
+              {
+                ...activeUser,
+                isSigned: updatedIsSigned,
+              }
+            ),
           ]);
         }
       } catch (error) {
         console.error("Error during cleanup:", error.response?.data || error);
       }
     }
-  
+
     cleanupLoggedInUsers();
   }, []);
-  
 
   //!verify the user checking the email and password
   async function verifyUser(email, password) {
@@ -225,14 +244,14 @@ export function Login() {
     <main className="home">
       <ToastContainer className="notification" />
       <div className="container">
-        <div className="reg-box">
+        <div className="regBox">
           <header>
             <img src={logo} alt="Bchat" id="logo" />
             <h1>Bchat</h1>
           </header>
           <h2>WELCOME BACK</h2>
           <form onSubmit={handleSubmit}>
-            <div className="input-box">
+            <div className="inputBox">
               <label>Email</label>
               <input
                 type="email"
@@ -242,9 +261,9 @@ export function Login() {
                 }
               />
             </div>
-            <div className="input-box">
+            <div className="inputBox">
               <label>Password</label>
-              <div className="password-input">
+              <div className="passwordInput">
                 <input
                   type={toggle ? "password" : "text"}
                   value={state.password}
@@ -259,21 +278,21 @@ export function Login() {
                   className={`bi bi-${toggle ? "eye" : "eye-slash"}`}
                   onClick={changeToggle}></i>
               </div>
-              <div className="remember_me_row">
+              <div className="rememberMeRow">
                 <div>
                   <input
                     type="checkbox"
-                    id="remember_me"
+                    id="rememberMe"
                     checked={state.checked}
                     onChange={toggleRememberMe}
                   />
-                  <label htmlFor="remember_me"></label>
+                  <label htmlFor="rememberMe"></label>
                   <span>Remember me</span>
                 </div>
                 <Link to={ROUTES.REC_PASSWORD}>Forgot Password</Link>
               </div>
             </div>
-            <div className="btn-box">
+            <div className="btnBox">
               <Button
                 button_type="submit"
                 content={
@@ -283,10 +302,10 @@ export function Login() {
                     "Sign In"
                   )
                 }
-                button_class="btn_sign_in"
+                button_class="btnSignIn"
                 button_disabled={state.loading}
               />
-              <Link className="btn_sign_in" to={ROUTES.REGISTER}>
+              <Link className="btnSignIn" to={ROUTES.REGISTER}>
                 Sign up
               </Link>
             </div>

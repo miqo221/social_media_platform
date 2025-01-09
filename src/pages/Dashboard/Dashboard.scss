@@ -1,0 +1,25 @@
+@import "../../styles/global";
+
+.dashboard {
+  background: $dashboard-bg;
+
+  .dashboardBody {
+    display: flex;
+    gap: 1.25rem;
+
+    .leftSide {
+      width: calc(25% - (40px / 3));
+    }
+
+    .middle {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: calc(50% - (40px / 3));
+    }
+
+    .rightSide {
+      width: calc(25% - (40px / 3));
+    }
+  }
+}
