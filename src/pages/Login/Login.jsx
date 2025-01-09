@@ -49,6 +49,7 @@ export function Login() {
   //! Toastify errors
   useEffect(() => {
     if (state.error) toast.error(state.error);
+    dispatch({ type: ACTIONS.SET_ERROR, payload: null });
   }, [state.error]);
 
   //! function fetchIP for getting IP

@@ -14,22 +14,22 @@ const Navbar = ({ src, alt, id }) => {
       <ul>
         <li>
           <NavLink to={`/dashboard/${id}`}>
-            <i class="bi bi-house-door-fill"></i>
+            <i className="bi bi-house-door-fill"></i>
           </NavLink>
         </li>
         <li>
           <NavLink to="/profile">
-            <i class="bi bi-person-fill"></i>
+            <i className="bi bi-person-fill"></i>
           </NavLink>
         </li>
         <li>
           <NavLink to="/chat">
-            <i class="bi bi-chat-fill"></i>
+            <i className="bi bi-chat-fill"></i>
           </NavLink>
         </li>
         <li>
           <NavLink to="preferences">
-            <i class="bi bi-gear-fill"></i>
+            <i className="bi bi-gear-fill"></i>
           </NavLink>
         </li>
       </ul>

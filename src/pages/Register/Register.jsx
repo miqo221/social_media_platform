@@ -27,6 +27,7 @@ export const Register = () => {
 
   useEffect(() => {
     if (state.error) toast.error(state.error);
+    dispatch({ type: ACTIONS.SET_ERROR, payload: null });
   }, [state.error]);
 
   const handleGoogleLogin = useGoogleLogin({
@@ -44,7 +45,6 @@ export const Register = () => {
         };
 
         const { data: existingUsers } = await axios.get(
-          //! Checking if the user already exists
           import.meta.env.VITE_REACT_USERS_URL
         );
 

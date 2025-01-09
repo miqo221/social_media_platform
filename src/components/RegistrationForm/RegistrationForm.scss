@@ -29,7 +29,7 @@
     input,
     select,
     label {
-      @include input(100%, 8px, transparent, none, 1.25rem, _, $white);
+      @include input(100%, 8px, transparent, none, 2px, _, $white);
     }
 
     input:-webkit-autofill {

@@ -12,25 +12,9 @@ import OnlineFollowers from "../../components/OnlineFollowers/OnlineFollowers";
 
 export function Dashboard() {
   const [user, setUser] = useState(null);
-  const [loggedUsers, setLoggedUsers] = useState([])
+  const [followers, setFollowers] = useState([]);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${id}`
-  //       );
-  //       setUser(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchUser();
-  // }, [id]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -48,33 +32,92 @@ export function Dashboard() {
     fetchUser();
   }, [id]);
 
+  useEffect(() => {
+    if (!user || !user.followers) return;
+
+    const myFollowers = async () => {
+      try {
+        const response = await axios.get(import.meta.env.VITE_REACT_USERS_URL);
+
+        const followerUsernames = new Set(
+          user.followers.map((f) => f.username)
+        );
+
+        setFollowers(
+          response.data.filter((follower) =>
+            followerUsernames.has(follower.username)
+          )
+        );
+      } catch (error) {
+        console.error("Error fetching followers data:", error);
+      }
+    };
+
+    myFollowers();
+  }, [user]);
+
   const newActivity = async (e) => {
     e.preventDefault();
-    const url = `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${id}`;
-    // const myFollowings = 
 
     const activityText = e.target[0].value.trim();
-    if (!activityText) {
-      return;
-    }
+    if (!activityText) return;
+
+    const updateUserIds = followers.map((follower) => follower.id);
+    const IDs = [id, ...updateUserIds];
+
+    const newPost = {
+      post: activityText,
+      date: new Date(),
+      author: user.name,
+      author_nickname: user.username,
+      comments: [],
+      likes: [],
+    };
 
     try {
-      const updatedUser = {
-        ...user,
-        posts: [
-          {
-            post: activityText,
-            date: new Date(),
-            author: user.name,
-            author_nickname: user.username,
-            comments: [],
-            likes: [],
-          },
-          ...user.posts,
-        ],
-      };
-      const response = await axios.put(url, updatedUser);
-      response.data.posts && setUser(response.data);
+      await Promise.all(
+        IDs.map(async (userId) => {
+          try {
+            const { data: userData } = await axios.get(
+              `${import.meta.env.VITE_REACT_USERS_URL}/${userId}`
+            );
+
+            const updatedUser = {
+              ...userData,
+              posts: [newPost, ...(userData.posts || [])],
+            };
+
+            await axios.put(
+              `${import.meta.env.VITE_REACT_USERS_URL}/${userId}`,
+              updatedUser
+            );
+
+            try {
+              const { data: onlineUserData } = await axios.get(
+                `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${userId}`
+              );
+
+              const updatedOnlineUser = {
+                ...onlineUserData,
+                posts: [newPost, ...(onlineUserData.posts || [])],
+              };
+
+              await axios.put(
+                `${import.meta.env.VITE_REACT_LOGGED_IN_USER_URL}/${userId}`,
+                updatedOnlineUser
+              );
+            } catch (onlineError) {
+              console.warn(`Online user not found for ID ${userId}`);
+            }
+
+            if (userId === id) {
+              setUser(updatedUser);
+            }
+          } catch (userError) {
+            console.error(`Error updating user ID ${userId}:`, userError);
+          }
+        })
+      );
     } catch (error) {
       console.error("Error updating activity:", error);
     }
@@ -106,7 +149,7 @@ export function Dashboard() {
                 />
               </div>
               <div className="middle">
-                <OnlineFollowers user={user}/>
+                <OnlineFollowers user={user} />
                 <div className="activityShare">
                   <ActivityShare
                     src={user?.image[0]}
@@ -115,12 +158,12 @@ export function Dashboard() {
                     placeholder="Tell your friends about your thoughts.."
                   />
                 </div>
-                {user.posts.map((post) => (
+                {user.posts.map((post, index) => (
                   <NewActivities
                     post={post}
-                    user={user}
-                    image={user.image[0] || null}
                     timeAgo={timeAgo}
+                    key={index}
+                    myUser={user}
                   />
                 ))}
               </div>

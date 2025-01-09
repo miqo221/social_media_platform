@@ -5,12 +5,15 @@ import { Field, Form, Formik, ErrorMessage } from "formik";
 import { object, string } from "yup";
 import { toast, ToastContainer } from "react-toastify";
 import { ClipLoader } from "react-spinners";
+import emailjs from "@emailjs/browser";
 import useToggle from "../../hooks/useToggle";
 import { loginReducer, ACTIONS } from "../../helpers/reducer";
-import { ERROR_MSG } from "../../config/messages";
+import { ERROR_MSG, SUCCESS_MSG } from "../../config/messages";
 import { signup } from "../../constants/registration";
 import google from "../../assets/png/google.png";
 import Button from "../Button/Button";
+import Modal from "../Modal/Modal";
+import EmailVerification from "../EmailVerification/EmailVerification";
 
 import "./RegistrationForm.scss";
 
@@ -22,16 +25,23 @@ const RegistrationForm = ({
   path,
 }) => {
   const [state, dispatch] = useReducer(loginReducer, initialState);
+  const [verified, setVerified] = useState(false);
   const navigate = useNavigate();
+  const [verificationCode, setVerificationCode] = useState(
+    Math.round(Math.random() * 899999 + 100000)
+  );
   const { toggle, changeToggle } = useToggle();
   const { toggle: toggle2, changeToggle: changeToggle2 } = useToggle();
+  const { toggle: toggleModal, changeToggle: changeToggleModal } = useToggle();
 
   useEffect(() => {
     if (state.error) toast.error(state.error);
+    dispatch({ type: ACTIONS.SET_ERROR, payload: null });
   }, [state.error]);
 
   useEffect(() => {
-    if (state.success) toast.success("Registration was successful");
+    if (state.success) toast.success(state.success);
+    dispatch({ type: ACTIONS.SET_SUCCESS, payload: null });
   }, [state.success]);
 
   const [formValues, setFormValues] = useState({
@@ -47,6 +57,7 @@ const RegistrationForm = ({
         password: "",
         password2: "",
       });
+      setVerified(true);
     }
   }, [googleSignIn, defaultValue]);
 
@@ -214,22 +225,69 @@ const RegistrationForm = ({
     newUser.age = getAge(values.birthday);
     newUser.username = `@${values.username.toLowerCase()}`;
 
-    try {
-      dispatch({ type: ACTIONS.SET_LOADING, payload: true });
-      await axios.post(import.meta.env.VITE_REACT_USERS_URL, newUser);
-      setTimeout(() => {
-        formikEvent.resetForm();
-        navigate(path);
-      }, 3000);
-    } catch (error) {
-      dispatch({ type: ACTIONS.SET_ERROR, payload: ERROR_MSG.SERVER_ERROR });
-      dispatch({ type: ACTIONS.SET_LOADING, payload: false });
-      console.error(error);
-    } finally {
-      dispatch({ type: ACTIONS.SET_SUCCESS, payload: true });
-      dispatch({ type: ACTIONS.SET_LOADING, payload: false });
+    dispatch({ type: ACTIONS.SET_USER, payload: newUser });
+
+    const emailVerification = {
+      to_name: values.name,
+      to_email: values.email,
+      code: verificationCode,
+    };
+
+    googleSignIn
+      ? setVerified(true)
+      : (sendVerificationEmail(emailVerification), changeToggleModal());
+
+    if (verified) {
+      try {
+        dispatch({ type: ACTIONS.SET_LOADING, payload: true });
+        await axios.post(import.meta.env.VITE_REACT_USERS_URL, newUser);
+        setTimeout(() => {
+          formikEvent.resetForm();
+          navigate(path);
+        }, 3000);
+      } catch (error) {
+        dispatch({
+          type: ACTIONS.SET_ERROR,
+          payload: ERROR_MSG.SERVER_ERROR,
+        });
+        console.error(error);
+      } finally {
+        dispatch({ type: ACTIONS.SET_LOADING, payload: false });
+        dispatch({ type: ACTIONS.SET_SUCCESS, payload: SUCCESS_MSG.REGISTRATION });
+      }
     }
   };
+
+  function verifyEmail() {
+    setVerified(true);
+  }
+
+  function cancel() {
+    changeToggleModal();
+    setVerificationCode(Math.round(Math.random() * 899999 + 100000));
+  }
+
+  function sendVerificationEmail(obj) {
+    emailjs
+      .send(
+        import.meta.env.VITE_REACT_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_REACT_EMAILJS_TEMPLATE_ID,
+        obj,
+        {
+          publicKey: import.meta.env.VITE_REACT_EMAILJS_PUBLIC_KEY,
+        }
+      )
+      .then((response) => {
+        console.log("SUCCESS!", response.status, response.text);
+      })
+      .catch((err) => {
+        dispatch({ type: ACTIONS.SET_ERROR, payload: ERROR_MSG.EMAIL_ERROR });
+        dispatch({ type: ACTIONS.SET_LOADING, payload: false });
+      })
+      .finally(() => {
+        dispatch({ type: ACTIONS.SET_LOADING, payload: false });
+      });
+  }
 
   function getAge(birthdate) {
     const [day, month, year] = birthdate.split(".").map(Number);
@@ -245,6 +303,23 @@ const RegistrationForm = ({
 
   return (
     <>
+      {!toggleModal && (
+        <Modal
+          component={
+            <EmailVerification
+              verificationCode={verificationCode}
+              changeToggleModal={changeToggleModal}
+              verifyEmail={verifyEmail}
+              cancel={cancel}
+              createUser={createUser}
+              initialState={state}
+              navigate={navigate}
+              path={path}
+              toast={toast}
+            />
+          }
+        />
+      )}
       <ToastContainer className="notification" />
       <Formik
         initialValues={formValues}
