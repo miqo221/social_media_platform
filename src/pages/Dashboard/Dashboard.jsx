@@ -16,6 +16,7 @@ export function Dashboard() {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
+
   useEffect(() => {
     const fetchUser = async () => {
       try {

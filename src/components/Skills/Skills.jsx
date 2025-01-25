@@ -1,36 +1,16 @@
-import { useEffect, useState } from "react";
-
 import Button from "../Button/Button";
 
+import { useDispatch, useSelector } from "react-redux";
+import { getText } from "../../store/Selectors/skillsSelector";
+import { addSkills, removeSkills } from "../../store/Actions/skillsActions";
+
 import "./Skills.scss";
+import { useParams } from "react-router-dom";
 
-const Skills = ({ initialSkill }) => {
-  const [skills, setSkills] = useState(initialSkill);
-  const [length, setLength] = useState(skills.length);
-
-  const addNewSkill = (e) => {
-    e.preventDefault();
-    setSkills([...skills, e.target[0].value]);
-    setLength(skills.length);
-    e.target.reset();
-  };
-
-  useEffect(() => {
-    setSkills(
-      Array.from(
-        new Set(
-          skills.map((skill) => {
-            skill = skill.toLowerCase();
-            return skill.replace(skill[0], skill[0].toUpperCase());
-          })
-        )
-      )
-    );
-  }, [length]);
-
-  const deleteSkill = (item) => {
-    setSkills(skills.filter((skill) => skill !== item));
-  };
+const Skills = () => {
+  const dispatch = useDispatch();
+  const skillList = useSelector(getText);
+  const { id } = useParams();
 
   return (
     <div className="section-skills">
@@ -39,9 +19,11 @@ const Skills = ({ initialSkill }) => {
       </div>
       <div className="skills-2">
         <form
-        className="skills-2-form"
+          className="skills-2-form"
           onSubmit={(e) => {
-            addNewSkill(e);
+            e.preventDefault();
+            dispatch(addSkills(e.target[0].value));
+            e.target.reset();
           }}
         >
           <input type="text" className="skills-2-input" placeholder="+" />
@@ -49,14 +31,14 @@ const Skills = ({ initialSkill }) => {
         </form>
       </div>
       <div className="every-single-skill-div">
-        {skills.map((item, index) => {
+        {skillList?.map((item) => {
           return (
-            <div key={index} className="skill-div">
-              <p className="skill-p">{item}</p>
+            <div key={item.id} className="skill-div">
+              <p className="skill-p">{item.text}</p>
               <i
                 className="bi bi-x"
                 onClick={() => {
-                  deleteSkill(item);
+                  dispatch(removeSkills(item.id));
                 }}
               ></i>
             </div>

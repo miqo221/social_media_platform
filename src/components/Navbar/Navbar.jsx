@@ -18,7 +18,7 @@ const Navbar = ({ src, alt, id }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/profile">
+          <NavLink to={`/profile/${id}`}>
             <i className="bi bi-person-fill"></i>
           </NavLink>
         </li>
