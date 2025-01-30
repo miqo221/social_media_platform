@@ -15,7 +15,6 @@ const Skills = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const dataOfPerson = useSelector(getDataOfSkills);
-  console.log(dataOfPerson.skillList);
 
   useEffect(() => {
     dispatch(getSkillsMiddleware(id));
@@ -31,7 +30,9 @@ const Skills = () => {
           className="skills-2-form"
           onSubmit={(e) => {
             e.preventDefault();
-            dispatch(addSkillsMiddleware(id, e.target[0].value));
+            dispatch(
+              addSkillsMiddleware(id, e.target[0].value, dataOfPerson.skillList)
+            );
             e.target.reset();
           }}
         >
@@ -41,7 +42,7 @@ const Skills = () => {
       </div>
       <div className="every-single-skill-div">
         {dataOfPerson?.skillList?.length > 0 ? (
-          dataOfPerson.skillList.map((item) => {
+          dataOfPerson.skillList.map((item,index) => {
             return (
               <div key={item.id} className="skill-div">
                 <p className="skill-p">{item.text}</p>

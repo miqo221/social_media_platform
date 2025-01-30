@@ -39,7 +39,9 @@
           "id": "1Ve9PwieupaxHmS9nj3Di"
         }
       ],
-      "skills": ["asf"],
+      "skills": [
+        "asf"
+      ],
       "status": "",
       "communities": [],
       "posts": [
@@ -125,7 +127,12 @@
           "id": "xAeFKZMhXBOQi0C8o8mAI"
         }
       ],
-      "skills": ["s"],
+      "skills": [
+        {
+          "id": "1738258566497",
+          "text": "sada"
+        }
+      ],
       "status": "",
       "communities": [],
       "posts": [
@@ -176,8 +183,32 @@
       "followers": [],
       "skills": [
         {
-          "id": "5hh3yyT3",
-          "text": "miqo"
+          "id": 1738260649584,
+          "text": "aaaa"
+        },
+        {
+          "id": 1738260748467,
+          "text": "sadsadsa"
+        },
+        {
+          "id": 1738260751220,
+          "text": "asdsa"
+        },
+        {
+          "id": 1738260756301,
+          "text": "asdsada"
+        },
+        {
+          "id": 1738260760136,
+          "text": "sadad"
+        },
+        {
+          "id": 1738260866988,
+          "text": "sadsa"
+        },
+        {
+          "id": 1738260877805,
+          "text": "asdasd"
         }
       ],
       "status": "",

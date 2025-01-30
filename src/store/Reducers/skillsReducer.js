@@ -16,9 +16,6 @@ const skillsReducer = (state = initialState, action) => {
         skillList: [...action.payload],
       };
     case ADD_SKILL:
-      console.log(action.payload);
-      console.log(state, "hhh");
-
       return {
         ...state,
         skillList: [
@@ -51,10 +48,8 @@ export const getSkillsMiddleware = (id) => {
 };
 
 export const addSkillsMiddleware = (id, newSkill) => {
-  return () => {
-    return Axios.postSkill(id, newSkill)
-      .then((res) => console.log(res))
-      .catch((err) => console.error(err));
+  return (dispatch) => {
+    Axios.postSkill(id).then(() => dispatch(addSkills(newSkill)));
   };
 };
 
