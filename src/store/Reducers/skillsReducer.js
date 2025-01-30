@@ -1,36 +1,60 @@
 import { nanoid } from "nanoid";
-import { ADD_SKILL, REMOVE_SKILL } from "../Types/skillsType";
+import { ADD_SKILL, GET_SKILLS, REMOVE_SKILL } from "../Types/skillsType";
 import { Axios } from "../../axios";
-import { getSkills } from "../Actions/skillsActions";
+import { addSkills, getSkills } from "../Actions/skillsActions";
 
-const initialState = [];
+const initialState = {
+  skillText: "",
+  skillList: [],
+};
 
 const skillsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_SKILL:
-      return [
+    case GET_SKILLS:
+      return {
         ...state,
-        {
-          id: nanoid(8),
-          text: action.payload,
-        },
-      ];
-    case REMOVE_SKILL:
-      return [
-        ...state.filter((elm) => {
-          return elm.id !== action.payload;
-        }),
-      ];
+        skillList: [...action.payload],
+      };
+    case ADD_SKILL:
+      console.log(action.payload);
+      console.log(state, "hhh");
+
+      return {
+        ...state,
+        skillList: [
+          ...state.skillList,
+          {
+            id: nanoid(8),
+            text: action.payload,
+          },
+        ],
+      };
+
+    // case REMOVE_SKILL:
+    //   console.log(action.payload);
+    //   return {
+
+    //     ...state,
+    //     skillList: state.skillList.filter((elm) => elm.id != action.payload),
+    //   };
     default:
       return state;
   }
 };
 
-export const getSkillsMiddleware = () => {
+export const getSkillsMiddleware = (id) => {
   return (dispatch) => {
-    Axios.getSkillsData().then((res) => {
-      dispatch(getSkills(res.data));
+    Axios.getOneUser(id).then((res) => {
+      dispatch(getSkills(res.data.skills));
     });
+  };
+};
+
+export const addSkillsMiddleware = (id, newSkill) => {
+  return () => {
+    return Axios.postSkill(id, newSkill)
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
   };
 };
 

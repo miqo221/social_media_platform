@@ -1,1 +1,1 @@
-export const getText = (state) => state.skills;
+export const getDataOfSkills = (state) => state.skills;

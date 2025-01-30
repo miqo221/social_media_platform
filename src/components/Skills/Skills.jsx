@@ -1,16 +1,25 @@
+import { useEffect, useState } from "react";
 import Button from "../Button/Button";
-
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getText } from "../../store/Selectors/skillsSelector";
-import { addSkills, removeSkills } from "../../store/Actions/skillsActions";
+import { getDataOfSkills } from "../../store/Selectors/skillsSelector";
+import { removeSkills } from "../../store/Actions/skillsActions";
 
 import "./Skills.scss";
-import { useParams } from "react-router-dom";
+import {
+  addSkillsMiddleware,
+  getSkillsMiddleware,
+} from "../../store/Reducers/skillsReducer";
 
 const Skills = () => {
-  const dispatch = useDispatch();
-  const skillList = useSelector(getText);
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const dataOfPerson = useSelector(getDataOfSkills);
+  console.log(dataOfPerson.skillList);
+
+  useEffect(() => {
+    dispatch(getSkillsMiddleware(id));
+  }, []);
 
   return (
     <div className="section-skills">
@@ -22,7 +31,7 @@ const Skills = () => {
           className="skills-2-form"
           onSubmit={(e) => {
             e.preventDefault();
-            dispatch(addSkills(e.target[0].value));
+            dispatch(addSkillsMiddleware(id, e.target[0].value));
             e.target.reset();
           }}
         >
@@ -31,19 +40,23 @@ const Skills = () => {
         </form>
       </div>
       <div className="every-single-skill-div">
-        {skillList?.map((item) => {
-          return (
-            <div key={item.id} className="skill-div">
-              <p className="skill-p">{item.text}</p>
-              <i
-                className="bi bi-x"
-                onClick={() => {
-                  dispatch(removeSkills(item.id));
-                }}
-              ></i>
-            </div>
-          );
-        })}
+        {dataOfPerson?.skillList?.length > 0 ? (
+          dataOfPerson.skillList.map((item) => {
+            return (
+              <div key={item.id} className="skill-div">
+                <p className="skill-p">{item.text}</p>
+                <i
+                  className="bi bi-x"
+                  onClick={() => {
+                    dispatch(removeSkills(item.id));
+                  }}
+                ></i>
+              </div>
+            );
+          })
+        ) : (
+          <p>No Skills</p>
+        )}
       </div>
     </div>
   );

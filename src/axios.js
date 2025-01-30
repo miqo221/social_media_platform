@@ -1,4 +1,5 @@
 import axios from "axios";
+import { data } from "react-router-dom";
 
 const instance = axios.create({
   baseURL: "http://localhost:8001",
@@ -7,7 +8,14 @@ const instance = axios.create({
 });
 
 export const Axios = {
-  getSkillsData() {
-    return instance.get();
+  postSkill(id, newSkill) {
+    return instance({
+      method: "POST",
+      url: `/loggedInUsers/${id}`,
+      data: newSkill,
+    });
+  },
+  getOneUser(id) {
+    return instance.get(`/loggedInUsers/${id}`);
   },
 };
