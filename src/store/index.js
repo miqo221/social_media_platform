@@ -1,7 +1,10 @@
-import { applyMiddleware, createStore } from "redux";
-import { thunk } from "redux-thunk";
-import reducers from "./Reducers/rootReducer";
+import { configureStore } from "@reduxjs/toolkit";
+import { skillsReducer } from "./skillSlice/skillSlice";
 
-const store = createStore(reducers, applyMiddleware(thunk));
+const store = configureStore({
+  reducer: {
+    skills: skillsReducer,
+  },
+});
 
 export default store;

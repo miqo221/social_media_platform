@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
-import Button from "../Button/Button";
-import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDataOfSkills } from "../../store/Selectors/skillsSelector";
-import { removeSkills } from "../../store/Actions/skillsActions";
+import Button from "../Button/Button";
+import { getSkillsData } from "../../store/skillSlice/skillSlice";
+import { useEffect } from "react";
+import {
+  addSkills,
+  fetchSkills,
+  removeSkill,
+} from "../../store/skillSlice/api";
+import { useParams } from "react-router-dom";
 
 import "./Skills.scss";
-import {
-  addSkillsMiddleware,
-  getSkillsMiddleware,
-} from "../../store/Reducers/skillsReducer";
 
 const Skills = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const dataOfPerson = useSelector(getDataOfSkills);
+  const { data, loading } = useSelector(getSkillsData);
 
   useEffect(() => {
-    dispatch(getSkillsMiddleware(id));
+    dispatch(fetchSkills(id));
   }, []);
 
   return (
@@ -30,35 +30,42 @@ const Skills = () => {
           className="skills-2-form"
           onSubmit={(e) => {
             e.preventDefault();
-            dispatch(
-              addSkillsMiddleware(id, e.target[0].value, dataOfPerson.skillList)
-            );
-            e.target.reset();
+            const newSkill = e.target[0].value.trim();
+            if (newSkill) {
+              dispatch(addSkills({ userId: id, newSkill }));
+              e.target.reset();
+            } else {
+              alert("Skill cannot be empty!");
+            }
           }}
         >
           <input type="text" className="skills-2-input" placeholder="+" />
           <Button content={"Add"} button_class={"btn_skills"} />
         </form>
       </div>
-      <div className="every-single-skill-div">
-        {dataOfPerson?.skillList?.length > 0 ? (
-          dataOfPerson.skillList.map((item,index) => {
-            return (
-              <div key={item.id} className="skill-div">
-                <p className="skill-p">{item.text}</p>
-                <i
-                  className="bi bi-x"
-                  onClick={() => {
-                    dispatch(removeSkills(item.id));
-                  }}
-                ></i>
-              </div>
-            );
-          })
-        ) : (
-          <p>No Skills</p>
-        )}
-      </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="every-single-skill-div">
+          {data.length > 0 ? (
+            data.map((item, index) => {
+              return (
+                <div key={index} className="skill-div">
+                  <p className="skill-p">{item.text}</p>
+                  <i
+                    className="bi bi-x"
+                    onClick={() => {
+                      dispatch(removeSkill({ userId: id, skillId: item.id }));
+                    }}
+                  ></i>
+                </div>
+              );
+            })
+          ) : (
+            <p>No Skills</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };

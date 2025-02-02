@@ -39,9 +39,7 @@
           "id": "1Ve9PwieupaxHmS9nj3Di"
         }
       ],
-      "skills": [
-        "asf"
-      ],
+      "skills": ["asf"],
       "status": "",
       "communities": [],
       "posts": [
@@ -87,9 +85,7 @@
         }
       ],
       "username": "@bghdo24"
-    }
-  ],
-  "loggedInUsers": [
+    },
     {
       "id": "1Ve9PwieupaxHmS9nj3Di",
       "email": "m.grikorian@gmail.com",
@@ -165,7 +161,9 @@
         }
       ],
       "username": "@matos95"
-    },
+    }
+  ],
+  "loggedInUsers": [
     {
       "id": "_aWCJxtJM_7sZJOrGJMR7",
       "email": "miqonazarian@gmail.com",
@@ -183,32 +181,8 @@
       "followers": [],
       "skills": [
         {
-          "id": 1738260649584,
-          "text": "aaaa"
-        },
-        {
-          "id": 1738260748467,
-          "text": "sadsadsa"
-        },
-        {
-          "id": 1738260751220,
-          "text": "asdsa"
-        },
-        {
-          "id": 1738260756301,
-          "text": "asdsada"
-        },
-        {
-          "id": 1738260760136,
-          "text": "sadad"
-        },
-        {
-          "id": 1738260866988,
-          "text": "sadsa"
-        },
-        {
-          "id": 1738260877805,
-          "text": "asdasd"
+          "id": 1738487928219,
+          "text": "fwwfw"
         }
       ],
       "status": "",
