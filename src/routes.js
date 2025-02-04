@@ -4,6 +4,6 @@ export const ROUTES = {
   DASHBOARD: "/dashboard/:id",
   PREFERENCES: "/preferences",
   MESSAGES: "/messages",
-  PROFILE: "/profile",
-  REC_PASSWORD: "/recover_password"
+  PROFILE: "/profile/:id",
+  REC_PASSWORD: "/recover_password",
 };

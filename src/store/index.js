@@ -1,5 +1,10 @@
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { skillsReducer } from "./skillSlice/skillSlice";
 
-const store = createStore(() => {});
+const store = configureStore({
+  reducer: {
+    skills: skillsReducer,
+  },
+});
 
 export default store;

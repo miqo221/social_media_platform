@@ -39,7 +39,7 @@
           "id": "1Ve9PwieupaxHmS9nj3Di"
         }
       ],
-      "skills": [],
+      "skills": ["asf"],
       "status": "",
       "communities": [],
       "posts": [
@@ -123,7 +123,12 @@
           "id": "xAeFKZMhXBOQi0C8o8mAI"
         }
       ],
-      "skills": [],
+      "skills": [
+        {
+          "id": "1738258566497",
+          "text": "sada"
+        }
+      ],
       "status": "",
       "communities": [],
       "posts": [
@@ -147,7 +152,6 @@
       "phone": "06766877568",
       "securityQuestion": "What color do you like the most?",
       "securityAnswer": "black",
-      "password": "Matos123",
       "isSigned": [
         {
           "deviceId": "xPLZQtYmE2CQDJBdbIVdz",
@@ -157,153 +161,45 @@
         }
       ],
       "username": "@matos95"
-    },
-    {
-      "id": "REiksyKE1vdNPGMMRT6_G",
-      "email": "mat.grigoryan@gmail.com",
-      "name": "Matevos",
-      "surname": "",
-      "gender": "Men",
-      "image": [
-        "https://profile-images.xing.com/images/b6d5cff2c52ddb69174b6a5be02efa51-1/matevos-grigoryan.1024x1024.jpg"
-      ],
-      "birthday": "08.12.1993",
-      "age": 31,
-      "address": "Starhembergstraße 15, 4020 Linz",
-      "postalCode": "4020",
-      "city": "Linz",
-      "country": "Österreich",
-      "following": [
-        {
-          "name": "Matevos Grigoryan",
-          "username": "@matos95",
-          "id": "1Ve9PwieupaxHmS9nj3Di"
-        },
-        {
-          "name": "Bghdo",
-          "username": "@bghdo24",
-          "id": "xAeFKZMhXBOQi0C8o8mAI"
-        }
-      ],
-      "followers": [
-        {
-          "name": "Matevos Grigoryan",
-          "username": "@matos95",
-          "id": "1Ve9PwieupaxHmS9nj3Di"
-        },
-        {
-          "name": "Bghdo",
-          "username": "@bghdo24",
-          "id": "xAeFKZMhXBOQi0C8o8mAI"
-        }
-      ],
-      "skills": [],
-      "status": "",
-      "communities": [],
-      "posts": [
-        {
-          "post": "New Post from Bghdo",
-          "date": "2025-01-09T14:26:51.231Z",
-          "author": "Bghdo",
-          "author_nickname": "@bghdo24",
-          "comments": [],
-          "likes": []
-        },
-        {
-          "post": "New Post",
-          "date": "2025-01-09T14:26:20.813Z",
-          "author": "Matevos",
-          "author_nickname": "@matos93",
-          "comments": [],
-          "likes": []
-        }
-      ],
-      "phone": "06766877568",
-      "securityQuestion": "What color do you like the most?",
-      "securityAnswer": "black",
-      "password": "Matos123",
-      "isSigned": [
-        {
-          "deviceId": "xPLZQtYmE2CQDJBdbIVdz",
-          "date": "2025-01-09T14:26:24.186Z",
-          "IP": "213.142.96.127",
-          "isSigned": false
-        }
-      ],
-      "username": "@matos93"
     }
   ],
   "loggedInUsers": [
     {
-      "id": "1Ve9PwieupaxHmS9nj3Di",
-      "email": "m.grikorian@gmail.com",
-      "name": "Matevos",
+      "id": "_aWCJxtJM_7sZJOrGJMR7",
+      "email": "miqonazarian@gmail.com",
+      "name": "Mikayel",
       "surname": "",
       "gender": "Men",
       "image": [],
-      "birthday": "08.12.1993",
-      "age": 31,
-      "address": "Starhembergstraße 15, 4020 Linz",
-      "postalCode": "4020",
-      "city": "Linz",
-      "country": "Österreich",
-      "following": [
+      "birthday": "21.02.2000",
+      "age": 24,
+      "address": "Andranik 120",
+      "postalCode": "0001",
+      "city": "Yerevan",
+      "country": "Armenia",
+      "following": [],
+      "followers": [],
+      "skills": [
         {
-          "name": "Matevos Grigoryan",
-          "username": "@matos93",
-          "id": "REiksyKE1vdNPGMMRT6_G"
-        },
-        {
-          "name": "Bghdo",
-          "username": "@bghdo24",
-          "id": "xAeFKZMhXBOQi0C8o8mAI"
+          "id": 1738487928219,
+          "text": "fwwfw"
         }
       ],
-      "followers": [
-        {
-          "name": "Matevos Grigoryan",
-          "username": "@matos93",
-          "id": "REiksyKE1vdNPGMMRT6_G"
-        },
-        {
-          "name": "Bghdo",
-          "username": "@bghdo24",
-          "id": "xAeFKZMhXBOQi0C8o8mAI"
-        }
-      ],
-      "skills": [],
       "status": "",
       "communities": [],
-      "posts": [
-        {
-          "post": "New Post from Bghdo",
-          "date": "2025-01-09T14:26:51.231Z",
-          "author": "Bghdo",
-          "author_nickname": "@bghdo24",
-          "comments": [],
-          "likes": []
-        },
-        {
-          "post": "New Post",
-          "date": "2025-01-09T14:26:20.813Z",
-          "author": "Matevos",
-          "author_nickname": "@matos93",
-          "comments": [],
-          "likes": []
-        }
-      ],
-      "phone": "06766877568",
+      "posts": [],
+      "phone": "+37477255204",
       "securityQuestion": "What color do you like the most?",
-      "securityAnswer": "black",
+      "securityAnswer": "Yellow",
       "isSigned": [
         {
-          "deviceId": "xPLZQtYmE2CQDJBdbIVdz",
-          "date": "2025-01-09T14:29:37.524Z",
-          "IP": "213.142.96.127",
+          "deviceId": "EPw29gXkqcJts-tBlZ4Ef",
+          "date": "2025-01-27T20:45:28.019Z",
+          "IP": "78.109.69.238",
           "isSigned": true
         }
       ],
-      "username": "@matos95"
+      "username": "@miqo221"
     }
   ]
 }
