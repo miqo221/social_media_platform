@@ -39,7 +39,9 @@
           "id": "1Ve9PwieupaxHmS9nj3Di"
         }
       ],
-      "skills": ["asf"],
+      "skills": [
+        "asf"
+      ],
       "status": "",
       "communities": [],
       "posts": [
@@ -183,6 +185,22 @@
         {
           "id": 1738487928219,
           "text": "fwwfw"
+        },
+        {
+          "id": 1738864785720,
+          "text": "wwwwww"
+        },
+        {
+          "id": 1738864787488,
+          "text": "asfasfasf"
+        },
+        {
+          "id": 1738865409262,
+          "text": "Problem solving skill"
+        },
+        {
+          "id": 1738865416102,
+          "text": "some other long tailored skill namne"
         }
       ],
       "status": "",
