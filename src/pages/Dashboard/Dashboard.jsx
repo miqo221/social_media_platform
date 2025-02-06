@@ -9,13 +9,13 @@ import { timeAgo } from "../../constants/functions";
 
 import "./Dashboard.scss";
 import OnlineFollowers from "../../components/OnlineFollowers/OnlineFollowers";
+import SkillsCard from "../../components/SkillsCard/SkillsCard";
 
 export function Dashboard() {
   const [user, setUser] = useState(null);
   const [followers, setFollowers] = useState([]);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -148,6 +148,7 @@ export function Dashboard() {
                   status={user.status || `Hi, I'm ${user.name}`}
                   path={"/profile"}
                 />
+                <SkillsCard userId={id} />
               </div>
               <div className="middle">
                 <OnlineFollowers user={user} />
