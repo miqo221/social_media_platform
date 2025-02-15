@@ -1,5 +1,15 @@
-import "./Preferences.scss"
+import Navbar from "../../components/Navbar/Navbar";
+import PreferencesAside from "../../components/PreferencesAside/PreferencesAside";
+import "./Preferences.scss";
 
 export function Preferences() {
-  return <h2>Preferences</h2>; // that is for changing user data
+  return (
+    <div className="preferencesPage">
+      <Navbar />
+      <div className="preferencesMain">
+      <PreferencesAside />
+
+      </div>
+    </div>
+  ); // that is for changing user data
 }

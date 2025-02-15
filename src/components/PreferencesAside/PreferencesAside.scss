@@ -1,0 +1,59 @@
+@import "../../styles/global.scss";
+
+.aside {
+  background-color: #28282882;
+  border-radius: 15px;
+  display: inline-flex;
+  align-self: flex-start;
+  flex-direction: column;
+  gap: 60px 0;
+  padding: 40px 60px;
+  max-width: 510px;
+  width: 100%;
+  form {
+    max-width: 323px;
+    width: 100%;
+    .searchInput {
+      background-color: $darkgrey;
+      border-radius: 0.5rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 28px;
+      padding: 6px 13px;
+      img {
+        width: 20px;
+      }
+      input {
+        @include input(100%, 0, $darkgrey, none, 0.5rem, 1rem, $white-tp);
+      }
+    }
+  }
+  .asideBtns {
+    @include flex(center, flex-start, 50px, column, wrap);
+    .btnDiv {
+      cursor: pointer;
+      transition: all 0.6s;
+      @include flex(flex-start, center, 0 27px, row, nowrap);
+      width: 100%;
+      img {
+        width: 45px;
+        height: 45px;
+      }
+
+      Button {
+        background-color: transparent;
+        border: none;
+        @include text(32px, $white, unset, 400);
+        line-height: 43.71px;
+        cursor: pointer;
+        transition: all 0.6s;
+      }
+      &:hover {
+        Button {
+          font-weight: 900;
+        }
+      }
+    }
+  }
+}
